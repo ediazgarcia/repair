@@ -18,3 +18,7 @@ def directory():
 @dash.route("/vehicles")
 def vehicles():
     return render_template("admin/vehicles.html")
+
+@dash.route("/settings")
+def settings():
+    return render_template("admin/settings.html")
