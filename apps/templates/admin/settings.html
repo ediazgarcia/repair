@@ -1,84 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>AIE Repair Suite | Configuración</title>
-    <!-- Favicon -->
-    <link rel="icon" href="../static/img/Icono.png" type="image/x-icon">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <!-- Google Fonts Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <!-- Material Design Bootstrap -->
-    <link rel="stylesheet" href="../static/css/mdb.min.css">
-    <!-- Your custom styles (optional) -->
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/main.css">
-  </head>
+<head>
+  {% extends 'layout.html' %}
+  {% set current_page = 'Configuración' %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{% block title %}Configuración{% endblock %}</title>
+</head>
+{% block content %}
 
 <body class="fixed-sn">
-  <!-- Start your project here-->
-
-  <!-- Sidebar navigation -->
-  <div id="slide-out" class="side-nav2 side special-color-dark">
-    <ul class="custom-scrollbar">
-      <!-- Logo -->
-      <li>
-        <div class="logo-wrapper" id="no-border">
-          <a href="#"><img src="../static/img/Logo White.png" class="img-fluid"></a>
-        </div>
-      </li>
-      <!--/. Logo -->
-      <!-- Side navigation links -->
-      <li>
-        <ul class="collapsible collapsible-accordion">
-          <li><a class="collapsible-header waves-effect" href="index.html"><i
-                class="fa-solid fa-house"></i> Inicio</a>
-          </li>
-          <li><a class="collapsible-header waves-effect" href="directorio.html"><i
-                class="fa-solid fa-users"></i> Directorio</a></li>
-          <li><a class="collapsible-header waves-effect" href="taller.html"><i class="fa-solid fa-toolbox"></i> Taller</a></li>
-          <li><a class="collapsible-header waves-effect" href="productos.html"><i class="fa-solid fa-box"></i> Productos</a></li>
-          <li><a class="collapsible-header waves-effect" href="vehiculos.html"><i class="fa-solid fa-car"></i> Vehículos</a></li>
-          <li><a class="collapsible-header waves-effect" href="usuarios.html"><i class="fa-solid fa-user"></i> Usuarios</a></li>
-          <li><a class="collapsible-header waves-effect active unique-color" href="configuracion.html"><i class="fa-solid fa-gear"></i> Configuración</a>
-          </li>
-        </ul>
-      </li>
-      <!--/. Side navigation links -->
-    </ul>
-    <div class="sidenav-bg"></div>
-  </div>
-  <!--/. Sidebar navigation -->
-  <!-- Navbar -->
-  <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav special-color-dark">
-    <!-- SideNav slide-out button -->
-    <a class="navbar-brand text-center" href="#"></a>
-    <div class="float-left">
-      <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
-    </div>
-    <a class="navbar-brand d-block d-xl-none" href="#">
-      <img src="../static/img/Logo White.png" height="30">
-    </a>
-    <ul class="nav navbar-nav nav-flex-icons ml-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="fa-solid fa-user"></i> Usuario
-        </a>
-        <div class="dropdown-menu dropdown-menu-right light" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Cerrar Sesión</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.Navbar -->
-  <!--Main Layout-->
   <main>
     <div class="container-fluid mt-auto">
       <h1>Configuración</h1>
@@ -86,86 +19,299 @@
       <div style="height: 2000px">
         <ul class="nav nav-tabs nav-justified md-tabs unique-color" id="myTabJust" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="empresa-tab-just" data-toggle="tab" href="#empresa-just" role="tab"
-              aria-controls="empresa-just" aria-selected="true">Empresa</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="reportes-tab-just" data-toggle="tab" href="#reportes-just" role="tab"
-              aria-controls="reportes-just" aria-selected="false">Reportes</a>
+            <a class="nav-link active" id="usuarios-tab-just" data-toggle="tab" href="#usuarios-just" role="tab"
+              aria-controls="usuarios-just" aria-selected="false">Usuarios</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="roles-tab-just" data-toggle="tab" href="#roles-just" role="tab"
               aria-controls="roles-just" aria-selected="false">Roles</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" id="empresa-tab-just" data-toggle="tab" href="#empresa-just" role="tab"
+              aria-controls="empresa-just" aria-selected="true">Empresa</a>
+          </li>
         </ul>
         <div class="tab-content card pt-5" id="myTabContentJust">
-          <div class="tab-pane fade show active abs-center" id="empresa-just" role="tabpanel" aria-labelledby="empresa-tab-just">
-            <h2 class='mb-3'>Perfil de la Empresa</h2>
-            <form class="border border-light p-5" action="#!">
-              <div class="form-row">
-                <div class="form-group col-md-11">
-                  <label for="RazonEp">Razón Social</label>
-                  <input type="text" id="RazonEp" class="form-control">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-4">
-                  <label for="RNC-CedulaEp">RNC/Cédula</label>
-                  <input type="text" id="NoDocEp" class="form-control">
-                </div>
-                <div class="form-group col-md-8">
-                  <label for="NombreEp">Nombre Comercial</label>
-                  <input type="text" id="NombreEp" class="form-control">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-8">
-                  <label for="CorreoEp">Correo Electrónico</label>
-                  <input type="mail" id="CorreoEp" class="form-control">
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="TelefonoEp">Teléfono</label>
-                  <input type="text" id="TelefonoEp" class="form-control">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01">Logo</span>
-                  </div>
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="LogoEp"
-                      aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="LogoEp">Elegir imagen</label>
-                  </div>
-                </div>
-                <div class="form-group col-md-12">
-                  <label for="DireccionEp">Dirección</label>
-                  <input type="text" id="DireccionEp" class="form-control">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="CiudadEp">Provincia</label>
-                  <select id="CiudadEp" class="form-control">
-                    <option value=""></option>
-                  </select>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="MunicipioEp">Municipio</label>
-                  <select id="MunicipioEp" class="form-control">
-                    <option value=""></option>
-                  </select>
-                </div>
-              </div>
-                <button type="submit" class="btn unique-color text-white">Guardar</button>
-            </form>
-          </div>
-          <div class="tab-pane fade" id="reportes-just" role="tabpanel" aria-labelledby="reportes-tab-just">
-            <h2 class='mb-3'>Generar Reportes</h2>
+          <div class="tab-pane fade show active abs-center" id="usuarios-just" role="tabpanel" aria-labelledby="usuarios-tab-just">
+            <div class="d-flex flex-row">
+              <h2 class="d-flex flex-row">Todos los Usuarios</h2>
+              <a class="btn btn-floating unique-color dropdown-toggle ml-auto" type="button" data-toggle="modal"
+                data-target="#NvoUsuario" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus"></i></a>
+            </div>
+            <table id="example" class="table table-hover table-responsive" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="th-sm">Nombre Completo
+                  </th>
+                  <th class="th-sm">Correo Electrónico
+                  </th>
+                  <th class="th-sm">Nombre de Usuario
+                  </th>
+                  <th class="th-sm">Contraseña
+                  </th>
+                  <th class="th-sm">Estado
+                  </th>
+                  <th class="th-sm">Registrado el
+                  </th>
+                  <th class="th-sm">Actualizado el
+                  </th>
+                  <th class="th-sm">Rol</th>
+                  <th class="th-sm">Editar
+                  </th>
+                  <th class="th-sm">Eliminar
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><button class="btn unique-color btn-sm m-0" data-toggle="modal" data-target="#EditUsuario"><i
+                        class="fas fa-pencil white-text"></i></button>
+                  </td>
+                  <td><button class="btn red btn-sm m-0"><i class="fas fa-trash white-text"></i></button></td>
+                </tr>
+            </table>
           </div>
           <div class="tab-pane fade" id="roles-just" role="tabpanel" aria-labelledby="roles-tab-just">
-            <h2 class='mb-3'>Editar Roles</h2>
+            <div class="d-flex flex-row">
+              <h2 class="d-flex flex-row">Roles de Usuario</h2>
+              <a class="btn btn-floating unique-color dropdown-toggle ml-auto" type="button" data-toggle="modal"
+                data-target="#NvoRol" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus"></i></a>
+            </div>
+            <table id="example" class="table table-hover table-responsive" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="th-sm">ID
+                  </th>
+                  <th class="th-sm">Nombre
+                  </th>
+<!--                   <th class="th-sm">Editar
+                  </th>
+                  <th class="th-sm">Eliminar
+                  </th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+<!--                   <td><button class="btn unique-color btn-sm m-0" data-toggle="modal" data-target="#EditRol"><i
+                        class="fas fa-pencil white-text"></i></button>
+                  </td>
+                  <td><button class="btn red btn-sm m-0"><i class="fas fa-trash white-text"></i></button></td> -->
+                </tr>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="empresa-just" role="tabpanel"
+          aria-labelledby="empresa-tab-just">
+          <h2 class='mb-3'>Perfil de la Empresa</h2>
+          <form class="border border-light p-5" action="#!">
+            <div class="form-row">
+              <div class="form-group col-md-11">
+                <label for="RazonEp">Razón Social</label>
+                <input type="text" id="RazonEp" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="RNC-CedulaEp">RNC/Cédula</label>
+                <input type="text" id="NoDocEp" class="form-control">
+              </div>
+              <div class="form-group col-md-8">
+                <label for="NombreEp">Nombre Comercial</label>
+                <input type="text" id="NombreEp" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="CorreoEp">Correo Electrónico</label>
+                <input type="mail" id="CorreoEp" class="form-control">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="TelefonoEp">Teléfono</label>
+                <input type="text" id="TelefonoEp" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupFileAddon01">Logo</span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="LogoEp" aria-describedby="inputGroupFileAddon01">
+                  <label class="custom-file-label" for="LogoEp">Elegir imagen</label>
+                </div>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="DireccionEp">Dirección</label>
+                <input type="text" id="DireccionEp" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="CiudadEp">Provincia</label>
+                <select id="CiudadEp" class="form-control">
+                  <option value=""></option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="MunicipioEp">Municipio</label>
+                <select id="MunicipioEp" class="form-control">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn unique-color text-white">Guardar</button>
+          </form>
+        </div>
+        </div>
+      </div>
+      <!-- Nuevo Rol -->
+      <div class="modal fade" id="NvoRol" tabindex="-1" role="dialog" aria-labelledby="NvoRolLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="NvoRolLabel">Nuevo Rol</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="border border-light p-5" action="#!">
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="NombreUs">Rol</label>
+                  <input type="text" id="NombreUs" class="form-control">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn unique-color text-white">Registrar</button>
+                <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- Nuevo Usuario -->
+      <div class="modal fade" id="NvoUsuario" tabindex="-1" role="dialog" aria-labelledby="NvoUsuarioLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="NvoUsusarioLabel">Nuevo Usuario</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="border border-light p-5" action="#!">
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="NombreUs">Nombre Completo</label>
+                    <input type="text" id="NombreUs" class="form-control">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="CorreoUs">Correo Electrónico</label>
+                    <input type="mail" id="CorreoUs" class="form-control">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="UsuarioUs">Nombre de Usuario</label>
+                    <input type="text" id="UsuarioUs" class="form-control">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="ContrasenaUs">Contraseña</label>
+                    <input type="password" id="ContrasenaUs" class="form-control">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="EstadoUs">Estado</label>
+                    <select id="EstadoUs" class="form-control">
+                      <option value="" disabled selected></option>
+                      <option value="Activo">Activo</option>
+                      <option value="Inactivo">Inactivo</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn unique-color text-white">Registrar</button>
+                  <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Editar Usuario -->
+      <div class="modal fade" id="EditUsuario" tabindex="-1" role="dialog" aria-labelledby="EditUsuarioLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="EditUsusarioLabel">Editar Usuario</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="border border-light p-5" action="#!">
+                <div class="form-row">
+                  <div class="form-group col-md-1">
+                    <label for="NombreUs">ID</label>
+                    <input type="text" id="NombreUs" class="form-control disabled">
+                  </div>
+                  <div class="form-group col-md-11">
+                    <label for="NombreUs">Nombre Completo</label>
+                    <input type="text" id="NombreUs" class="form-control">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="CorreoUs">Correo Electrónico</label>
+                    <input type="mail" id="CorreoUs" class="form-control">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="UsuarioUs">Nombre de Usuario</label>
+                    <input type="text" id="UsuarioUs" class="form-control">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="ContrasenaUS">Contraseña</label>
+                    <input type="password" id="ContrasenaUs" class="form-control">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="EstadoUs">Estado</label>
+                    <select id="EstadoUs" class="form-control">
+                      <option value="" disabled selected></option>
+                      <option value="Activo">Activo</option>
+                      <option value="Inactivo">Inactivo</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn unique-color text-white">Actualizar</button>
+                  <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -184,9 +330,11 @@
   <script type="text/javascript" src="../static/js/mdb.min.js"></script>
   <!-- Your custom scripts (optional) -->
   <script type="text/javascript" src="../static/js/scripts.js"></script>
- 
+
 
 </body>
+{% endblock%}
+
 
 
 
