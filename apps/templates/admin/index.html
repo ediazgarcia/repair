@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  {% extends 'layout.html' %}
+  {% set current_page = 'Inicio' %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title> {% block title %}Inicio{% endblock %}</title>
+</head>
+
+{% block content %}
+
+<body class="fixed-sn">
+  <!-- Start your project here-->
+  <!--Main Layout-->
+  <main>
+    <div class="container-fluid mt-auto">
+      <h1>Inicio</h1>
+      <br>
+      <div style="height: 2000px">
+        <div style="height: 2000px">
+          <div class="z-depth-1 rounded p-3">
+            <h4 class="mb-3">Tarjetas</h4>
+            <div class="row row-cols-1 row-cols-md-3">
+              <div class="col mb-4">
+                <!-- Card -->
+                <div class="card cyan">
+                  <!--Card content-->
+                  <div class="card-body">
+                    <i class="fas fa-square fa-3x pb-4 text-white"></i>
+                    <h4 class="card-title text-white">Tarjeta 1</h4>
+                    <p class="card-text text-white">###</p>
+                  </div>
+                </div>
+                <!-- Card -->
+              </div>
+              <div class="col mb-4">
+                <!-- Card -->
+                <div class="card indigo">
+                  <!--Card content-->
+                  <div class="card-body">
+                    <i class="fas fa-circle fa-3x pb-4 text-white"></i>
+                    <h4 class="card-title text-white">Tarjeta 2</h4>
+                    <p class="card-text text-white">###</p>
+                  </div>
+                </div>
+                <!-- Card -->
+              </div>
+              <div class="col mb-4">
+                <!-- Card -->
+                <div class="card teal">
+                  <!--Card content-->
+                  <div class="card-body text-white">
+                    <i class="fas fa-play fa-3x pb-4"></i>
+                    <h4 class="card-title">Tarjeta 3</h4>
+                    <p class="card-text text-white">###</p>
+                  </div>
+                </div>
+                <!-- Card -->
+              </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3">
+              <div class="col mb-4">
+                <!-- Card -->
+                <div class="card cyan lighten-2">
+                  <!--Card content-->
+                  <div class="card-body">
+                    <i class="fas fa-square fa-3x pb-4 text-white"></i>
+                    <h4 class="card-title text-white">Tarjeta 4</h4>
+                    <p class="card-text text-white">###</p>
+                  </div>
+                </div>
+                <!-- Card -->
+              </div>
+              <div class="col mb-4">
+                <!-- Card -->
+                <div class="card indigo lighten-2">
+                  <!--Card content-->
+                  <div class="card-body">
+                    <i class="fas fa-circle fa-3x pb-4 text-white"></i>
+                    <h4 class="card-title text-white">Tarjeta 5</h4>
+                    <p class="card-text text-white">###</p>
+                  </div>
+                </div>
+                <!-- Card -->
+              </div>
+              <div class="col mb-4">
+                <!-- Card -->
+                <div class="card teal lighten-2">
+                  <!--Card content-->
+                  <div class="card-body text-white">
+                    <i class="fas fa-play fa-3x pb-4"></i>
+                    <h4 class="card-title">Tarjeta 6</h4>
+                    <p class="card-text text-white">###</p>
+                  </div>
+                </div>
+                <!-- Card -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+  </main>
+
+  <!--Main Layout-->
+  <!-- End your project here-->
+</body>
+{% endblock%}
+
+</html>

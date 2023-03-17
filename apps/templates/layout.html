@@ -5,39 +5,99 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AIE Repair Suite | {% block title %}{% endblock %}</title>
+    <!-- Favicon -->
+    <link rel="icon" href="../static/img/Icono.png" type="image/x-icon">
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
-    <title>{% block title %}{% endblock %} - RepairSuite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" href="../static/css/mdb.min.css">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <!-- jQuery -->
+    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="../static/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../static/js/mdb.min.js"></script>
+    <!-- Your custom scripts (optional) -->
+    <script type="text/javascript" src="../static/js/scripts.js"></script>
+    <script type="text/javascript" src="../static/js/datatables.min.js"></script>
 </head>
 
 <body>
     <header>
-        <div>
-            <a href="">
-                <h1>RepairSuite</h1>
+        <!-- Sidebar navigation -->
+        <div id="slide-out" class="side-nav2 side special-color-dark">
+            <ul class="custom-scrollbar">
+                <!-- Logo -->
+                <li>
+                    <div class="logo-wrapper" id="no-border">
+                        <a href="#"><img src="../static/img/Logo White.png" class="img-fluid"></a>
+                    </div>
+                </li>
+                <!--/. Logo -->
+                <!-- Side navigation links -->
+                <li>
+                    <ul class="collapsible collapsible-accordion">
+                        <li><a class="collapsible-header waves-effect {% if current_page == 'Inicio' %} active unique-color{% endif %}"
+                                href="/"><i class="fa-solid fa-house"></i> Inicio</a>
+                        </li>
+                        <li><a class="collapsible-header waves-effect {% if current_page == 'Directorio' %}active unique-color{% endif %}"
+                                href="/directory"><i class="fa-solid fa-users"></i>
+                                Directorio</a></li>
+                        <li><a class="collapsible-header waves-effect {% if current_page == 'Taller' %}active unique-color{% endif %}"
+                                href="#"><i class="fa-solid fa-toolbox"></i>
+                                Taller</a></li>
+                        <li><a class="collapsible-header waves-effect {% if current_page == 'Productos' %}active unique-color{% endif %}"
+                                href="#"><i class="fa-solid fa-box"></i>
+                                Productos</a></li>
+                        <li><a class="collapsible-header waves-effect {% if current_page == 'Vehículos' %}active unique-color{% endif %}"
+                                href="/vehicles"><i class="fa-solid fa-car"></i>
+                                Vehículos</a></li>
+                        <li><a class="collapsible-header waves-effect {% if current_page == 'Configuración' %}active unique-color{% endif %}"
+                                href="#"><i class="fa-solid fa-gear"></i>
+                                Configuración</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--/. Side navigation links -->
+            </ul>
+            <div class="sidenav-bg"></div>
+        </div>
+        <!--/. Sidebar navigation -->
+        <!-- Navbar -->
+        <nav
+            class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav special-color-dark">
+            <!-- SideNav slide-out button -->
+            <a class="navbar-brand text-center" href="#"></a>
+            <div class="float-left">
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+            </div>
+            <a class="navbar-brand d-block d-xl-none" href="#">
+                <img src="../static/img/Logo White.png" height="30">
             </a>
-        </div>
-        <nav>
-            <a href="">Registrar Role</a>
-            <a href="">Iniciar Sesion</a>
+            <ul class="nav navbar-nav nav-flex-icons ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i> Usuario
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right light" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Cerrar Sesión</a>
+                    </div>
+                </li>
+            </ul>
         </nav>
+        <!-- /.Navbar -->
     </header>
-
-    <section>
-        <header>{% block header %}{% endblock %}</header>
-        {% for message in get_flashed_messages() %}
-        <div>{{ message }}</div>
-        {% endfor %}
-        <div class="container">
-            {% block content %}{% endblock %}
-        </div>
-    </section>
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+    {% block content %} Cuerpo {% endblock%}
 </body>
 
 </html>

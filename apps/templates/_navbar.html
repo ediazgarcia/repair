@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIE Repair Suite</title>
+</head>
+
+<body>
+    <!-- Sidebar navigation -->
+    <div id="slide-out" class="side-nav2 side special-color-dark">
+        <ul class="custom-scrollbar">
+            <!-- Logo -->
+            <li>
+                <div class="logo-wrapper" id="no-border">
+                    <a href="#"><img src="../static/img/Logo White.png" class="img-fluid"></a>
+                </div>
+            </li>
+            <!--/. Logo -->
+            <!-- Side navigation links -->
+            <li>
+                <ul class="collapsible collapsible-accordion">
+                    <li><a class="collapsible-header waves-effect {% if current_page == 'Inicio' %}active unique-color{% endif %}" href="/"><i
+                                class="fa-solid fa-house"></i> Inicio</a>
+                    </li>
+                    <li><a class="collapsible-header waves-effect {% if current_page == 'Directorio' %}active unique-color{% endif %}" href="/directory"><i
+                                class="fa-solid fa-users"></i>
+                            Directorio</a></li>
+                    <li><a class="collapsible-header waves-effect {% if current_page == 'Taller' %}active unique-color{% endif %}" href="#"><i
+                                class="fa-solid fa-toolbox"></i>
+                            Taller</a></li>
+                    <li><a class="collapsible-header waves-effect {% if current_page == 'Productos' %}active unique-color{% endif %}" href="#"><i class="fa-solid fa-box"></i>
+                            Productos</a></li>
+                    <li><a class="collapsible-header waves-effect {% if current_page == 'Vehículos' %}active unique-color{% endif %}" href="/vehicles"><i class="fa-solid fa-car"></i>
+                            Vehículos</a></li>
+                    <li><a class="collapsible-header waves-effect {% if current_page == 'Configuración' %}active unique-color{% endif %}" href="#"><i
+                                class="fa-solid fa-gear"></i>
+                            Configuración</a>
+                    </li>
+                </ul>
+            </li>
+            <!--/. Side navigation links -->
+        </ul>
+        <div class="sidenav-bg"></div>
+    </div>
+    <!--/. Sidebar navigation -->
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav special-color-dark">
+        <!-- SideNav slide-out button -->
+        <a class="navbar-brand text-center" href="#"></a>
+        <div class="float-left">
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
+        </div>
+        <a class="navbar-brand d-block d-xl-none" href="#">
+            <img src="../static/img/Logo White.png" height="30">
+        </a>
+        <ul class="nav navbar-nav nav-flex-icons ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> Usuario
+                </a>
+                <div class="dropdown-menu dropdown-menu-right light" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Cerrar Sesión</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.Navbar -->
+</body>
+
+</html>
