@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  {% extends 'layout.html' %}
+  {% set current_page = 'Directorio' %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{% block title %}Directorio{% endblock %}</title>
+</head>
+
+
+{% block content %}
+
+<body class="fixed-sn">
+  <!--Main Layout-->
+  <main>
+    <div class="container-fluid mt-auto">
+      <div class="dropdown d-flex flex-row">
+        <h1 class="d-flex flex-row">Directorio</h1>
+        <br>
+      </div>
+      <div style="height: 2000px">
+        <ul class="nav nav-tabs nav-justified md-tabs unique-color" id="myTabJust" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="cliente-tab-just" data-toggle="tab" href="#cliente-just" role="tab"
+              aria-controls="cliente-just" aria-selected="true">Clientes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="empleado-tab-just" data-toggle="tab" href="#empleado-just" role="tab"
+              aria-controls="empleado-just" aria-selected="false">Empleados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="proveedor-tab-just" data-toggle="tab" href="#proveedor-just" role="tab"
+              aria-controls="proveedor-just" aria-selected="false">Proveedores</a>
+          </li>
+        </ul>
+        <div class="tab-content card" id="myTabContentJust">
+          <div class="tab-pane fade show active" id="cliente-just" role="tabpanel" aria-labelledby="cliente-tab-just">
+            <div class="dropdown d-flex flex-row">
+              <h2 class="d-flex flex-row">Todos los Clientes</h2>
+              <a class="btn btn-floating unique-color dropdown-toggle ml-auto" type="button" data-toggle="modal"
+                data-target="#NvoCliente" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus"></i></a>
+            </div>
+            <!-- Tabla Clientes -->
+            <table id="example" class="table table-hover table-responsive" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="th-sm">ID
+                  </th>
+                  <th class="th-sm">Nombre
+                  </th>
+                  <th class="th-sm">Apellido
+                  </th>
+                  <th class="th-sm">Tipo de Documento
+                  </th>
+                  <th class="th-sm">No. de Documento
+                  </th>
+                  <th class="th-sm">Teléfono
+                  </th>
+                  <th class="th-sm">Correo Electrónico
+                  </th>
+                  <th class="th-sm">Dirección
+                  </th>
+                  <th class="th-sm">Cuidad
+                  </th>
+                  <th class="th-sm">Registrado
+                  </th>
+                  <th class="th-sm">Actualizado
+                  </th>
+                  <th class="th-sm">Editar
+                  </th>
+                  <th class="th-sm">Eliminar
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><button class="btn unique-color btn-sm m-0" data-toggle="modal" data-target="#EditCliente"><i
+                        class="fas fa-pencil white-text"></i></button>
+                  </td>
+                  <td><button class="btn red btn-sm m-0"><i class="fas fa-trash white-text"></i></button></td>
+                </tr>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="empleado-just" role="tabpanel" aria-labelledby="empleado-tab-just">
+            <div class="dropdown d-flex flex-row">
+              <h2 class="d-flex flex-row">Todos los Empleados</h2>
+              <a class="btn btn-floating unique-color dropdown-toggle ml-auto" type="button" data-toggle="modal"
+                data-target="#NvoEmpleado" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus"></i></a>
+            </div>
+            <!-- Tabla Empleados -->
+            <table id="example" class="table table-hover table-responsive" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="th-sm">ID
+                  </th>
+                  <th class="th-sm">Nombre
+                  </th>
+                  <th class="th-sm">Apellido
+                  </th>
+                  <th class="th-sm">Fecha de Nac.</th>
+                  <th class="th-sm">Género</th>
+                  <th class="th-sm">Tipo de Documento
+                  </th>
+                  <th class="th-sm">No. de Documento
+                  </th>
+                  <th class="th-sm">Teléfono
+                  </th>
+                  <th class="th-sm">Correo Electrónico
+                  </th>
+                  <th class="th-sm">Dirección
+                  </th>
+                  <th class="th-sm">Cuidad
+                  </th>
+                  <th class="th-sm">Cargo Laboral
+                  </th>
+                  <th class="th-sm">Sueldo</th>
+                  <th class="th-sm">Dias Laborales
+                  </th>
+                  <th class="th-sm">Hora de Entrada
+                  </th>
+                  <th class="th-sm">Hora de Salida
+                  </th>
+                  <th class="th-sm">Estado</th>
+                  <th class="th-sm">Contratado el
+                  </th>
+                  <th class="th-sm">Registrado el
+                  </th>
+                  <th class="th-sm">Actualizado el
+                  </th>
+                  <th class="th-sm">ID de Usuario
+                  </th>
+                  <th class="th-sm">Editar
+                  </th>
+                  <th class="th-sm">Eliminar
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Nombre</td>
+                  <td>Apellido</td>
+                  <td>Fecha Nac</td>
+                  <td>Género</td>
+                  <td>Tipo Doc</td>
+                  <td>No. Doc</td>
+                  <td>Teléfono</td>
+                  <td>Correo</td>
+                  <td>Dirección</td>
+                  <td>Ciudad</td>
+                  <td>Cargo</td>
+                  <td>Sueldo</td>
+                  <td>Dias</td>
+                  <td>Entrada</td>
+                  <td>Salida</td>
+                  <td>Estado</td>
+                  <td>Contratado</td>
+                  <td>Registrado</td>
+                  <td>Actualizado</td>
+                  <td>1</td>
+                  <td><button class="btn unique-color btn-sm m-0" data-toggle="modal" data-target="#EditEmpleado"><i
+                        class="fas fa-pencil white-text"></i></button></td>
+                  <td><button class="btn red btn-sm m-0"><i class="fas fa-trash white-text"></i></button></td>
+                </tr>
+            </table>
+          </div>
+          <!-- Tabla Proveedores -->
+          <div class="tab-pane fade" id="proveedor-just" role="tabpanel" aria-labelledby="proveedor-tab-just">
+            <div class="dropdown d-flex flex-row">
+              <h2 class="d-flex flex-row">Todos los Proveedores</h2>
+              <a class="btn btn-floating unique-color dropdown-toggle ml-auto" type="button" data-toggle="modal"
+                data-target="#NvoProveedor" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus"></i></a>
+            </div>
+            <table id="example" class="table table-hover table-responsive" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="th-sm">ID
+                  </th>
+                  <th class="th-sm">Nombre Comercial
+                  </th>
+                  <th class="th-sm">Tipo de Documento
+                  </th>
+                  <th class="th-sm">No. de Documento
+                  </th>
+                  <th class="th-sm">Teléfono
+                  </th>
+                  <th class="th-sm">Correo Electrónico
+                  </th>
+                  <th class="th-sm">Dirección
+                  </th>
+                  <th class="th-sm">Ciudad
+                  </th>
+                  <th class="th-sm">Registrado el
+                  </th>
+                  <th class="th-sm">Actualizado el
+                  </th>
+                  <th class="th-sm">Editar</th>
+                  <th class="th-sm">Eliminar
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><button class="btn unique-color btn-sm m-0" data-toggle="modal" data-target="#EditProveedor"><i
+                        class="fas fa-pencil white-text"></i></button></td>
+                  <td><button class="btn red btn-sm m-0"><i class="fas fa-trash white-text"></i></button></td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!--Main Layout-->
+  <!--   Modal Nuevo Cliente -->
+  <div class="modal fade" id="NvoCliente" tabindex="-1" role="dialog" aria-labelledby="NvoClienteLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="NvoClienteLabel">Nuevo Cliente</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="border border-light p-5" action="#!">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="NombreCl">Nombre</label>
+                <input type="text" id="NombreCl" class="form-control">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="ApellidoCl">Apellido</label>
+                <input type="text" id="ApellidoCl" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="TipoDocCl">Tipo de Documento</label>
+                <select id="TipoDocCl" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option value="Cédula">Cédula</option>
+                  <option value="Pasaporte">Pasaporte</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="NoDocCl">No. de Documento</label>
+                <input type="text" id="NoDocCl" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="TelefonoCl">Teléfono</label>
+                <input type="text" id="TelefonoCl" class="form-control">
+              </div>
+              <div class="form-group col-md-8">
+                <label for="CorreoCl">Correo Electrónico</label>
+                <input type="mail" id="CorreoCl" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="DireccionCl">Dirección</label>
+                <input type="text" id="DireccionCl" class="form-control">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="CiudadCl">Ciudad</label>
+                <select id="CiudadCl" class="form-control">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn unique-color text-white">Registrar</button>
+              <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Editar Cliente -->
+  <div class="modal fade" id="EditCliente" tabindex="-1" role="dialog" aria-labelledby="EditClienteLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="EditClienteLabel">Editar Cliente</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="border border-light p-5" action="#!">
+            <div class="form-row">
+              <div class="form-group col-md-1">
+                <label for="IDCl">ID</label>
+                <input type="text" id="IDCl" class="form-control disabled">
+              </div>
+              <div class="form-group col-md-5">
+                <label for="NombreCl">Nombre</label>
+                <input type="text" id="NombreCl" class="form-control">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="ApellidoCl">Apellido</label>
+                <input type="text" id="ApellidoCl" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="TipoDocCl">Tipo de Documento</label>
+                <select id="TipoDocCl" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option value="Cédula">Cédula</option>
+                  <option value="Pasaporte">Pasaporte</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="NoDocCl">No. de Documento</label>
+                <input type="text" id="NoDocCl" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="TelefonoCl">Teléfono</label>
+                <input type="text" id="TelefonoCl" class="form-control">
+              </div>
+              <div class="form-group col-md-8">
+                <label for="CorreoCl">Correo Electrónico</label>
+                <input type="mail" id="CorreoCl" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="DirecciomCl">Dirección</label>
+                <input type="text" id="DireccionCl" class="form-control">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="CiudadCl">Ciudad</label>
+                <select id="CiudadCl" class="form-control">
+                  <option value="" disabled selected></option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn unique-color text-white">Actualizar</button>
+              <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--   Modal Nuevo Empleado -->
+  <div class="modal fade" id="NvoEmpleado" tabindex="-1" role="dialog" aria-labelledby="NvoEmpleadoLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="NvoEmpleadoLabel">Nuevo Empleado</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="border border-light p-5" action="#!">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="NombreEm">Nombre</label>
+                <input type="text" id="NombreEm" class="form-control">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="ApellidoEm">Apellido</label>
+                <input type="text" id="ApellidoEm" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="FechaNacEm">Fecha de Nacimiento</label>
+                <input type="date" name="FechaNacEm" id="FechaNacEm" class="form-control">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="GeneroEm">Género</label>
+                <select id="GeneroEm" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="TipoDocCl">Tipo de Documento</label>
+                <select id="TipoDocCl" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option value="Cédula">Cédula</option>
+                  <option value="Pasaporte">Pasaporte</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="NoDocCl">No. de Documento</label>
+                <input type="text" id="NoDocCl" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="TelefonoEm">Teléfono</label>
+                <input type="text" id="TelefonoEm" class="form-control">
+              </div>
+              <div class="form-group col-md-8">
+                <label for="CorreoEm">Correo Electrónico</label>
+                <input type="mail" id="CorreoEm" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="DireccionEm">Dirección</label>
+                <input type="text" id="DireccionEm" class="form-control">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="CiudadEm">Ciudad</label>
+                <select id="CiudadEm" class="form-control">
+                  <option value="" disabled selected></option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="CargoEm">Cargo Laboral</label>
+                <input type="text" id="CargoEm" class="form-control">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="SueldoEm">Sueldo</label>
+                <input type="text" id="SueldoEm" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form group-col-md-12">
+                <label>Días Laborales</label>
+                <br>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Domingo">
+                  <label class="custom-control-label" for="Domingo">Dom</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Lunes">
+                  <label class="custom-control-label" for="Lunes">Lun</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Martes">
+                  <label class="custom-control-label" for="Martes">Mar</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Miércoles">
+                  <label class="custom-control-label" for="Miércoles">Mie</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Jueves">
+                  <label class="custom-control-label" for="Jueves">Jue</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Viernes">
+                  <label class="custom-control-label" for="Viernes">Vie</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Sábado">
+                  <label class="custom-control-label" for="Sábado">Sab</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="EntradaEm">Hora de Entrada</label>
+                <input type="time" name="EntradaEm" id="EntradaEm" class="form-control">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="SalidaEm">Hora de Salida</label>
+                <input type="time" name="SalidaEm" id="SalidaEm" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="EstadoEm">Estado</label>
+                <select id="EstadoEm" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option value="Activo">Activo</option>
+                  <option value="De Vacaciones">De Vacaciones</option>
+                  <option value="De Licencia">De Licencia</option>
+                  <option value="Inactivo">Inactivo</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="FechaConEm">Fecha de Contratación</label>
+                <input type="date" name="FechaConEm" id="FechaConEm" class="form-control">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn unique-color text-white">Registrar</button>
+              <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Editar Empleado -->
+  <div class="modal fade" id="EditEmpleado" tabindex="-1" role="dialog" aria-labelledby="EditEmpleadoLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="EditEmpleadoLabel">Editar Empleado</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="border border-light p-5" action="#!">
+            <div class="form-row">
+              <div class="form-group col-md-1">
+                <label for="IDEm">ID</label>
+                <input type="text" id="IDEm" class="form-control disabled">
+              </div>
+              <div class="form-group col-md-5">
+                <label for="NombreEm">Nombre</label>
+                <input type="text" id="NombreEm" class="form-control">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="ApellidoEm">Apellido</label>
+                <input type="text" id="ApellidoEm" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="FechaNacEm">Fecha de Nacimiento</label>
+                <input type="date" name="FechaNacEm" id="FechaNacEm" class="form-control">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="GeneroEm">Género</label>
+                <select id="GeneroEm" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="TipoDocEm">Tipo de Documento</label>
+                <select id="TipoDocEm" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option value="Cédula">Cédula</option>
+                  <option value="Pasaporte">Pasaporte</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="NoDocEm">No. de Documento</label>
+                <input type="text" id="NoDocEm" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="TelefonoEm">Teléfono</label>
+                <input type="text" id="TelefonoEm" class="form-control">
+              </div>
+              <div class="form-group col-md-8">
+                <label for="CorreoEm">Correo Electrónico</label>
+                <input type="mail" id="CorreoEm" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="DireccionEm">Dirección</label>
+                <input type="text" id="DireccionEm" class="form-control">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="CiudadEm">Ciudad</label>
+                <select id="CiudadEm" class="form-control">
+                  <option value="" disabled selected></option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="CargoEm">Cargo Laboral</label>
+                <input type="text" id="CargoEm" class="form-control">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="SueldoEm">Sueldo</label>
+                <input type="text" id="SueldoEm" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form group-col-md-12">
+                <label>Días Laborales</label>
+                <br>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Domingo">
+                  <label class="custom-control-label" for="Domingo">Dom</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Lunes">
+                  <label class="custom-control-label" for="Lunes">Lun</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Martes">
+                  <label class="custom-control-label" for="Martes">Mar</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Miércoles">
+                  <label class="custom-control-label" for="Miércoles">Mie</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Jueves">
+                  <label class="custom-control-label" for="Jueves">Jue</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Viernes">
+                  <label class="custom-control-label" for="Viernes">Vie</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="Sábado">
+                  <label class="custom-control-label" for="Sábado">Sab</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="EntradaEm">Hora de Entrada</label>
+                <input type="time" name="EntradaEm" id="EntradaEm" class="form-control">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="SalidaEm">Hora de Salida</label>
+                <input type="time" name="SalidaEm" id="SalidaEm" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="EstadoEm">Estado</label>
+                <select id="EstadoEm" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option value="Activo">Activo</option>
+                  <option value="De Vacaciones">De Vacaciones</option>
+                  <option value="De Licencia">De Licencia</option>
+                  <option value="Inactivo">Inactivo</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="FechaConEm">Fecha de Contratación</label>
+                <input type="date" name="FechaConEm" id="FechaConEm" class="form-control">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn unique-color text-white">Actualizar</button>
+              <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--   Modal Nuevo Proveedor -->
+  <div class="modal fade" id="NvoProveedor" tabindex="-1" role="dialog" aria-labelledby="NvoProveedorLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="NvoProveedorLabel">Nuevo Proveedor</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="border border-light p-5" action="#!">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="NombrePr">Nombre Comercial</label>
+                <input type="text" id="NombrePr" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="TipoDocPr">Tipo de Documento</label>
+                <select id="TipoDocPr" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option value="Cédula">Cédula</option>
+                  <option value="RNC">RNC</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="NoDocPr">No. de Documento</label>
+                <input type="text" id="NoDocPr" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="TelefonoPr">Teléfono</label>
+                <input type="text" id="TelefonoPr" class="form-control">
+              </div>
+              <div class="form-group col-md-8">
+                <label for="CorreoPr">Correo Electrónico</label>
+                <input type="mail" id="CorreoPr" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="DireccionPr">Dirección</label>
+                <input type="text" id="DireccionPr" class="form-control">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="CiudadPr">Ciudad</label>
+                <select id="CiudadPr" class="form-control">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn unique-color text-white">Registrar</button>
+              <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Editar Proveedor -->
+  <div class="modal fade" id="EditProveedor" tabindex="-1" role="dialog" aria-labelledby="EditProveedorLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="EditProveedorLabel">Editar Proveedor</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="border border-light p-5" action="#!">
+            <div class="form-row">
+              <div class="form-group col-md-1">
+                <label for="IDPr">ID</label>
+                <input type="text" id="IDPr" class="form-control disabled">
+              </div>
+              <div class="form-group col-md-11">
+                <label for="NombrePr">Nombre Comercial</label>
+                <input type="text" id="NombrePr" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="TipoDocPr">Tipo de Documento</label>
+                <select id="TipoDocPr" class="form-control">
+                  <option value="" disabled selected></option>
+                  <option value="Cédula">Cédula</option>
+                  <option value="RNC">RNC</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="NoDocPr">No. de Documento</label>
+                <input type="text" id="NoDocPr" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="TelefonoPr">Teléfono</label>
+                <input type="text" id="TelefonoPr" class="form-control">
+              </div>
+              <div class="form-group col-md-8">
+                <label for="CorreoPr">Correo Electrónico</label>
+                <input type="mail" id="CorreoPr" class="form-control">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="DireccionPr">Dirección</label>
+                <input type="text" id="DireccionPr" class="form-control">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="CiudadPr">Ciudad</label>
+                <select id="CiudadPr" class="form-control">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn unique-color text-white">Actualizar</button>
+              <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- End your project here-->
+</body>
+{% endblock%}
+
+</html>

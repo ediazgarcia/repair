@@ -15,6 +15,7 @@ Software de propósito general orientado a talleres mecánicos.
 
 - pip install virtualenv
 - python3 -m venv env
+- source ./env/Scripts/activate
 
 4.  pip install -r requirements.txt
 

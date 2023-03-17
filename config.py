@@ -4,8 +4,8 @@ class Config:
 
     # Configuración de base dedatos
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:1234@localhost:3306/repair_db"
-
+    #SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:1234@localhost:3306/repair_db"
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:123456@localhost:3306/repair_db"
 
 class ProductionConfig(Config):
     DEBUG = False
