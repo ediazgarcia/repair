@@ -32,7 +32,8 @@
           </li>
         </ul>
         <div class="tab-content card pt-5" id="myTabContentJust">
-          <div class="tab-pane fade show active abs-center" id="usuarios-just" role="tabpanel" aria-labelledby="usuarios-tab-just">
+          <div class="tab-pane fade show active abs-center" id="usuarios-just" role="tabpanel"
+            aria-labelledby="usuarios-tab-just">
             <div class="d-flex flex-row">
               <h2 class="d-flex flex-row">Todos los Usuarios</h2>
               <a class="btn btn-floating unique-color dropdown-toggle ml-auto" type="button" data-toggle="modal"
@@ -92,7 +93,7 @@
                   </th>
                   <th class="th-sm">Nombre
                   </th>
-<!--                   <th class="th-sm">Editar
+                  <!--                   <th class="th-sm">Editar
                   </th>
                   <th class="th-sm">Eliminar
                   </th> -->
@@ -104,105 +105,103 @@
                   <td></td>
                   <td></td>
                   <td></td>
-<!--                   <td><button class="btn unique-color btn-sm m-0" data-toggle="modal" data-target="#EditRol"><i
+                  <!--                   <td><button class="btn unique-color btn-sm m-0" data-toggle="modal" data-target="#EditRol"><i
                         class="fas fa-pencil white-text"></i></button>
                   </td>
                   <td><button class="btn red btn-sm m-0"><i class="fas fa-trash white-text"></i></button></td> -->
                 </tr>
             </table>
           </div>
-          <div class="tab-pane fade" id="empresa-just" role="tabpanel"
-          aria-labelledby="empresa-tab-just">
-          <h2 class='mb-3'>Perfil de la Empresa</h2>
-          <form class="border border-light p-5" action="#!">
-            <div class="form-row">
-              <div class="form-group col-md-11">
-                <label for="RazonEp">Razón Social</label>
-                <input type="text" id="RazonEp" class="form-control">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="RNC-CedulaEp">RNC/Cédula</label>
-                <input type="text" id="NoDocEp" class="form-control">
-              </div>
-              <div class="form-group col-md-8">
-                <label for="NombreEp">Nombre Comercial</label>
-                <input type="text" id="NombreEp" class="form-control">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-8">
-                <label for="CorreoEp">Correo Electrónico</label>
-                <input type="mail" id="CorreoEp" class="form-control">
-              </div>
-              <div class="form-group col-md-4">
-                <label for="TelefonoEp">Teléfono</label>
-                <input type="text" id="TelefonoEp" class="form-control">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupFileAddon01">Logo</span>
-                </div>
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="LogoEp" aria-describedby="inputGroupFileAddon01">
-                  <label class="custom-file-label" for="LogoEp">Elegir imagen</label>
-                </div>
-              </div>
-              <div class="form-group col-md-12">
-                <label for="DireccionEp">Dirección</label>
-                <input type="text" id="DireccionEp" class="form-control">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="CiudadEp">Provincia</label>
-                <select id="CiudadEp" class="form-control">
-                  <option value=""></option>
-                </select>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="MunicipioEp">Municipio</label>
-                <select id="MunicipioEp" class="form-control">
-                  <option value=""></option>
-                </select>
-              </div>
-            </div>
-            <button type="submit" class="btn unique-color text-white">Guardar</button>
-          </form>
-        </div>
-        </div>
-      </div>
-      <!-- Nuevo Rol -->
-      <div class="modal fade" id="NvoRol" tabindex="-1" role="dialog" aria-labelledby="NvoRolLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title" id="NvoRolLabel">Nuevo Rol</h2>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
+          <div class="tab-pane fade" id="empresa-just" role="tabpanel" aria-labelledby="empresa-tab-just">
+            <h2 class='mb-3'>Perfil de la Empresa</h2>
             <form class="border border-light p-5" action="#!">
               <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label for="NombreUs">Rol</label>
-                  <input type="text" id="NombreUs" class="form-control">
+                <div class="form-group col-md-11">
+                  <label for="RazonEp">Razón Social</label>
+                  <input type="text" id="RazonEp" class="form-control">
                 </div>
               </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn unique-color text-white">Registrar</button>
-                <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="RNC-CedulaEp">RNC/Cédula</label>
+                  <input type="text" id="NoDocEp" class="form-control">
+                </div>
+                <div class="form-group col-md-8">
+                  <label for="NombreEp">Nombre Comercial</label>
+                  <input type="text" id="NombreEp" class="form-control">
+                </div>
               </div>
+              <div class="form-row">
+                <div class="form-group col-md-8">
+                  <label for="CorreoEp">Correo Electrónico</label>
+                  <input type="mail" id="CorreoEp" class="form-control">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="TelefonoEp">Teléfono</label>
+                  <input type="text" id="TelefonoEp" class="form-control">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Logo</span>
+                  </div>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="LogoEp" aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="LogoEp">Elegir imagen</label>
+                  </div>
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="DireccionEp">Dirección</label>
+                  <input type="text" id="DireccionEp" class="form-control">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="CiudadEp">Provincia</label>
+                  <select id="CiudadEp" class="form-control">
+                    <option value=""></option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="MunicipioEp">Municipio</label>
+                  <select id="MunicipioEp" class="form-control">
+                    <option value=""></option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn unique-color text-white">Guardar</button>
             </form>
           </div>
         </div>
       </div>
-    </div>
+      <!-- Nuevo Rol -->
+      <div class="modal fade" id="NvoRol" tabindex="-1" role="dialog" aria-labelledby="NvoRolLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="NvoRolLabel">Nuevo Rol</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="border border-light p-5" action="#!">
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="NombreUs">Rol</label>
+                    <input type="text" id="NombreUs" class="form-control">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn unique-color text-white">Registrar</button>
+                  <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Nuevo Usuario -->
       <div class="modal fade" id="NvoUsuario" tabindex="-1" role="dialog" aria-labelledby="NvoUsuarioLabel"
         aria-hidden="true">
