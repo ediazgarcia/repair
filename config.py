@@ -1,17 +1,24 @@
-class Config:
-    DEBUG = True
+from dotenv import load_dotenv
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '.env'))
+
+
+class Config(object):
+    DEBUG = os.getenv('FLASK_DEBUG') == 'development'
     TESTING = True
 
     # Configuración de base dedatos
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    #SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:1234@localhost:3306/repair_db"
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:123456@localhost:3306/repair_db"
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
+    SECRET_KEY = os.getenv('SECRET_KEY')
 
 class ProductionConfig(Config):
     DEBUG = False
 
 
 class DevelopmentConfig(Config):
-    SECRET_KEY = 'dev'
+    SECRET_KEY = os.getenv('SECRET_KEY')
     DEBUG = True
     TESTING = True
