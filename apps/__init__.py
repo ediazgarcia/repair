@@ -1,10 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from config import Config, DevelopmentConfig, ProductionConfig
 
 app = Flask(__name__)
 
 # Cargar las configuraciones
-app.config.from_object("config.DevelopmentConfig")
+app.config.from_object(DevelopmentConfig)
 db = SQLAlchemy(app)
 
 # Importar routes
