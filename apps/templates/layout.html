@@ -2,102 +2,120 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AIE Repair Suite | {% block title %}{% endblock %}</title>
-    <!-- Favicon -->
-    <link rel="icon" href="../static/img/Icono.png" type="image/x-icon">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <!-- Google Fonts Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <!-- Material Design Bootstrap -->
-    <link rel="stylesheet" href="../static/css/mdb.min.css">
-    <!-- Your custom styles (optional) -->
-    <link rel="stylesheet" href="../static/css/style.css">
-    <!-- jQuery -->
-    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="../static/js/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="../static/js/mdb.min.js"></script>
-    <!-- Your custom scripts (optional) -->
-    <script type="text/javascript" src="../static/js/scripts.js"></script>
-    <script type="text/javascript" src="../static/js/datatables.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='imgs/icono.ico')}}" type="image/x-icon">
+
+    <title>{% block title %}{% endblock %} | Repair Suite</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
 </head>
 
 <body>
-    <header>
-        <!-- Sidebar navigation -->
-        <div id="slide-out" class="side-nav2 side special-color-dark">
-            <ul class="custom-scrollbar">
-                <!-- Logo -->
+    <div class="containers">
+        <div class="navigation">
+            <ul>
                 <li>
-                    <div class="logo-wrapper" id="no-border">
-                        <a href="#"><img src="../static/img/Logo White.png" class="img-fluid"></a>
-                    </div>
-                </li>
-                <!--/. Logo -->
-                <!-- Side navigation links -->
-                <li>
-                    <ul class="collapsible collapsible-accordion">
-                        <li><a class="collapsible-header waves-effect {% if current_page == 'Inicio' %} active unique-color{% endif %}"
-                                href="/"><i class="fa-solid fa-house"></i> Inicio</a>
-                        </li>
-                        <li><a class="collapsible-header waves-effect {% if current_page == 'Directorio' %}active unique-color{% endif %}"
-                                href="/directory"><i class="fa-solid fa-users"></i>
-                                Directorio</a></li>
-                        <li><a class="collapsible-header waves-effect {% if current_page == 'Taller' %}active unique-color{% endif %}"
-                                href="#"><i class="fa-solid fa-toolbox"></i>
-                                Taller</a></li>
-                        <li><a class="collapsible-header waves-effect {% if current_page == 'Productos' %}active unique-color{% endif %}"
-                                href="#"><i class="fa-solid fa-box"></i>
-                                Productos</a></li>
-                        <li><a class="collapsible-header waves-effect {% if current_page == 'Vehículos' %}active unique-color{% endif %}"
-                                href="/vehicles"><i class="fa-solid fa-car"></i>
-                                Vehículos</a></li>
-                        <li><a class="collapsible-header waves-effect {% if current_page == 'Configuración' %}active unique-color{% endif %}"
-                                href="/settings"><i class="fa-solid fa-gear"></i>
-                                Configuración</a>
-                        </li>
-                    </ul>
-                </li>
-                <!--/. Side navigation links -->
-            </ul>
-            <div class="sidenav-bg"></div>
-        </div>
-        <!--/. Sidebar navigation -->
-        <!-- Navbar -->
-        <nav
-            class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav special-color-dark">
-            <!-- SideNav slide-out button -->
-            <a class="navbar-brand text-center" href="#"></a>
-            <div class="float-left">
-                <a href="#" data-activates="slide-out" class="button-collapse"><i class="fas fa-bars"></i></a>
-            </div>
-            <a class="navbar-brand d-block d-xl-none" href="#">
-                <img src="../static/img/Logo White.png" height="30">
-            </a>
-            <ul class="nav navbar-nav nav-flex-icons ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fa-solid fa-user"></i> Usuario
+                    <a href="{{ url_for('dash.index') }}" class="logtype">
+                        <img src="{{ url_for('static', filename='imgs/logo_wh.png') }}" alt="">
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right light" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Cerrar Sesión</a>
-                    </div>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('dash.index') }}">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Menu</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Directorios</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="construct-outline"></ion-icon>
+                        </span>
+                        <span class="title">Taller</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="car-sport-outline"></ion-icon>
+                        </span>
+                        <span class="title">Vehículos</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="add-outline"></ion-icon>
+                        </span>
+                        <span class="title">Productos</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('dash.setting') }}">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Configuración</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Salir</span>
+                    </a>
                 </li>
             </ul>
-        </nav>
-        <!-- /.Navbar -->
-    </header>
-    {% block content %} Cuerpo {% endblock%}
+        </div>
+        <section>
+            <div class="content">
+                <header>{% block header %}{% endblock %}</header>
+
+                {% for message in get_flashed_messages() %}
+                <div class="flash"> {{ message }}</div>
+                {% endfor %}
+
+                {% block content %}
+                {% endblock %}
+            </div>
+        </section>
+        <!-- =========== Scripts =========  -->
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+        <!-- =========== jQuery DataTable =========  -->
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+        <!-- =========== Bootstrap DataTable =========  -->
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+        <!-- ====== ionicons ======= -->
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
