@@ -1,12 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicia Sesión | Repair Suite</title>
+    <!-- Favicon -->
+    <link rel="icon" href="../static/img/Icono.png" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" href="../static/css/mdb.min.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/login.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='imgs/icono.ico')}}" type="image/x-icon">
 </head>
+
 <body>
-    
+    <!-- Section: Design Block -->
+    <section class="background-radial-gradient overflow-hidden">
+        <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+            <div class="row gx-lg-5 align-items-center mb-5">
+                <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+                    <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+                        Software de gestión <br>
+                        <span style="color: #3E729A">Repair Suite</span>
+                    </h1>
+                    <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+                        Te ofrecemos una amplia variedad de módulos que permiten organizar y gestionar tu taller de
+                        mecánica de
+                        forma profesional, desde cualquier lugar con una conexión a internet.
+                    </p>
+                </div>
+
+                <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+                    <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+                    <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+                    <div class="card bg-glass">
+                        <div class="card-body px-4 py-5 px-md-5">
+                            <form>
+                                <div class="log">
+                                    <img src="{{ url_for('static', filename='img/Logo_one.png') }}" alt="">
+                                </div>
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form3Example3">Correo electrónico</label>
+                                    <input type="email" id="form3Example3" name="email" class="form-control" required />
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form3Example4">Contraseña </label>
+                                    <input type="password" id="form3Example4" name="password" class="form-control"
+                                        required />
+                                </div>
+
+                                <!-- Submit button -->
+                                <div class="row h-100 justify-content-center">
+                                    <div class="col-6 align-self-center">
+                                        <button type="submit" class="btn btn-custom btn-md btn-block w-100">
+                                            Iniciar Sesión
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section: Design Block -->
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="../static/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../static/js/mdb.min.js"></script>
+    <!-- Your custom scripts (optional) -->
+    <script type="text/javascript" src="../static/js/scripts.js"></script>
 </body>
+
 </html>

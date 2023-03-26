@@ -1,20 +1,18 @@
-#no-border
-{
-    border-bottom: 0px
+#no-border {
+  border-bottom: 0px;
 }
 
 .login-container {
-    width: 400px;
-    margin: 100px auto;
-  }
-
-
-.bg {
-    background-image: url(../img/bodybg.jpg);
-    background-size: cover;
+  width: 400px;
+  margin: 100px auto;
 }
 
-.md-outline.select-wrapper+label {
-    top: .7em !important;
-    z-index: 2 !important;
-  }
+.bg {
+  background-image: url(../img/bodybg.jpg);
+  background-size: cover;
+}
+
+.md-outline.select-wrapper + label {
+  top: 0.7em !important;
+  z-index: 2 !important;
+}
