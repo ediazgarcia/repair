@@ -7,7 +7,7 @@ dash = Blueprint('dash', __name__)
 
 @dash.route("/")
 def index():
-    return render_template("auth/login.html")
+    return render_template("views/index.html")
 
 # Usuarios
 @dash.route('/settings')

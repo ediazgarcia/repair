@@ -7,27 +7,29 @@ from werkzeug.security import generate_password_hash
 from apps.models.user import User
 from apps import db
 
-user = Blueprint('user', __name__, url_prefix='/user')
+user = Blueprint('user', __name__)
 
 
 # CRUDS USERS
 
 # GetAllUsers
-@user.route('/list', methods=('GET', 'POST'))
-def get_all_users():
-    return render_template('views/settings/users.html')
+@user.route('/', methods=('GET', 'POST'))
+def index():
+    users = User.query.all()
+    return render_template('views/settings/index.html')
     
 # create
 @user.route('/create', methods=('GET', 'POST'))
 def create_user():
     if request.method == 'POST':
         try:
-            role = bool(int(request.form.get('role')))
-            name = request.form.get('fullName')
+            # receive data from the form
+            name = request.form.get('fullname')
             username = request.form.get('username')
             email = request.form.get('email')
             password = request.form.get('password')
-            isActive = bool(int(request.form.get('estado')))
+            role = bool(int(request.form.get('role')))
+            active = bool(int(request.form.get('estado')))
         except (TypeError, ValueError):
             flash('Datos inválidos.')
             return redirect(url_for('user.create_user'))
@@ -40,11 +42,13 @@ def create_user():
         if user is not None:
             flash('El nombre de usuario ya está en uso.')
             return redirect(url_for('user.create_user'))
-
-        new_user = User(role, name, username, email, generate_password_hash(password, method='sha256'), isActive)
+        
+        # create a new Contact object
+        new_user = User(name, username, email, generate_password_hash(password, method='sha256'), role, active)
+         # save the object into the database
         db.session.add(new_user)
         db.session.commit()
         flash('Usuario creado correctamente.')
-        return redirect(url_for('user.settings'))
+        return redirect(url_for('user.index'))
 
-    return render_template('views/setting/index.html')
+    return render_template('views/settings/index.html')
