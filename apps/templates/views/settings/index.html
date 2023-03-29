@@ -45,8 +45,6 @@
                                     </th>
                                     <th class="th-sm">Correo Electrónico
                                     </th>
-                                    <th class="th-sm">Contraseña
-                                    </th>
                                     <th class="th-sm">Rol</th>
                                     <th class="th-sm">Estado
                                     </th>
@@ -61,21 +59,34 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for user in users%}
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><button class="btn unique-color btn-sm m-0" data-toggle="modal"
-                                            data-target="#EditUsuario"><i class="fas fa-pencil white-text"></i></button>
+                                    <td>{{user.name}}</td>
+                                    <td>{{user.username}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td>{{user.role}}</td>
+                                    {% if user.active %}
+                                    <td>Activo</td>
+                                    {% else %}
+                                    <td>Inactivo</td>
+                                    {% endif %}
+                                    <td>{{user.created}}</td>
+                                    <td>{{user.updated}}</td>
+                                    <td>
+                                        <button id="update-btn-{{ user.id }}" class="btn unique-color btn-sm m-0"
+                                            data-toggle="modal" data-target="#EditUsuario">
+                                            <i class="fas fa-pencil white-text"></i>
+                                        </button>
                                     </td>
-                                    <td><button class="btn red btn-sm m-0"><i
-                                                class="fas fa-trash white-text"></i></button></td>
+                                    <td>
+                                        <button id="delete-btn-{{ user.id }}" class="btn red btn-sm m-0"
+                                            data-id="{{ user.id }}" onclick="deleteUser({{ user.id }})">
+                                            <i class="fas fa-trash white-text"></i>
+                                        </button>
+                                    </td>
                                 </tr>
+                                {% endfor %}
+                            </tbody>
                         </table>
                     </div>
                     <div class="tab-pane fade" id="empresa-just" role="tabpanel" aria-labelledby="empresa-tab-just">
@@ -154,7 +165,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="border border-light p-5" action="/create" method="POST">
+                            <form class="border border-light p-5" action="{{url_for('users.create_user')}}"
+                                method="POST">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="NombreUs">Nombre Completo</label>
@@ -182,22 +194,21 @@
                                         <label for="EstadoUs">Estado</label>
                                         <select id="EstadoUs" name="estado" class="form-control">
                                             <option value="" disabled selected></option>
-                                            <option value="Activo">Activo</option>
-                                            <option value="Inactivo">Inactivo</option>
+                                            <option value="1">Activo</option>
+                                            <option value="0">Inactivo</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="EstadoUs">Role</label>
-                                        <select id="EstadoUs" name="role" class="form-control">
+                                        <label for="Role">Role</label>
+                                        <select id="Role" name="role" class="form-control">
                                             <option value="" disabled selected></option>
-                                            <option value="Activo">Admin</option>
-                                            <option value="Inactivo">User</option>
+                                            <option value="Administrador">Administrador</option>
+                                            <option value="Usuario">Usuario</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn unique-color text-white">Registrar</button>
-                                    <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
                                 </div>
                             </form>
                         </div>
@@ -216,46 +227,50 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="border border-light p-5" action="#!">
+                            <form class="border border-light p-5" action="{{ url_for('users.update_user') }}"
+                                method="POST">
                                 <div class="form-row">
-                                    <div class="form-group col-md-1">
-                                        <label for="NombreUs">ID</label>
-                                        <input type="text" id="NombreUs" class="form-control disabled">
-                                    </div>
-                                    <div class="form-group col-md-11">
+                                    <div class="form-group col-md-12">
                                         <label for="NombreUs">Nombre Completo</label>
-                                        <input type="text" id="NombreUs" class="form-control">
+                                        <input type="text" id="NombreUs" name="fullname" value="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label for="CorreoUs">Correo Electrónico</label>
-                                        <input type="mail" id="CorreoUs" class="form-control">
+                                        <input type="mail" id="CorreoUs" name="email" value="" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="UsuarioUs">Nombre de Usuario</label>
-                                        <input type="text" id="UsuarioUs" class="form-control">
+                                        <input type="text" id="UsuarioUs" name="username" value="" class="form-control">
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="ContrasenaUS">Contraseña</label>
-                                        <input type="password" id="ContrasenaUs" class="form-control">
-                                    </div>
+                                    <!-- <div class="form-group col-md-6">
+                                        <label for="ContrasenaUs">Contraseña</label>
+                                        <input type="password" id="ContrasenaUs" name="password" class="form-control">
+                                    </div> -->
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="EstadoUs">Estado</label>
-                                        <select id="EstadoUs" class="form-control">
+                                        <select id="EstadoUs" value="" name="estado" class="form-control">
                                             <option value="" disabled selected></option>
-                                            <option value="Activo">Activo</option>
-                                            <option value="Inactivo">Inactivo</option>
+                                            <option value="1">Activo</option>
+                                            <option value="0">Inactivo</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Role">Role</label>
+                                        <select id="Role" name="role" value="" class="form-control">
+                                            <option value="" disabled selected></option>
+                                            <option value="Administrador">Administrador</option>
+                                            <option value="Usuario">Usuario</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn unique-color text-white">Actualizar</button>
-                                    <button type="reset" class="btn special-color-dark text-white">Reiniciar</button>
+                                    <button type="submit" class="btn unique-color text-white">Registrar</button>
                                 </div>
                             </form>
                         </div>
@@ -266,6 +281,25 @@
     </main>
     <!--Main Layout-->
     <!-- End your project here-->
+    <script>
+        function deleteUser(userId) {
+            // Construir la URL utilizando url_for y el userId
+            var url = "{{ url_for('users.delete_user', id=0) }}".replace("0", userId);
+
+            // Redirigir a la ruta correspondiente
+            window.location.href = url;
+        }
+
+        function updateUser(userId) {
+            // Construir la URL utilizando url_for y el userId
+            var url = "{{ url_for('users.update_user', id=0) }}".replace("0", userId);
+
+            // Redirigir a la ruta correspondiente
+            window.location.href = url;
+        }
+
+
+    </script>
 </body>
 {% endblock%}
 
