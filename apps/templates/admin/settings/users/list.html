@@ -1,30 +1,27 @@
 {% extends 'layout.html' %}
-<h2>{% block title %}Configuración{% endblock %}</h2>
+{% set current_page = 'Configuración' %}
+<h2>{% block title %}Usuarios{% endblock %}</h2>
 
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Listado de Usuarios</h1>
+    <h1 class="h1 mb-0 text-gray-800 d-flex">Usuarios</h1>
+    <a href="{{url_for('user.create_user')}}" class="btn btn-primary btn-circle btn-lg ml-auto">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
 </div>
-
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Configuración</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
+    </ol>
+</nav>
 <!-- Content Row -->
 
-<!-- Content Row -->
-
-<!-- <div class="row"> -->
-<!-- Page Heading -->
-<!-- <h1 class="h3 mb-2 text-gray-800">Listado de Usuarios</h1> -->
-<div class="row">
-    <div class="col-12 d-flex justify-content-start p-2 m-2">
-        <a href="{{url_for('user.create_user')}}" class="btn btn-primary btn-circle btn-lg">
-            <i class="fa fa-user-plus" aria-hidden="true"></i>
-        </a>
-    </div>
-</div>
 <!-- DataTales Example -->
 <div class="card shadow mb-5">
     <div class="card-header py-2">
-        <h6 class="m-2 font-weight-bold text-dark">Todos los Usuarios</h6>
+        <h3 class="text-gray-900 mb-4">Todos los Usuarios</h3>
     </div>
     <div class="card-body table-custom">
         <div class="table-responsive">
@@ -44,7 +41,7 @@
                         </th>
                         <th class="th-sm">Actualizado
                         </th>
-                        <th class="th-sm">Acci&oacute;n
+                        <th class="th-sm">Acciones
                         </th>
                     </tr>
                 </thead>
