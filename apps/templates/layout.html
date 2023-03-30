@@ -2,120 +2,147 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='imgs/icono.ico')}}" type="image/x-icon">
 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/Icono.ico')}}" type="image/x-icon">
     <title>{% block title %}{% endblock %} | Repair Suite</title>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
-    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" type="text/css"
+        href="{{url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css"
+        integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css"
+        integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous" />
+
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/sb-admin-2.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/sb-admin-2.min.css')}}">
+
+    <!-- Custom styles for this page -->
+    <link rel="stylesheet" type="text/css"
+        href="{{url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.css')}}">
+
+    <!-- MDB -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" /> -->
+
+
 </head>
 
-<body>
-    <div class="containers">
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="{{ url_for('dash.index') }}" class="logtype">
-                        <img src="{{ url_for('static', filename='imgs/logo_wh.png') }}" alt="">
-                    </a>
-                </li>
+<body id="page-top">
 
-                <li>
-                    <a href="{{ url_for('dash.index') }}">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                        <span class="title">Menu</span>
-                    </a>
-                </li>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Directorios</span>
-                    </a>
-                </li>
+        <!-- Sidebar -->
+        {% include 'partials/_sidebar.html' %}
+        <!-- End of Sidebar -->
 
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="construct-outline"></ion-icon>
-                        </span>
-                        <span class="title">Taller</span>
-                    </a>
-                </li>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="car-sport-outline"></ion-icon>
-                        </span>
-                        <span class="title">Vehículos</span>
-                    </a>
-                </li>
+            <!-- Main Content -->
+            <div id="content">
 
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="add-outline"></ion-icon>
-                        </span>
-                        <span class="title">Productos</span>
-                    </a>
-                </li>
+                <!-- Navbar -->
+                {% include 'partials/_navbar.html' %}
+                <!-- End of Navbar -->
 
-                <li>
-                    <a href="{{ url_for('dash.setting') }}">
-                        <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
-                        </span>
-                        <span class="title">Configuración</span>
-                    </a>
-                </li>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    {% block content %}{% endblock %}
+                </div>
+                <!-- /.container-fluid -->
 
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-                        <span class="title">Salir</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <section>
-            <div class="content">
-                <header>{% block header %}{% endblock %}</header>
-
-                {% for message in get_flashed_messages() %}
-                <div class="flash"> {{ message }}</div>
-                {% endfor %}
-
-                {% block content %}
-                {% endblock %}
             </div>
-        </section>
-        <!-- =========== Scripts =========  -->
-        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+            <!-- End of Main Content -->
 
-        <!-- =========== jQuery DataTable =========  -->
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <!-- Footer -->
+            {% include 'partials/_footer.html' %}
+            <!-- End of Footer -->
 
-        <!-- =========== Bootstrap DataTable =========  -->
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+        </div>
+        <!-- End of Content Wrapper -->
 
-        <!-- ====== ionicons ======= -->
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Está seguro que desea cerrar sesión?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión
+                    actual.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="login.html">Cerrar Sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+        integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/solid.js"
+        integrity="sha384-/BxOvRagtVDn9dJ+JGCtcofNXgQO/CCCVKdMfL115s3gOgQxWaX/tSq5V8dRgsbc"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/fontawesome.js"
+        integrity="sha384-dPBGbj4Uoy1OOpM4+aRGfAOc0W37JkROT+3uynUgTHZCHZNMHfGXsmmvYTffZjYO"
+        crossorigin="anonymous"></script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="{{url_for('static', filename='js/sb-admin-2.min.js')}}"></script>
+    <!-- Page level plugins -->
+    <script src="{{url_for('static', filename='vendor/chart.js/Chart.min.js')}}"></script>
+    <!-- Page level custom scripts -->
+    <script src="{{url_for('static', filename='js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{url_for('static', filename='js/demo/chart-pie-demo.js')}}"></script>
+
+
+
+    <!-- Page level plugins -->
+    <script src="{{url_for('static', filename='vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{url_for('static', filename='js/demo/datatables-demo.js')}}"></script>
+
+
+    <!-- MDB -->
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script> -->
+
+
 </body>
 
 </html>

@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+<h2>{% block title %}Configuración{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Listado de Usuarios</h1>
+</div>
+
+<!-- Content Row -->
+
+<!-- Content Row -->
+
+<!-- <div class="row"> -->
+<!-- Page Heading -->
+<!-- <h1 class="h3 mb-2 text-gray-800">Listado de Usuarios</h1> -->
+<div class="row">
+    <div class="col-12 d-flex justify-content-start p-2 m-2">
+        <a href="{{url_for('user.create_user')}}" class="btn btn-primary btn-circle btn-lg">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<!-- DataTales Example -->
+<div class="card shadow mb-5">
+    <div class="card-header py-2">
+        <h6 class="m-2 font-weight-bold text-dark">Todos los Usuarios</h6>
+    </div>
+    <div class="card-body table-custom">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="th-sm">Nombre Completo
+                        </th>
+                        <th class="th-sm">Nombre de Usuario
+                        </th>
+                        <th class="th-sm">Correo Electrónico
+                        </th>
+                        <th class="th-sm">Rol</th>
+                        <th class="th-sm">Estado
+                        </th>
+                        <th class="th-sm">Registrado
+                        </th>
+                        <th class="th-sm">Actualizado
+                        </th>
+                        <th class="th-sm">Acci&oacute;n
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in user%}
+                    <tr>
+                        <td>{{user.fullname}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.role}}</td>
+                        {% if user.active %}
+                        <td>Activo</td>
+                        {% else %}
+                        <td>Inactivo</td>
+                        {% endif %}
+                        <td>{{user.created}}</td>
+                        <td>{{user.updated}}</td>
+                        <td>
+                            <button class="btn  btn-sm btn-primary"
+                                onclick="location.href='{{ url_for('user.update_user', id=user.id) }}'">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="location.href='{{ url_for('user.delete_user', id=user.id) }}'">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- </div> -->
+
+{% endblock %}

@@ -6,10 +6,5 @@ dash = Blueprint('dash', __name__)
 
 
 @dash.route("/")
-def index():
-    return render_template("views/index.html")
-
-# Usuarios
-@dash.route('/settings')
-def setting():
-    return render_template('views/settings/index.html')
+def home():
+    return render_template("admin/index.html")

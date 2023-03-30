@@ -1,0 +1,176 @@
+<!-- Sidebar -->
+<ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url_for('dash.home')}}">
+        <div class="sidebar-brand-icon">
+            <img class="logo" src="{{ url_for('static', filename='img/Logo_White.png') }}" alt="">
+        </div>
+    </a>
+
+    <!-- Divider
+    <hr class="sidebar-divider my-0"> -->
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{url_for('dash.home')}}">
+            <i class="fa fa-home"></i>
+            <span>Menu</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        SECCI&Oacute;N DIRECTORIOS
+    </div>
+
+    <!-- Nav Item - DIRECTORIOS Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+            aria-controls="collapseTwo">
+            <i class="fa fa-sitemap" aria-hidden="true"></i>
+            <span>Directorios</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="#">Clientes</a>
+                <a class="collapse-item" href="#">Empleados</a>
+                <a class="collapse-item" href="#">Proveedores</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        SECCI&Oacute;N TALLER
+    </div>
+
+    <!-- Nav Item - Taller Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+            aria-controls="collapsePages">
+            <i class="fa fa-wrench" aria-hidden="true"></i>
+            <span>Taller</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">&Oacute;rdenes</h6>
+                <a class="collapse-item" href="#">&Oacute;rdenes de Trabajos</a>
+                <h6 class="collapse-header">Facturaci&oacute;n</h6>
+                <a class="collapse-item" href="#">Facturas</a>
+                <a class="collapse-item" href="#">Detalles de Facturas</a>
+                <a class="collapse-item" href="#">Cotizaci&oacute;nes</a>
+                <a class="collapse-item" href="#">Detalles de Cotizaci&oacute;n</a>
+                <h6 class="collapse-header">Pagos</h6>
+                <a class="collapse-item" href="#">Pagos</a>
+                <a class="collapse-item" href="#">Detalles de Pagos</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        SECCI&Oacute;N VEHICULOS
+    </div>
+
+    <!-- Nav Item - Vehiculos Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fa fa-car" aria-hidden="true"></i>
+            <span>Veh&iacute;culos</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Veh&iacute;culos</h6>
+                <a class="collapse-item" href="#">Veh&iacute;culos</a>
+                <a class="collapse-item" href="#">Recepci&oacute;n de Veh&iacute;culos</a>
+                <a class="collapse-item" href="#">Det. Recep. de Veh&iacute;culos</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        SECCI&Oacute;N PRODUCTOS
+    </div>
+
+    <!-- Nav Item - PRODUCTOS Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseproducts"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+            <span>Productos</span>
+        </a>
+        <div id="collapseproducts" class="collapse" aria-labelledby="headingProduct" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">PRODUCTOS</h6>
+                <a class="collapse-item" href="#">Productos</a>
+                <h6 class="collapse-header">INVENTARIOS</h6>
+                <a class="collapse-item" href="#">Inventarios</a>
+                <h6 class="collapse-header">COMPRAS</h6>
+                <a class="collapse-item" href="#">Compras</a>
+                <a class="collapse-item" href="#">Detalles de Compras</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        SECCI&Oacute;N CONFIGURACI&Oacute;N
+    </div>
+
+    <!-- Nav Item - PRODUCTOS Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true"
+            aria-controls="collapseUser">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            <span>Configuraci&oacute;n</span>
+        </a>
+        <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">USUARIOS</h6>
+                <a class="collapse-item" href="{{url_for('user.get_user')}}">Usuarios</a>
+                <h6 class="collapse-header">CONTRASEÑAS</h6>
+                <a class="collapse-item" href="#">Cambiar Contraseñas</a>
+                <h6 class="collapse-header">EMPRESAS</h6>
+                <a class="collapse-item" href="#">Empresas</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Nav Item - Salir -->
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
+            <span>Cerrar Sesión</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+<!-- End of Sidebar -->
