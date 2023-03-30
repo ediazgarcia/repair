@@ -1,148 +1,76 @@
 {% extends 'layout.html' %}
-<h2>{% block title %}Configuración{% endblock %}</h2>
+{% set current_page = 'Configuración' %}
+<h2>{% block title %}Nuevo Usuario{% endblock %}</h2>
 
 {% block content %}
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Menu</h1>
-</div>
-
-<!-- Content Row -->
-<div class="row">
-
-    <!-- Ordenes de trabajos -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-primary shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            &Oacute;rdenes de Trabajos (OTs)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-calendar-check fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Ventas -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Ventas</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">50</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Recepci&oacute;n de Veh&iacute;culos -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Recepci&oacute;n de
-                            Veh&iacute;culos
-                        </div>
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">20</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Inventarios de productos -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Inventarios de Productos</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">50</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-list-ol fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<h1 class="h1 mb-0 text-gray-800 d-flex">Usuarios</h1>
+<br>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Configuración</a></li>
+        <li class="breadcrumb-item"><a href="{{url_for('user.get_user')}}">Usuarios</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nuevo Usuario</li>
+    </ol>
+</nav>
 
 <!-- Content Row -->
 <div class="card o-hidden border-0 shadow-lg my-5">
     <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
         <div class="row">
-            <!-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> -->
             <div class="col-lg-12">
                 <div class="p-5">
                     <div class="text-left">
-                        <h1 class="h4 text-gray-900 mb-4">Crear Usuarios</h1>
-                        <hr width="100%;" color="blue" size="10">
+                        <h3 class="text-gray-900 mb-4">Nuevo Usuario</h3>
                     </div>
                     <form action="{{url_for('user.create_user')}}" method="POST">
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="fullname">Nombre Completo</label>
                                 <input type="text" class="form-control rounded-imput" id="fullname" name="fullname"
-                                    placeholder="Nombre Completo" required>
+                                    placeholder="" required>
                             </div>
                             <div class="col-sm-6">
+                                <label for="username">Nombre de Usuario</label>
                                 <input type="text" class="form-control rounded-imput" id="username" name="username"
-                                    placeholder="Nombre de Usuario" required>
+                                    placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="email">Correo Electrónico</label>
                                 <input type="email" class="form-control rounded-imput" id="email" name="email"
-                                    placeholder="Correo Electrónico" required>
+                                    placeholder="" required>
                             </div>
                             <div class="col-sm-6">
+                                <label for="password">Contraseña</label>
                                 <input type="password" class="form-control rounded-imput" id="password" name="password"
-                                    placeholder="Contraseña" required>
+                                    placeholder="" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="role">Rol</label>
                                 <select id="role" name="role" class="form-control rounded-select" required>
-                                    <option value="" disabled selected>Role</option>
+                                    <option value="" disabled selected></option>
                                     <option value="Administrador">Administrador</option>
                                     <option value="Usuario">Usuario</option>
                                 </select>
                             </div>
                             <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="active">Estado</label>
                                 <select id="active" name="active" class="form-control rounded-select" required>
-                                    <option value="" disabled selected>Estado</option>
+                                    <option value="" disabled selected></option>
                                     <option value="1">Activo</option>
                                     <option value="0">Inactivo</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group text-center">
-                            <button class="btn btn-primary col-6 mx-auto rounded-button" type="submit">Crear</button>
+                        <div class="col-12 text-center">
+                            <button class="btn btn-primary col-6 rounded-button" type="submit">Crear</button>
                         </div>
-                        <hr>
                     </form>
-                    <hr>
                 </div>
             </div>
         </div>

@@ -1,5 +1,9 @@
 .sidebar {
-  background-color: #3e729a;
+  background-color: #263238;
+}
+
+.navbar {
+  background-color: #263238;
 }
 
 .logo {
@@ -12,7 +16,7 @@
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:visited {
-  background-color: #3e729a !important;
+  background-color: #3e729b !important;
 }
 
 .table-custom {
@@ -20,7 +24,7 @@
 }
 
 .btn-custom {
-  color: #3e729a !important;
+  color: #3e729b !important;
 }
 
 .rounded-imput {
@@ -32,4 +36,9 @@
 
 .rounded-button {
   border-radius: 20px !important;
+}
+
+.foot-logo{
+  opacity: 0.5;
+  margin-bottom: 15px;
 }
