@@ -28,6 +28,13 @@
   margin: 0 auto;
 }
 
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #3e729a !important;
+}
+
 #radius-shape-1 {
   height: 220px;
   width: 220px;

@@ -5,11 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/Icono.ico')}}" type="image/x-icon">
+    <title>Iniciar Sesión | Repair Suite</title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/login.css')}}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='imgs/icono.ico')}}" type="image/x-icon">
-    <title>Inicia sesión | Repair Suite</title>
+
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
+
+
 </head>
 
 <body>
@@ -19,7 +29,7 @@
             <div class="row gx-lg-5 align-items-center mb-5">
                 <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
                     <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-                        Software de gestión
+                        Software de gestión <br>
                         <span style="color: #3E729A">Repair Suite</span>
                     </h1>
                     <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
@@ -36,25 +46,24 @@
                         <div class="card-body px-4 py-5 px-md-5">
                             <form>
                                 <div class="log">
-                                    <img src="{{ url_for('static', filename='imgs/Logo_one.png') }}" alt="">
+                                    <img src="{{ url_for('static', filename='img/Logo_one.png') }}" alt="">
                                 </div>
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="form3Example3">Correo electrónico</label>
-                                    <input type="email" id="form3Example3" name="email" class="form-control" required />
+                                    <input type="email" id="typeEmail" class="form-control" />
+                                    <label class="form-label" for="typeEmail">Correo electrónico</label>
                                 </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="form3Example4">Contraseña </label>
-                                    <input type="password" id="form3Example4" name="password" class="form-control"
-                                        required />
+                                    <input type="password" id="typePassword" class="form-control" />
+                                    <label class="form-label" for="typePassword">Contraseña</label>
                                 </div>
 
                                 <!-- Submit button -->
                                 <div class="row h-100 justify-content-center">
                                     <div class="col-6 align-self-center">
-                                        <button type="submit" class="btn btn-custom btn-md btn-block w-100">
+                                        <button type="submit" class="btn btn-primary btn-md btn-block w-100">
                                             Iniciar Sesión
                                         </button>
                                     </div>
@@ -69,6 +78,9 @@
     <!-- Section: Design Block -->
     <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
 </body>
 
 </html>
