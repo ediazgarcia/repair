@@ -8,3 +8,4 @@ dash = Blueprint('dash', __name__)
 @dash.route("/")
 def home():
     return render_template("admin/index.html")
+

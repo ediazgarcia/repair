@@ -1,18 +1,18 @@
 {% extends 'layout.html' %}
 {% set current_page = 'Directorio' %}
-<h2>{% block title %}Empleados{% endblock %}</h2>
+<h2>{% block title %}Proveedores{% endblock %}</h2>
 
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h1 mb-0 text-gray-800 d-flex">Empleados</h1>
-    <a href="{{url_for('employee.create_employee')}}" class="btn btn-primary btn-circle btn-lg ml-auto">
+    <h1 class="h1 mb-0 text-gray-800 d-flex">Proveedores</h1>
+    <a href="{{url_for('provider.create_provider')}}" class="btn btn-primary btn-circle btn-lg ml-auto">
         <i class="fa fa-plus" aria-hidden="true"></i>
     </a>
 </div>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Empleados</li>
+        <li class="breadcrumb-item active" aria-current="page">Proveedores</li>
     </ol>
 </nav>
 <!-- Content Row -->
@@ -20,19 +20,17 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-5">
     <div class="card-header py-2">
-        <h3 class="text-gray-900 mb-4">Todos los Empleados</h3>
+        <h3 class="text-gray-900 mb-4">Todos los Proveedores</h3>
     </div>
     <div class="card-body table-custom">
         <div class="table-responsive">
             <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th class="th-sm">Nombre
+                        <th class="th-sm">Razón Social
                         </th>
-                        <th class="th-sm">Apellido
+                        <th class="th-sm">Nombre Comercial
                         </th>
-                        <th class="th-sm">Fecha de Nac.</th>
-                        <th class="th-sm">Género</th>
                         <th class="th-sm">Tipo de Documento
                         </th>
                         <th class="th-sm">No. de Documento
@@ -43,43 +41,20 @@
                         </th>
                         <th class="th-sm">Dirección
                         </th>
+                        <th class="th-sm">Sucursal
+                        </th>
                         <th class="th-sm">Provincia
-                        </th>
-                        <th class="th-sm">Cargo Laboral
-                        </th>
-                        <th class="th-sm">Sueldo</th>
-                        <th class="th-sm">Dias Laborales
-                        </th>
-                        <th class="th-sm">Hora de Entrada
-                        </th>
-                        <th class="th-sm">Hora de Salida
-                        </th>
-                        <th class="th-sm">Estado</th>
-                        <th class="th-sm">Contratado
                         </th>
                         <th class="th-sm">Registrado
                         </th>
                         <th class="th-sm">Actualizado
-                        </th>
-                        <th class="th-sm">Nombre de Usuario
                         </th>
                         <th class="th-sm">Acciones
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for employee in employee%}
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
+                    {% for provider in provider%}
                     <tr></tr>
                     <tr></tr>
                     <tr></tr>
@@ -90,15 +65,15 @@
                     <tr></tr>
                     <tr></tr>
                     <tr>
-                        <td>{{employee.created}}</td>
-                        <td>{{employee.updated}}</td>
+                        <td>{{provider.created}}</td>
+                        <td>{{provider.updated}}</td>
                         <td>
                             <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('employee.update_employee', id=employee.id) }}'">
+                                onclick="location.href='{{ url_for('provider.update_provider', id=provider.id) }}'">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('employee.delete_employee', id=employee.id) }}'">
+                                onclick="location.href='{{ url_for('provider.delete_provider', id=provider.id) }}'">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
