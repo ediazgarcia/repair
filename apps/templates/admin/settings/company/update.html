@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Configuración' %}
+<h2>{% block title %}Editar Empresa{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<h1 class="h1 mb-0 text-gray-800 d-flex">Empresas</h1>
+<br>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Configuración</a></li>
+        <li class="breadcrumb-item"><a href="{{url_for('company.get_company')}}">Empresas</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Editar Empresa</li>
+    </ol>
+</nav>
+
+<!-- Content Row -->
+<div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="p-5">
+                    <div class="text-left">
+                        <h3 class="text-gray-900 mb-4">Editar Empresa</h3>
+                    </div>
+                    <form action="{{url_for('company.update_company', id=company.id)}}" method="POST">
+                        <div class="form-group row">
+                            <div class="col-sm-8 mb-3 mb-sm-0">
+                                <label for="business_name">Razón Social</label>
+                                <input type="text" class="form-control rounded-imput" id="business_name"
+                                    name="business_name" placeholder="" value="{{company.business_name}}">
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="rnc_id">RNC/Cédula</label>
+                                <input type="text" class="form-control rounded-imput" id="rnc_id" name="rnc_id"
+                                    placeholder="" value="{{company.rnc_id}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="trade_name">Nombre Comercial</label>
+                                <input type="text" class="form-control rounded-imput" id="trade_name" name="trade_name"
+                                    placeholder="" value="{{company.trade_name}}">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="email">Correo Electrónico</label>
+                                <input type="email" class="form-control rounded-imput" id="email" name="email"
+                                    placeholder="" value="{{company.email}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4 mb-3 mb-sm-0">
+                                <label for="phone">Teléfono</label>
+                                <input type="text" class="form-control rounded-imput" id="phone" name="phone"
+                                    placeholder="" value="{{company.phone}}">
+                            </div>
+                            <div class="col-sm-8">
+                                <label for="branch_name">Sucursal</label>
+                                <input type="text" class="form-control rounded-imput" id="branch_name"
+                                    name="branch_name" placeholder="" value="{{company.branch_name}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-3 mb-sm-0">
+                                <label for="address">Dirección</label>
+                                <input type="text" class="form-control rounded-imput" id="address" name="address"
+                                    placeholder="" value="{{company.address}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="province">Provincia</label>
+                                <input type="text" class="form-control rounded-imput" id="province" name="province"
+                                    placeholder="" value="{{company.province}}">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="municipality">Municipio</label>
+                                <input type="text" class="form-control rounded-imput" id="municipality"
+                                    name="municipality" placeholder="" value="{{company.municipality}}">
+                            </div>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button class="btn btn-primary col-6 rounded-button" type="submit">Actualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
