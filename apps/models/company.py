@@ -2,7 +2,7 @@ from datetime import datetime
 from apps import db
 
 # define Empresa class that inherits
-class User(db.Model):
+class Company(db.Model):
     __tablename__ = 'companies'
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -20,16 +20,16 @@ class User(db.Model):
     
     
      # define constructor
-    def __init__(self, business_name, rnc_id, trade_name, email, phone, address, province, municipality, branch_name=None):
+    def __init__(self, business_name, rnc_id, trade_name, email, phone, branch_name, address, province, municipality):
         self.business_name = business_name
         self.rnc_id = rnc_id
         self.trade_name = trade_name
         self.email = email
         self.phone = phone
+        self.branch_name = branch_name
         self.address = address
         self.province = province
         self.municipality = municipality
-        self.branch_name = branch_name
     
 
     def __repr__(self) -> str:

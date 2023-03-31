@@ -53,6 +53,13 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    {% for message in get_flashed_messages() %}
+                    <div id="flash-message" class="alert alert-success fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                    </div>
+                    {% endfor %}
+
+
                     {% block content %}{% endblock %}
                 </div>
                 <!-- /.container-fluid -->
@@ -119,6 +126,12 @@
     <!-- Page level custom scripts -->
     <script src="{{url_for('static', filename='js/demo/datatables-demo.js')}}"></script>
     <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    <script>
+        // Ocultar el mensaje flash después de 5 segundos
+        setTimeout(function () {
+            document.getElementById("flash-message").style.display = "none";
+        }, 3000);
+    </script>
 
     <!-- MDB -->
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script> -->

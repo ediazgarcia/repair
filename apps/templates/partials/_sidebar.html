@@ -87,7 +87,7 @@
         <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{url_for('user.get_user')}}">Usuarios</a>
-                <a class="collapse-item" href="#">Empresas</a>
+                <a class="collapse-item" href="{{url_for('company.get_company')}}">Empresas</a>
                 <!-- <a class="collapse-item" href="#">Cambiar Contraseña</a> -->
             </div>
         </div>
@@ -97,12 +97,12 @@
     <!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
     <!-- Nav Item - Salir -->
-<!--     <li class="nav-item">
+    <!--     <li class="nav-item">
         <a class="nav-link" href="#">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
             <span>Cerrar Sesión</span></a>
     </li> -->
-    
+
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

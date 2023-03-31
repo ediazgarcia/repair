@@ -23,93 +23,102 @@ def get_user():
 @user.route('/create', methods=('GET', 'POST'))
 def create_user():
     if request.method == 'POST':
+        try:
+            # receive data from the form
+            fullname = request.form['fullname']
+            username = request.form['username']
+            email = request.form['email']
+            password = request.form['password']
+            role = request.form['role']
+            active = bool(int(request.form.get('active')))
 
-        # receive data from the form
-        fullname = request.form['fullname']
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        role = request.form['role']
-        active = bool(int(request.form.get('active')))
+            # validate form data
+            if not fullname:
+                raise ValueError('El nombre completo es requerido.')
+            if not username:
+                raise ValueError('El nombre de usuario es requerido.')
+            if not email:
+                raise ValueError('El correo electrónico es requerido.')
+            if not password:
+                raise ValueError('La contraseña es requerida.')
+            if not role:
+                raise ValueError('El rol es requerido.')
 
-        # create a new Contact object
-        new_user = User(fullname, username, email, generate_password_hash(password, method='sha256'), role, active )
+            # create a new User object
+            new_user = User(fullname, username, email, generate_password_hash(password, method='sha256'), role, active)
+            
+            # save the object into the database
+            db.session.add(new_user)
+            db.session.commit()
+
+            flash('¡Usuario añadido con éxito!')
+            return redirect(url_for('user.get_user'))
         
-        # save the object into the database
-        db.session.add(new_user)
-        db.session.commit()
-
-        # flash('Contact added successfully!')
-
-        return redirect(url_for('user.get_user'))
+        except ValueError as err:
+            flash(f'Error: {str(err)}', category='error')
+        except Exception as err:
+            flash(f'Error inesperado: {str(err)}', category='error')
+        
     return render_template('admin/settings/users/create.html')
+
     
-    
+
 @user.route("/update/<string:id>", methods=["GET", "POST"])
 def update_user(id):
     # get contact by Id
-    print(id)
     user = User.query.get(id)
 
     if request.method == "POST":
-        user.fullname = request.form['fullname']
-        user.username = request.form['username']
-        user.email = request.form['email']
-        # user.password = request.form['password']
-        user.role = request.form['role']
-        user.active = bool(int(request.form.get('active')))
-
-        db.session.commit()
-
-        # flash('Contact updated successfully!')
-
-        return redirect(url_for('user.get_user'))
+        try:
+            # validate form data
+            if not request.form['fullname']:
+                raise ValueError('El nombre completo es requerido.')
+            if not request.form['username']:
+                raise ValueError('El nombre de usuario es requerido.')
+            if not request.form['email']:
+                raise ValueError('El correo electrónico es requerido.')
+            if not request.form['role']:
+                raise ValueError('El rol es requerido.')
+                
+            # update user object
+            user.fullname = request.form['fullname']
+            user.username = request.form['username']
+            user.email = request.form['email']
+            user.role = request.form['role']
+            user.active = bool(int(request.form.get('active')))
+            
+            db.session.commit()
+            
+            flash('¡Usuario actualizado con éxito!')
+            return redirect(url_for('user.get_user'))
+        
+        except ValueError as err:
+            flash(f'Error: {str(err)}', category='error')
+        except Exception as err:
+            flash(f'Error inesperado: {str(err)}', category='error')
+        
     return render_template('admin/settings/users/update.html', user=user)
-    
-    
-    
 
+    
+    
 @user.route("/delete/<id>", methods=["GET"])
 def delete_user(id):
     user = User.query.get(id)
-    db.session.delete(user)
-    db.session.commit()
-
-    # flash('Contact deleted successfully!')
-
-    return redirect(url_for('user.get_user'))
     
-# # create
-# @user.route('/create', methods=('GET', 'POST'))
-# def create_user():
-#     if request.method == 'POST':
-#         try:
-#             # receive data from the form
-#             fullname = request.form['fullname']
-#             username = request.form['username']
-#             email = request.form['email']
-#             password = request.form['password']
-#             role = request.form['role']
-#             active = bool(int(request.form.get('active')))
-#         except (TypeError, ValueError):
-#             flash('Datos inválidos.')
-#             return redirect(url_for('user.create_user'))
+    if not user:
+        flash('Usuario no encontrado', category='error')
+        return redirect(url_for('user.get_user'))
+    
+    try:
+        db.session.delete(user)
+        db.session.commit()
 
-#         if not all((fullname, username, email, password, role, active)):
-#             flash('Faltan campos obligatorios.')
-#             return redirect(url_for('user.create_user'))
+        flash('¡Usuario eliminado con éxito!')
+        return redirect(url_for('user.get_user'))
+    
+    except Exception as err:
+        flash(f'Error al eliminar el usuario: {str(err)}', category='error')
+        return redirect(url_for('user.get_user'))
 
-#         users = User.query.filter_by(username=username).first()
-        
-#         if users is not None:
-#             flash('El nombre de usuario ya está en uso.')
-#             return redirect(url_for('user.create_user'))
 
-#         new_user = User(fullname, username, email, generate_password_hash(password, method='sha256'), role, active )
-#         db.session.add(new_user)
-#         db.session.commit()
-#         flash('Usuario creado correctamente.')
-        
-#         return redirect(url_for('user.get_user'))
-
-#     return render_template('admin/settings/users/create.html')
+    
