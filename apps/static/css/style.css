@@ -1,4 +1,4 @@
-.navbar {
+.sidebar {
   background-color: #263238;
 }
 
@@ -34,7 +34,7 @@
   border-radius: 20px !important;
 }
 
-.foot-logo{
+.foot-logo {
   opacity: 0.5;
   margin-bottom: 15px;
 }
