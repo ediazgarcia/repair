@@ -1,0 +1,107 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Vehículos' %}
+<h2>{% block title %}Nuevo Vehículo{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<h1 class="h1 mb-0 text-gray-800 d-flex">Vehículos</h1>
+<br>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('vehicle.get_vehicle')}}">Vehículos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nuevo Vehículo</li>
+    </ol>
+</nav>
+
+<!-- Content Row -->
+<div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="p-5">
+                    <div class="text-left">
+                        <h3 class="text-gray-900 mb-4">Nuevo Vehículo</h3>
+                    </div>
+                    <form action="{{url_for('vehicle.create_vehicle')}}" method="POST">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label for="MarcaVh">Marca</label>
+                                  <input type="text" id="MarcaVh" class="form-control rounded-imput">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="ModeloVh">Modelo</label>
+                                  <input type="text" id="ModeloVh" class="form-control rounded-imput">
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label for="AnioVh">Año</label>
+                                  <input type="number" id="AnioVh" class="form-control rounded-imput">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="CombustibleVh">Tipo de Combustible</label>
+                                  <select name="CombustibleVh" class="form-control rounded-imput">
+                                    <option value="" selected disabled></option>
+                                    <option value="Gasolina">Gasolina</option>
+                                    <option value="GLP">GLP</option>
+                                    <option value="Gasoil/Diesel">Gasoil/Diesel</option>
+                                    <option value="Gasolina y GLP">Gasolina y GLP</option>
+                                    <option value="Eléctrico">Eléctrico</option>
+                                    <option value="Híbrido">Híbrido</option>
+                                    <option value="Otros">Otros</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-8">
+                                  <label for="MatriculaVh">Matrícula</label>
+                                  <input type="text" id="MatriculaVh" class="form-control rounded-imput">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="PlacaVh">Placa</label>
+                                  <input type="text" id="PlacaVh" class="form-control rounded-imput">
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-8">
+                                  <label for="ChasisVh">Chasis</label>
+                                  <input type="text" id="MatriculaVh" class="form-control rounded-imput">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="exampleColorInput" class="form-label">Color</label>
+                                    <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#ffffff" title="Color del Vehículo">
+                                </div>
+                              </div>
+                              <div class="form-row">
+                                <div class="form-group col-md-4">
+                                  <label for="TransmisionVh">Transmisión</label>
+                                  <select id="TransmisionVh" class="form-control rounded-imput">
+                                    <option value="" disabled selected></option>
+                                    <option value="Automática">Automática</option>
+                                    <option value="Mecánica">Mecánica</option>
+                                  </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="CilindrajeVh">Cilindraje</label>
+                                  <input type="number" id="CilindrajeVh" class="form-control rounded-imput" min="1" max="16">
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <label for="EstadoVh">Estado</label>
+                                  <select id="EstadoVh" class="form-control rounded-imput">
+                                    <option value="" disabled selected></option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                  </select>
+                                </div>
+                              </div>
+                        <div class="col-12 text-center">
+                            <button class="btn btn-primary col-6 rounded-button" type="submit">Crear</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
