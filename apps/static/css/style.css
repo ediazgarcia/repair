@@ -8,19 +8,28 @@
   padding: 10%;
 }
 
-.btn-primary,
-.btn-primary:hover,
-.btn-primary:active,
+.btn-primary{
+  background-color: #3e729b !important;
+}
+
+.btn-primary:hover
+{
+  border-color: #ffffff !important;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.btn-circle:hover
+{
+  background-color: #3e729b !important;
+}
+
 .btn-primary:visited {
   background-color: #3e729b !important;
 }
 
 .table-custom {
   background-color: #fff !important;
-}
-
-.btn-custom {
-  color: #3e729b !important;
 }
 
 .rounded-imput {

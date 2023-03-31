@@ -14,7 +14,7 @@
             <span>Inicio</span></a>
     </li>
     <!-- Nav Item - DIRECTORIOS Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item {% if current_page == 'Directorio' %} active{% endif %}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
             aria-controls="collapseTwo">
             <i class="fa fa-sitemap" aria-hidden="true"></i>
@@ -22,9 +22,9 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Clientes</a>
-                <a class="collapse-item" href="#">Empleados</a>
-                <a class="collapse-item" href="#">Proveedores</a>
+                <a class="collapse-item" href="{{url_for('client.get_client')}}">Clientes</a>
+                <a class="collapse-item" href="{{url_for('employee.get_employee')}}">Empleados</a>
+                <a class="collapse-item" href="{{url_for('provider.get_provider')}}">Proveedores</a>
             </div>
         </div>
     </li>
@@ -77,7 +77,7 @@
             </div>
         </div>
     </li>
-    <!-- Nav Item - PRODUCTOS Collapse Menu -->
+    <!-- Nav Item - CONFIG Collapse Menu -->
     <li class="nav-item {% if current_page == 'Configuración' %} active{% endif %}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true"
             aria-controls="collapseUser">
