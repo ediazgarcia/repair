@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Directorio' %}
+<h2>{% block title %}Nuevo Cliente{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<h1 class="h1 mb-0 text-gray-800 d-flex">Clientes</h1>
+<br>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('client.get_client')}}">Clientes</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nuevo Cliente</li>
+    </ol>
+</nav>
+
+<!-- Content Row -->
+<div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="p-5">
+                    <div class="text-left">
+                        <h3 class="text-gray-900 mb-4">Nuevo Cliente</h3>
+                    </div>
+                    <form action="{{url_for('client.create_client')}}" method="POST">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="NombreCl">Nombre</label>
+                              <input type="text" id="NombreCl" class="form-control rounded-imput">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="ApellidoCl">Apellido</label>
+                              <input type="text" id="ApellidoCl" class="form-control rounded-imput">
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="TipoDocCl">Tipo de Documento</label>
+                              <select id="TipoDocCl" class="form-control rounded-select">
+                                <option value="" disabled selected></option>
+                                <option value="Cédula">Cédula</option>
+                                <option value="Pasaporte">Pasaporte</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="NoDocCl">No. de Documento</label>
+                              <input type="text" id="NoDocCl" class="form-control rounded-imput">
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-4">
+                              <label for="TelefonoCl">Teléfono</label>
+                              <input type="text" id="TelefonoCl" class="form-control rounded-imput">
+                            </div>
+                            <div class="form-group col-md-8">
+                              <label for="CorreoCl">Correo Electrónico</label>
+                              <input type="mail" id="CorreoCl" class="form-control rounded-imput">
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-8">
+                              <label for="DireccionCl">Dirección</label>
+                              <input type="text" id="DireccionCl" class="form-control rounded-imput">
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label for="CiudadCl">Provincia</label>
+                              <input type="text" id="CiudadCl" class="form-control rounded-imput">
+                            </div>
+                          </div>
+                        <div class="col-12 text-center">
+                            <button class="btn btn-primary col-6 rounded-button" type="submit">Crear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
