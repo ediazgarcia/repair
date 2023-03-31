@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Directorio' %}
+<h2>{% block title %}Clientes{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h1 mb-0 text-gray-800 d-flex">Clientes</h1>
+    <a href="{{url_for('')}}" class="btn btn-primary btn-circle btn-lg ml-auto">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+</div>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Directorio</li>
+        <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+    </ol>
+</nav>
+<!-- Content Row -->
+
+<!-- DataTales Example -->
+<div class="card shadow mb-5">
+    <div class="card-header py-2">
+        <h3 class="text-gray-900 mb-4">Todos los Clientes</h3>
+    </div>
+    <div class="card-body table-custom">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="th-sm">Nombre
+                        </th>
+                        <th class="th-sm">Apellido
+                        </th>
+                        <th class="th-sm">Tipo de Documento
+                        </th>
+                        <th class="th-sm">No. de Documento
+                        </th>
+                        <th class="th-sm">Teléfono
+                        </th>
+                        <th class="th-sm">Correo Electrónico
+                        </th>
+                        <th class="th-sm">Dirección
+                        </th>
+                        <th class="th-sm">Provincia
+                        </th>
+                        <th class="th-sm">Registrado
+                        </th>
+                        <th class="th-sm">Actualizado
+                        </th>
+                        <th class="th-sm">Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients%}
+                    <tr>
+                        <td>{{}}</td>
+                        <td>{{}}</td>
+                        <td>{{}}</td>
+                        <td>{{}}</td>
+                        <td>{{}}</td>
+                        <td>{{}}</td>
+                        <td>{{}}</td>
+                        <td>{{}}</td>
+                        <td>{{}}</td>
+                        <td>{{}}</td>
+                        <td>
+                            <button class="btn  btn-sm btn-primary"
+                                onclick="location.href='{{ url_for('client.update_client', id=client.id) }}'">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="location.href='{{ url_for('client.delete_client', id=client.id) }}'">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- </div> -->
+
+{% endblock %}
