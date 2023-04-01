@@ -35,13 +35,15 @@
                         </th>
                         <th class="th-sm">No. de Documento
                         </th>
+                        <th class="th-sm">Correo Electrónico
+                        </th>
                         <th class="th-sm">Teléfono
                         </th>
-                        <th class="th-sm">Correo Electrónico
+                        <th class="th-sm">Provincia
                         </th>
                         <th class="th-sm">Dirección
                         </th>
-                        <th class="th-sm">Provincia
+                        <th class="th-sm">Empresa
                         </th>
                         <th class="th-sm">Registrado
                         </th>
@@ -52,27 +54,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for client in client%}
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
+                    {% for customers in customers%}
                     <tr>
-                        <td>{{client.created}}</td>
-                        <td>{{client.updated}}</td>
+                        <td>{{customers.first_name}}</td>
+                        <td>{{customers.last_name}}</td>
+                        <td>{{customers.document_type}}</td>
+                        <td>{{customers.document_number}}</td>
+                        <td>{{customers.email}}</td>
+                        <td>{{customers.phone}}</td>
+                        <td>{{customers.city}}</td>
+                        <td>{{customers.address}}</td>
+                        <td>{{customers.company_id}}</td>
+                        <td>{{customers.created}}</td>
+                        <td>{{customers.updated}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('client.update_client', id=client.id) }}'">
+                            <button class="btn  btn-sm btn-primary" onclick="location.href=''">
                                 <i class="fa fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('client.delete_client', id=client.id) }}'">
+                            <button class="btn btn-sm btn-danger" onclick="location.href=''">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
