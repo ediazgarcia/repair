@@ -3,12 +3,22 @@ from flask import (
 )
 
 from apps.models.company import Company
+from apps.models.user import User
 from apps import db
 
 company = Blueprint('company', __name__, url_prefix='/company')
 
+# función para verificar el rol del usuario
+def set_role():
+    if 'user_id' in session:
+        user = User.query.get(session['user_id'])
+        g.role = session['role']
 
-# CRUDS COMPANY
+
+# asignar la función set_role a la función before_request
+@company.before_request
+def before_request():
+    set_role()
 
 # GetAllCompanies
 @company.route('/list', methods=('GET', 'POST'))

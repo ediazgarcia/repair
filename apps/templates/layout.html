@@ -38,7 +38,204 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        {% include 'partials/_sidebar.html' %}
+        <!-- Sidebar -->
+
+        {% if g.role == 'Administrador' %}
+
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url_for('auth.home')}}">
+                <div class="sidebar-brand-icon">
+                    <img class="logo" src="{{ url_for('static', filename='img/Logo_White.png') }}" alt="">
+                </div>
+            </a>
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item {% if current_page == 'Inicio' %} active{% endif %}">
+                <a class="nav-link" href="{{url_for('auth.home')}}">
+                    <i class="fa fa-home"></i>
+                    <span>Inicio</span></a>
+            </li>
+            <!-- Nav Item - DIRECTORIOS Collapse Menu -->
+            <li class="nav-item {% if current_page == 'Directorio' %} active{% endif %}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa fa-sitemap" aria-hidden="true"></i>
+                    <span>Directorio</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{url_for('client.get_client')}}">Clientes</a>
+                        <a class="collapse-item" href="{{url_for('employee.get_employee')}}">Empleados</a>
+                        <a class="collapse-item" href="{{url_for('provider.get_provider')}}">Proveedores</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Taller Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                    <span>Taller</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Órdenes</h6>
+                        <a class="collapse-item" href="#">Órdenes de Servicios</a>
+                        <h6 class="collapse-header">Facturación y Cotización</h6>
+                        <a class="collapse-item" href="#">Facturación</a>
+                        <a class="collapse-item" href="#">Cotización</a>
+                        <h6 class="collapse-header">Pagos</h6>
+                        <a class="collapse-item" href="#">Pagos</a>
+                        <a class="collapse-item" href="#">Opciones de Pago</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Vehiculos Collapse Menu -->
+            <li class="nav-item {% if current_page == 'Vehículos' %} active{% endif %}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fa fa-car" aria-hidden="true"></i>
+                    <span>Vehículos</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{url_for('vehicle.get_vehicle')}}">Vehículos</a>
+                        <a class="collapse-item" href="#">Recepción de Vehículos</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - PRODUCTOS Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseproducts"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-solid fa-box" aria-hidden="true"></i>
+                    <span>Productos</span>
+                </a>
+                <div id="collapseproducts" class="collapse" aria-labelledby="headingProduct"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#">Productos</a>
+                        <a class="collapse-item" href="#">Inventarios</a>
+                        <a class="collapse-item" href="#">Compras</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - CONFIG Collapse Menu -->
+            <li class="nav-item {% if current_page == 'Configuración' %} active{% endif %}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
+                    aria-expanded="true" aria-controls="collapseUser">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                    <span>Configuración</span>
+                </a>
+                <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{url_for('user.get_user')}}">Usuarios</a>
+                        <a class="collapse-item" href="{{url_for('company.get_company')}}">Empresas</a>
+                        <!-- <a class="collapse-item" href="#">Cambiar Contraseña</a> -->
+                    </div>
+                </div>
+            </li>
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        {% else %}
+
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url_for('auth.home')}}">
+                <div class="sidebar-brand-icon">
+                    <img class="logo" src="{{ url_for('static', filename='img/Logo_White.png') }}" alt="">
+                </div>
+            </a>
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item {% if current_page == 'Inicio' %} active{% endif %}">
+                <a class="nav-link" href="{{url_for('auth.home')}}">
+                    <i class="fa fa-home"></i>
+                    <span>Inicio</span></a>
+            </li>
+            <!-- Nav Item - DIRECTORIOS Collapse Menu -->
+            <li class="nav-item {% if current_page == 'Directorio' %} active{% endif %}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa fa-sitemap" aria-hidden="true"></i>
+                    <span>Directorio</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{url_for('client.get_client')}}">Clientes</a>
+                        <a class="collapse-item" href="{{url_for('employee.get_employee')}}">Empleados</a>
+                        <a class="collapse-item" href="{{url_for('provider.get_provider')}}">Proveedores</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Taller Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                    <span>Taller</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Órdenes</h6>
+                        <a class="collapse-item" href="#">Órdenes de Servicios</a>
+                        <h6 class="collapse-header">Facturación y Cotización</h6>
+                        <a class="collapse-item" href="#">Facturación</a>
+                        <a class="collapse-item" href="#">Cotización</a>
+                        <h6 class="collapse-header">Pagos</h6>
+                        <a class="collapse-item" href="#">Pagos</a>
+                        <a class="collapse-item" href="#">Opciones de Pago</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Vehiculos Collapse Menu -->
+            <li class="nav-item {% if current_page == 'Vehículos' %} active{% endif %}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fa fa-car" aria-hidden="true"></i>
+                    <span>Vehículos</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{url_for('vehicle.get_vehicle')}}">Vehículos</a>
+                        <a class="collapse-item" href="#">Recepción de Vehículos</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - PRODUCTOS Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseproducts"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-solid fa-box" aria-hidden="true"></i>
+                    <span>Productos</span>
+                </a>
+                <div id="collapseproducts" class="collapse" aria-labelledby="headingProduct"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#">Productos</a>
+                        <a class="collapse-item" href="#">Inventarios</a>
+                        <a class="collapse-item" href="#">Compras</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+
+        {% endif %}
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -48,7 +245,184 @@
             <div id="content">
 
                 <!-- Navbar -->
-                {% include 'partials/_navbar.html' %}
+                <!-- Topbar -->
+                {% if g.role == 'Administrador' %}
+
+                <nav class="navbar navbar-expand navbar-light topbar  bg-white mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Buscar..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    {% if 'user_id' in session and session['role'] == 'Administrador' %}
+                                    <p>Bienvenido, {{ g.role }} </p>
+                                    {% endif %}
+                                </span>
+                                <img class="img-profile rounded-circle"
+                                    src="{{ url_for('static', filename='img/profile.png') }}">
+                            </a>
+
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    {{session['username']}}
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Configuración
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa fa-unlock fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cambiar Contraseña
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar Sesión
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+
+                {% else %}
+
+                <nav class="navbar navbar-expand navbar-light topbar  bg-white mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Buscar..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                                    {% if 'user_id' in session and session['role'] == 'Usuario' %}
+                                    <p>Bienvenido, {{ g.role }} </p>
+                                    {% endif %}
+                                </span>
+                                <img class="img-profile rounded-circle"
+                                    src="{{ url_for('static', filename='img/profile.png') }}">
+                            </a>
+
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    {{session['username']}}
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa fa-unlock fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cambiar Contraseña
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar Sesión
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                {% endif %}
+                <!-- End of Sidebar -->
+                <!-- End of Topbar -->
+
                 <!-- End of Navbar -->
 
                 <!-- Begin Page Content -->
@@ -97,7 +471,7 @@
                     actual.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.html">Cerrar Sesión</a>
+                    <a class="btn btn-primary" href="{{url_for('auth.logout')}}">Cerrar Sesión</a>
                 </div>
             </div>
         </div>

@@ -5,12 +5,26 @@ from flask import (
 
 from apps.models.client import Customer
 from apps.models.company import Company
+from apps.models.user import User
 from apps import db
 
 client = Blueprint('client', __name__, url_prefix='/client')
 
-# CRUDS Customer
+# función para verificar el rol del usuario
+def set_role():
+    if 'user_id' in session:
+        user = User.query.get(session['user_id'])
+        g.role = session['role']
 
+
+# asignar la función set_role a la función before_request
+@client.before_request
+def before_request():
+    set_role()
+
+
+
+# CRUDS Customer
 # GetAllCustomer
 @client.route("/list", methods=('GET', 'POST'))
 def get_client():
