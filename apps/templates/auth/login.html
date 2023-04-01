@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/Icono.ico')}}" type="image/x-icon">
-    <title>Iniciar Sesión | Repair Suite</title>
+    <title>AIE Repair Suite</title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/login.css')}}">
@@ -29,13 +29,12 @@
             <div class="row gx-lg-5 align-items-center mb-5">
                 <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
                     <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-                        Software de gestión <br>
-                        <span style="color: #3E729A">Repair Suite</span>
+                        Software de gestión<br>
+                        <span style="color: #3E729A">AIE Repair Suite</span>
                     </h1>
                     <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
                         Te ofrecemos una amplia variedad de módulos que permiten organizar y gestionar tu taller de
-                        mecánica de
-                        forma profesional, desde cualquier lugar con una conexión a internet.
+                        mecánica de forma profesional, desde cualquier lugar con una conexión a internet.
                     </p>
                 </div>
 
@@ -63,9 +62,13 @@
                                 <!-- Submit button -->
                                 <div class="row h-100 justify-content-center">
                                     <div class="col-6 align-self-center">
-                                        <button type="submit" class="btn btn-primary btn-md btn-block w-100">
+                                        <!--  <button type="submit" class="btn btn-primary btn-md btn-block w-100">
                                             Iniciar Sesión
-                                        </button>
+                                        </button> -->
+                                        <a href="{{url_for('dash.home')}}"
+                                            class="btn btn-primary btn-md btn-block w-100">
+                                            Iniciar Sesión
+                                        </a>
                                     </div>
                                 </div>
                             </form>
