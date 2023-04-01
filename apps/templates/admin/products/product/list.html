@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Productos' %}
+<h2>{% block title %}Productos{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h1 mb-0 text-gray-800 d-flex">Productos</h1>
+    <a href="{{url_for('product.create_product')}}" class="btn btn-primary btn-circle btn-lg ml-auto">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+</div>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Productos</li>
+    </ol>
+</nav>
+<!-- Content Row -->
+
+<!-- DataTales Example -->
+<div class="card shadow mb-5">
+    <div class="card-header py-2">
+        <h3 class="text-gray-900 mb-4">Todos los Productos</h3>
+    </div>
+    <div class="card-body table-custom">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="th-sm">Descripción
+                        </th>
+                        <th class="th-sm">Tipo
+                        </th>
+                        <th class="th-sm">Categoría
+                        </th>
+                        <th class="th-sm">Costo
+                        </th>
+                        <th class="th-sm">Precio
+                        </th>
+                        <th class="th-sm">Estado
+                        </th>
+                        <th class="th-sm">Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in product%}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button class="btn  btn-sm btn-primary" onclick="location.href=''">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="location.href=''">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- </div> -->
+
+{% endblock %}
