@@ -25,9 +25,9 @@ def login():
                 session['role'] = user.role
                 return redirect(url_for('auth.home'))
             else:
-                return render_template('auth/login.html', error='Your account is inactive. Please contact the administrator to activate your account.')
+                return render_template('auth/login.html', error='Tu cuenta está inactiva. Contacta con un administador.')
         else:
-            return render_template('auth/login.html', error='Invalid username or password')
+            return render_template('auth/login.html', error='Tu nombre de usuario o contraseña son incorrectos.')
     else:
         return render_template('auth/login.html')
 

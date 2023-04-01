@@ -19,6 +19,8 @@ from apps.routes.client import client
 from apps.routes.provider import provider
 from apps.routes.employee import employee
 from apps.routes.vehicle import vehicle
+from apps.routes.product import product
+from apps.routes.inventory import inventory
 
 app.register_blueprint(auth)
 app.register_blueprint(user)
@@ -27,6 +29,8 @@ app.register_blueprint(client)
 app.register_blueprint(provider)
 app.register_blueprint(employee)
 app.register_blueprint(vehicle)
+app.register_blueprint(product)
+app.register_blueprint(inventory)
 
 # app.add_url_rule("/", endpoint="index")
 
