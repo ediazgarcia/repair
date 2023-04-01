@@ -1,10 +1,11 @@
 {% extends 'layout.html' %}
-<h2>{% block title %}Configuración{% endblock %}</h2>
+{% set current_page = 'Inicio' %}
+<h2>{% block title %}Inicio{% endblock %}</h2>
 
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Menu</h1>
+    <h1 class="mb-0 text-gray-800">Inicio</h1>
 </div>
 
 <!-- Content Row -->
@@ -17,7 +18,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            &Oacute;rdenes de Trabajos (OTs)</div>
+                            Órdenes de Servicios</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
                     </div>
                     <div class="col-auto">
@@ -35,7 +36,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Ventas de Productos y Servicios</div>
+                            Ventas</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">50</div>
                     </div>
                     <div class="col-auto">
@@ -46,14 +47,13 @@
         </div>
     </div>
 
-    <!-- Recepci&oacute;n de Veh&iacute;culos -->
+    <!-- Recepción de Vehículos -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-info shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Recepci&oacute;n de
-                            Veh&iacute;culos
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Recepción de Vehículos
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
@@ -76,7 +76,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Inventarios de Productos</div>
+                            Inventario de Productos</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">50</div>
                     </div>
                     <div class="col-auto">
@@ -97,7 +97,7 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Gr&aacute;ficos de Ventas</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Historial de Ventas</h6>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -106,8 +106,10 @@
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                         aria-labelledby="dropdownMenuLink">
                         <div class="dropdown-header">TIPOS DE VENTAS</div>
-                        <a class="dropdown-item" href="#">Reparaci&oacute;n</a>
-                        <a class="dropdown-item" href="#">Mantenimientos</a>
+                        <a class="dropdown-item" href="#">Todas</a>
+                        <a class="dropdown-item" href="#">Productos</a>
+                        <a class="dropdown-item" href="#">Reparación</a>
+                        <a class="dropdown-item" href="#">Mantenimiento</a>
                     </div>
                 </div>
             </div>

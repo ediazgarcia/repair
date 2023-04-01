@@ -1,6 +1,7 @@
 from datetime import datetime
 from apps import db
 
+
 class User(db.Model):
     __tablename__ = 'users'
 
