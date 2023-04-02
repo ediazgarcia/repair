@@ -54,24 +54,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for customers in customers%}
+                    {% for customer in customers %}
                     <tr>
-                        <td>{{customers.first_name}}</td>
-                        <td>{{customers.last_name}}</td>
-                        <td>{{customers.document_type}}</td>
-                        <td>{{customers.document_number}}</td>
-                        <td>{{customers.email}}</td>
-                        <td>{{customers.phone}}</td>
-                        <td>{{customers.city}}</td>
-                        <td>{{customers.address}}</td>
-                        <td>{{customers.company_id}}</td>
-                        <td>{{customers.created}}</td>
-                        <td>{{customers.updated}}</td>
+                        <td>{{customer.first_name}}</td>
+                        <td>{{customer.last_name}}</td>
+                        <td>{{customer.document_type}}</td>
+                        <td>{{customer.document_number}}</td>
+                        <td>{{customer.email}}</td>
+                        <td>{{customer.phone}}</td>
+                        <td>{{customer.city}}</td>
+                        <td>{{customer.address}}</td>
+                        <td>{{customer.company.trade_name}}</td>
+                        <td>{{customer.created}}</td>
+                        <td>{{customer.updated}}</td>
                         <td>
                             <button class="btn  btn-sm btn-primary" onclick="location.href=''">
                                 <i class="fa fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger" onclick="location.href=''">
+                            <button class="btn btn-sm btn-danger"
+                                onclick="location.href='{{ url_for('client.delete_client', id=customer.id) }}'">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
