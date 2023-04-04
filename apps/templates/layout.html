@@ -25,7 +25,7 @@
     <!-- Custom styles for this page -->
     <link rel="stylesheet" type="text/css"
         href="{{url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename='css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/select2.min.css')}}">
     <!-- MDB -->
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" /> -->
 
@@ -303,7 +303,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     {% if 'user_id' in session and session['role'] == 'Administrador' %}
-                                    <p> {{session['username']}} | {{ g.role }} </p>
+                                    <p> {{ g.username }} | {{ g.role }} </p>
                                     {% endif %}
                                 </span>
                                 <img class="img-profile rounded-circle"
@@ -315,7 +315,7 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Mi Perfil
+                                    {{g.email}}
                                 </a>
                                 <a class="dropdown-item" href="{{url_for('user.get_user')}}">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -392,7 +392,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     {% if 'user_id' in session and session['role'] == 'Usuario' %}
-                                    <p>{{session['username']}} | {{ g.role }} </p>
+                                    <p> {{ g.username }} | {{ g.role }} </p>
                                     {% endif %}
                                 </span>
                                 <img class="img-profile rounded-circle"
@@ -404,7 +404,7 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    {{session['username']}}
+                                    {{g.email}}
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa fa-unlock fa-sm fa-fw mr-2 text-gray-400"></i>
