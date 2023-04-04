@@ -13,17 +13,19 @@ from apps import db
 client = Blueprint('client', __name__, url_prefix='/client')
 
 # función para verificar el rol del usuario
+@client.before_request
 def set_role():
     if 'user_id' in session:
         user = User.query.get(session['user_id'])
         g.role = session['role']
-
-
-# asignar la función set_role a la función before_request
-@client.before_request
-def before_request():
-    set_role()
-
+        g.username = session['username']
+        g.fullname = session['fullname']
+        g.email = session['email']
+    else:
+        g.role = None
+        g.username = None
+        g.fullname = None
+        g.email = None
 
 
 # CRUDS Customer

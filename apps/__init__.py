@@ -34,6 +34,10 @@ app.register_blueprint(inventory)
 
 # app.add_url_rule("/", endpoint="index")
 
-# Ejecutar todas las consultas SQL
+# Crear todas las tablas en la base de datos
 with app.app_context():
-    db.create_all()
+    try:
+        db.create_all()
+        print("Todas las tablas fueron creadas exitosamente")
+    except Exception as e:
+        print(f"Error creando las tablas: {str(e)}")

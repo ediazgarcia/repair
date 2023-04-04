@@ -11,16 +11,19 @@ user = Blueprint('user', __name__, url_prefix='/user')
 
 
 # función para verificar el rol del usuario
+@user.before_request
 def set_role():
     if 'user_id' in session:
         user = User.query.get(session['user_id'])
         g.role = session['role']
-
-
-# asignar la función set_role a la función before_request
-@user.before_request
-def before_request():
-    set_role()
+        g.username = session['username']
+        g.fullname = session['fullname']
+        g.email = session['email']
+    else:
+        g.role = None
+        g.username = None
+        g.fullname = None
+        g.email = None
 
 # GetAllUsers
 @user.route('/list', methods=('GET', 'POST'))
