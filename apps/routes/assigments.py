@@ -23,3 +23,7 @@ def get_assigments(user=None):
 @set_role
 def create_assigments(user=None):
     return render_template('admin/workshop/assigments/create.html')
+
+@assigments.route("/create")
+def create_assigments():
+    return render_template('admin/workshop/assigments/create.html')
