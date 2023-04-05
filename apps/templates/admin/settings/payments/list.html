@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Configuración' %}
+<h2>{% block title %}Métodos de Pago{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h1 mb-0 text-gray-800 d-flex">Métodos de Pago</h1>
+    <a href="{{url_for('payments.create_payments')}}" class="btn btn-primary btn-circle btn-lg ml-auto">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+</div>
+<br>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Métodos de Pago</li>
+    </ol>
+</nav>
+<!-- Content Row -->
+
+<!-- DataTales Example -->
+<div class="card shadow mb-5">
+    <div class="card-header py-2">
+        <h3 class="text-gray-900 mb-4">Todos los Métodos de Pago</h3>
+    </div>
+    <div class="card-body table-custom">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Tipo</th>
+                        <th>Creado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payments in payments%}
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td>{{payments.description}}</td>
+                        <td>{{payments.type}}</td>
+                        <td>{{payments.created}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="location.href='{{ url_for('payments.delete_payments', id=payments.id) }}'">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- </div> -->
+
+{% endblock %}
