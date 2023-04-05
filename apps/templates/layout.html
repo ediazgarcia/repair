@@ -82,14 +82,11 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Servicios</h6>
                         <a class="collapse-item" href="{{url_for('vehiclereception.create_vehiclereception')}}">Recepción de Vehículos</a>
-                        <a class="collapse-item" href="#">Órdenes de Servicios</a>
+                        <a class="collapse-item" href="{{url_for('assigments.create_assigments')}}">Asignación de Servicios</a>
                         <h6 class="collapse-header">Ventas y Compras</h6>
                         <a class="collapse-item" href="#">Facturación</a>
                         <a class="collapse-item" href="#">Cotización</a>
                         <a class="collapse-item" href="#">Compras</a>
-                        <h6 class="collapse-header">Pagos</h6>
-                        <a class="collapse-item" href="#">Pagos</a>
-                        <a class="collapse-item" href="#">Opciones de Pago</a>
                     </div>
                 </div>
             </li>
@@ -133,7 +130,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{url_for('user.get_user')}}">Usuarios</a>
                         <a class="collapse-item" href="{{url_for('company.get_company')}}">Empresas</a>
-
+                        <a class="collapse-item" href="{{url_for('payments.get_payments')}}">Métodos de Pago</a>
                     </div>
                 </div>
             </li>
@@ -186,14 +183,11 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Órdenes</h6>
-                        <a class="collapse-item" href="#">Órdenes de Servicios</a>
+                        <h6 class="collapse-header">Servicios</h6>
+                        <a class="collapse-item" href="#">Asignación de Servicios</a>
                         <h6 class="collapse-header">Facturación y Cotización</h6>
                         <a class="collapse-item" href="#">Facturación</a>
                         <a class="collapse-item" href="#">Cotización</a>
-                        <h6 class="collapse-header">Pagos</h6>
-                        <a class="collapse-item" href="#">Pagos</a>
-                        <a class="collapse-item" href="#">Opciones de Pago</a>
                     </div>
                 </div>
             </li>
