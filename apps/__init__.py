@@ -18,6 +18,8 @@ from apps.routes.provider import provider
 from apps.routes.employee import employee
 from apps.routes.vehicle import vehicle
 from apps.routes.vehiclereception import vehiclereception
+from apps.routes.assigments import assigments
+from apps.routes.payments import payments
 from apps.routes.product import product
 from apps.routes.inventory import inventory
 
@@ -29,6 +31,8 @@ app.register_blueprint(provider)
 app.register_blueprint(employee)
 app.register_blueprint(vehicle)
 app.register_blueprint(vehiclereception)
+app.register_blueprint(assigments)
+app.register_blueprint(payments)
 app.register_blueprint(product)
 app.register_blueprint(inventory)
 
