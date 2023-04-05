@@ -68,7 +68,8 @@
                         <td>{{customer.created}}</td>
                         <td>{{customer.updated}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary" onclick="location.href=''">
+                            <button class="btn  btn-sm btn-primary"
+                                onclick="location.href='{{ url_for('client.update_client', id=customer.id) }}'">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
