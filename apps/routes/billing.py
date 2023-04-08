@@ -7,28 +7,18 @@ from werkzeug.security import generate_password_hash
 #from apps.models.billing import Billing
 from apps.models.user import User
 from apps import db
+from .auth import set_role
 
 billing = Blueprint('billing', __name__, url_prefix='/billing')
 
-# función para verificar el rol del usuario
-@billing.before_request
-def set_role():
-    if 'user_id' in session:
-        user = User.query.get(session['user_id'])
-        g.role = session['role']
-        g.username = session['username']
-        g.fullname = session['fullname']
-        g.email = session['email']
-    else:
-        g.role = None
-        g.username = None
-        g.fullname = None
-        g.email = None
-
 @billing.route("/list")
-def get_billing():
+# función para verificar el rol del usuario
+@set_role
+def get_billing(user=None):
     return render_template('admin/workshop/billing/list.html')
 
+
 @billing.route("/create")
-def create_billing():
+@set_role
+def create_billing(user=None):
     return render_template('admin/workshop/billing/create.html')

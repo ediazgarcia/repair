@@ -1,18 +1,18 @@
 {% extends 'layout.html' %}
 {% set current_page = 'Taller' %}
-<h2>{% block title %}Compras{% endblock %}</h2>
+<h2>{% block title %}Cotización{% endblock %}</h2>
 
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex justify-content-end mb-4">
-    <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Compras</h1>
-    <a href="#" class="btn btn-primary btn-circle btn-lg m-1">
+    <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Cotización</h1>
+    <a href="{{url_for('quotation.get_quotation')}}" class="btn btn-primary btn-circle btn-lg m-1">
         <i class="fas fa-list"></i>
     </a>
 </div>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Compras</li>
+        <li class="breadcrumb-item active" aria-current="page">Cotización</li>
     </ol>
 </nav>
 <!-- Content Row -->
@@ -63,11 +63,27 @@
             <div class="col-lg-12">
                 <div class="p-5">
                     <div class="text-left">
-                        <h3 class="text-gray-900 mb-4">Generar Compra</h3>
+                        <h3 class="text-gray-900 mb-4">Generar Cotización</h3>
                         <form action="" method="post">
                             <div class="form-row">
-                                <div class="form-group col-md-8">
-                                    <label for="">Buscar Proveedor</label>
+                                <div class="form-group col-md-4">
+                                    <label for="">Tipo de Cotización</label>
+                                    <select name="" id="" class="form-control rounded-select">
+                                        <option value="" disabled selected></option>
+                                        <option value="Venta">Venta</option>
+                                        <option value="Despacho de Servicio">Despacho de Servicio</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="">Buscar Cliente</label>
+                                    <select name="" id="" class="form-control js-example-basic-single">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="">Buscar Servicio</label>
                                     <select name="" id="" class="form-control js-example-basic-single">
                                         <option value=""></option>
                                     </select>
@@ -75,7 +91,7 @@
                             </div>
                             <br>
                             <div class="d-sm-flex justify-content-end mb-4">
-                                <h3 class="text-gray-900 mb-4 flex-grow-1">Detalle de la Compra</h3>
+                                <h3 class="text-gray-900 mb-4 flex-grow-1">Detalle de la Cotización</h3>
                                 <a data-toggle="modal" data-target="#ProductModal" class="btn btn-primary btn-circle btn-lg ml-auto">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </a>
@@ -111,11 +127,11 @@
                                 <h5 class="p-2 text-gray-900">Subtotal: RD$ ####</h5>
                             </div>
                             <div class="d-flex align-items-end flex-column mb-3">
-                                <h3 class="p-2 text-gray-900">Total a Comprar: RD$ ####</h3>
+                                <h3 class="p-2 text-gray-900">Total Cotizado: RD$ ####</h3>
                             </div>
                             <div class="col-12 text-center">
                                 <button class="btn btn-primary col-3 rounded-button m-1" type="submit"><i
-                                        class="fa-solid fa-cash-register"></i> Comprar</button>
+                                        class="fa-solid fa-cash-register"></i> Cotizar</button>
                                 <button class="btn btn-primary col-3 rounded-button m-1" type="button"><i
                                         class="fa-solid fa-print"></i> Imprimir</button>
                             </div>

@@ -1,15 +1,15 @@
 {% extends 'layout.html' %}
 {% set current_page = 'Taller' %}
-<h2>{% block title %}Historial de Facturas{% endblock %}</h2>
+<h2>{% block title %}Historial de Cotizaciones{% endblock %}</h2>
 
 {% block content %}
 <!-- Page Heading -->
-<h1 class="h1 mb-0 text-gray-800 d-flex">Facturación</h1>
+<h1 class="h1 mb-0 text-gray-800 d-flex">Cotización</h1>
 <br>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url_for('billing.create_billing')}}">Facturación</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Historial de Facturas</li>
+        <li class="breadcrumb-item"><a href="{{url_for('quotation.create_quotation')}}">Cotización</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Historial de Cotizaciones</li>
     </ol>
 </nav>
 <!-- Content Row -->
@@ -17,16 +17,16 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-5">
     <div class="card-header py-2">
-        <h3 class="text-gray-900 mb-4">Historial de Facturas</h3>
+        <h3 class="text-gray-900 mb-4">Historial de Cotizaciones</h3>
     </div>
     <div class="card-body table-custom">
         <div class="table-responsive">
-            <blockquote>Pulsa en "Editar" en la factura deseada para ver más información.</blockquote>
+            <blockquote>Pulsa en "Editar" en la cotización deseada para ver más información.</blockquote>
             <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Cliente</th>
-                        <th>Tipo de Factura</th>
+                        <th>Descripción</th>
                         <th>Sub-Total</th>
                         <th>ITBIS</th>
                         <th>Descuento</th>

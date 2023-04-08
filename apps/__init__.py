@@ -13,30 +13,35 @@ db = SQLAlchemy(app)
 from apps.routes.auth import auth
 from apps.routes.user import user
 from apps.routes.company import company
+from apps.routes.payments import payments
 from apps.routes.client import client
 from apps.routes.provider import provider
 from apps.routes.employee import employee
 from apps.routes.vehicle import vehicle
-from apps.routes.vehiclereception import vehiclereception
-from apps.routes.assigments import assigments
-from apps.routes.payments import payments
-from apps.routes.billing import billing
 from apps.routes.product import product
 from apps.routes.inventory import inventory
+from apps.routes.vehiclereception import vehiclereception
+from apps.routes.assigments import assigments
+from apps.routes.billing import billing
+from apps.routes.quotation import quotation
+from apps.routes.shopping import shopping
 
 app.register_blueprint(auth)
 app.register_blueprint(user)
 app.register_blueprint(company)
+app.register_blueprint(payments)
 app.register_blueprint(client)
 app.register_blueprint(provider)
 app.register_blueprint(employee)
 app.register_blueprint(vehicle)
+app.register_blueprint(product)
+app.register_blueprint(inventory)
 app.register_blueprint(vehiclereception)
 app.register_blueprint(assigments)
 app.register_blueprint(billing)
-app.register_blueprint(payments)
-app.register_blueprint(product)
-app.register_blueprint(inventory)
+app.register_blueprint(quotation)
+app.register_blueprint(shopping)
+
 
 # Importar modelos
 from apps.models.user import User
