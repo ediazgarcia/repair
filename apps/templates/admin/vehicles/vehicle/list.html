@@ -27,6 +27,8 @@
             <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th class="th-sm">Cliente
+                        </th>
                         <th class="th-sm">Marca
                         </th>
                         <th class="th-sm">Modelo
@@ -34,8 +36,6 @@
                         <th class="th-sm">Año
                         </th>
                         <th class="th-sm">Tipo de Combustible
-                        </th>
-                        <th class="th-sm">Matrícula
                         </th>
                         <th class="th-sm">Placa
                         </th>
@@ -49,32 +49,32 @@
                         </th>
                         <th class="th-sm">Estado
                         </th>
-                        <th class="th-sm">Nombre de Cliente
+                        <th class="th-sm">Creado
+                        </th>
+                        <th class="th-sm">Actualizado
                         </th>
                         <th class="th-sm">Acciones
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for vehicle in vehicle%}
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
                     <tr>
+                        {% for vehicle in vehicle%}
+                        <td>{{vehicle.client}}</td>
+                        <td>{{vehicle.brand}}</td>
+                        <td>{{vehicle.model}}</td>
+                        <td>{{vehicle.year}}</td>
+                        <td>{{vehicle.fuel_type}}</td>
+                        <td>{{vehicle.plate_number}}</td>
+                        <td>{{vehicle.chassis_number}}</td>
+                        <td>{{vehicle.color}}</td>
+                        <td>{{vehicle.transmission}}</td>
+                        <td>{{vehicle.cylinder}}</td>
+                        <td>{{vehicle.status}}</td>
                         <td>{{vehicle.created}}</td>
                         <td>{{vehicle.updated}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('vehicle.update_vehicle', id=vehicle.id) }}'">
+                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('vehicle.update_vehicle', id=vehicle.id) }}'">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"

@@ -26,30 +26,32 @@
           <form action="{{url_for('vehicle.create_vehicle')}}" method="POST">
             <div class="form-row">
               <div class="form-group col-md-12">
-                <label for="">Cliente</label>
-                <select name="" id="" class="form-control js-example-basic-single">
-                  <option value=""></option>
+                <label for="client_id">Cliente</label>
+                <select name="client_id" class="form-control js-example-basic-single">
+                  {% for customer in customers %}
+                  <option value="{{customer.id}}">{{customer.first_name}} {{customer.last_name}}</option>
+                  {% endfor %}
                 </select>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="MarcaVh">Marca</label>
-                <input type="text" id="MarcaVh" class="form-control rounded-imput">
+                <label for="brand">Marca</label>
+                <input type="text" name="brand" class="form-control rounded-imput">
               </div>
               <div class="form-group col-md-6">
-                <label for="ModeloVh">Modelo</label>
-                <input type="text" id="ModeloVh" class="form-control rounded-imput">
+                <label for="model">Modelo</label>
+                <input type="text" name="model" class="form-control rounded-imput">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="AnioVh">Año</label>
-                <input type="number" id="AnioVh" class="form-control rounded-imput">
+                <label for="year">Año</label>
+                <input type="number" name="year" class="form-control rounded-imput">
               </div>
               <div class="form-group col-md-6">
-                <label for="CombustibleVh">Tipo de Combustible</label>
-                <select name="CombustibleVh" class="form-control rounded-imput">
+                <label for="fuel_type">Tipo de Combustible</label>
+                <select name="fuel_type" class="form-control rounded-imput">
                   <option value="" selected disabled></option>
                   <option value="Gasolina">Gasolina</option>
                   <option value="GLP">GLP</option>
@@ -62,42 +64,36 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-8">
-                <label for="MatriculaVh">Matrícula</label>
-                <input type="text" id="MatriculaVh" class="form-control rounded-imput">
-              </div>
               <div class="form-group col-md-4">
-                <label for="PlacaVh">Placa</label>
-                <input type="text" id="PlacaVh" class="form-control rounded-imput">
+                <label for="plate_number">Placa</label>
+                <input type="text" name="plate_number" class="form-control rounded-imput">
               </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-8">
-                <label for="ChasisVh">Chasis</label>
-                <input type="text" id="MatriculaVh" class="form-control rounded-imput">
+              <div class="form-group col-md-6">
+                <label for="chassis_number">Chasis</label>
+                <input type="text" name="chassis_number" class="form-control rounded-imput">
               </div>
               <div class="form-group col-md-2">
-                <label for="exampleColorInput" class="form-label">Color</label>
-                <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#ffffff"
+                <label for="color" class="form-label">Color</label>
+                <input type="color" class="form-control form-control-color rounded-imput" name="color" id="exampleColorInput" value="#ffffff"
                   title="Color del Vehículo">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="TransmisionVh">Transmisión</label>
-                <select id="TransmisionVh" class="form-control rounded-imput">
+                <label for="transmission">Transmisión</label>
+                <select class="form-control rounded-imput" name="transmission">
                   <option value="" disabled selected></option>
                   <option value="Automática">Automática</option>
                   <option value="Mecánica">Mecánica</option>
                 </select>
               </div>
               <div class="form-group col-md-4">
-                <label for="CilindrajeVh">Cilindraje</label>
-                <input type="number" id="CilindrajeVh" class="form-control rounded-imput" min="1" max="16">
+                <label for="cylinder">Cilindraje</label>
+                <input type="number" name="cylinder" class="form-control rounded-imput" min="1" max="16">
               </div>
               <div class="form-group col-md-4">
-                <label for="EstadoVh">Estado</label>
-                <select id="EstadoVh" class="form-control rounded-imput">
+                <label for="status">Estado</label>
+                <select class="form-control rounded-imput" name="status">
                   <option value="" disabled selected></option>
                   <option value="Activo">Activo</option>
                   <option value="Inactivo">Inactivo</option>
