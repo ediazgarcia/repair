@@ -56,4 +56,5 @@ class Customer(db.Model):
 
     # define methods here
     def __repr__(self):
-        return f'<Customer {self.first_name} {self.last_name}>'
+        #Customer
+        return f' {self.first_name} {self.last_name}'
