@@ -4,8 +4,8 @@ from .employee import Employee
 from apps import db
 
 
-class WorkOrder(db.Model):
-    __tablename__ = 'orders_services'
+class ServiceOrder(db.Model):
+    __tablename__ = 'services_orders'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     description = db.Column(db.Text, nullable=False)
@@ -22,8 +22,8 @@ class WorkOrder(db.Model):
         'employees.id', onupdate='RESTRICT', ondelete='CASCADE'))
 
     vehicle_reception = db.relationship(
-        'VehicleReception', backref='orders_services')
-    employee = db.relationship('Employee', backref='orders_services')
+        'VehicleReception', backref='services_orders')
+    employee = db.relationship('Employee', backref='services_orders')
 
     def __init__(self, description, start_date, end_date, status, observations, vehicle_reception, employee):
         self.description = description

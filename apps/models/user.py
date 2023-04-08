@@ -13,8 +13,9 @@ class User(db.Model):
     role = db.Column(db.String(25), nullable=False)
     active = db.Column(db.Boolean, default=True)
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow,)
-    updated = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
+    updated = db.Column(db.DateTime, nullable=False,
+                        default=datetime.utcnow, onupdate=datetime.utcnow)
+
     def __init__(self, fullname, username, email, password, role, active) -> None:
         self.fullname = fullname
         self.username = username
