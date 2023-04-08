@@ -5,6 +5,7 @@ from apps import db
 from .company import Company
 from sqlalchemy.orm import validates
 
+
 class Customer(db.Model):
     __tablename__ = 'customers'
 
@@ -18,10 +19,13 @@ class Customer(db.Model):
     city = db.Column(db.String(50), nullable=False)
     address = db.Column(db.Text)
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow,)
-    updated = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
-    company_id = db.Column(db.Integer, db.ForeignKey('companies.id', onupdate='restrict', ondelete='cascade'))
-    company = db.relationship('Company', backref=db.backref('customers', lazy=True))
-    
+    updated = db.Column(db.DateTime, nullable=False,
+                        default=datetime.utcnow, onupdate=datetime.utcnow)
+    company_id = db.Column(db.Integer, db.ForeignKey(
+        'companies.id', onupdate='restrict', ondelete='cascade'))
+    company = db.relationship(
+        'Company', backref=db.backref('customers', lazy=True))
+
     def __init__(self, first_name, last_name, document_type, document_number, email, phone, city, address, company):
         self.first_name = first_name
         self.last_name = last_name
@@ -34,7 +38,7 @@ class Customer(db.Model):
         self.company = company
         self.created = datetime.utcnow()
         self.updated = datetime.utcnow()
-    
+
     # @validates('document_number')
     # def validate_document_number(self, key, value):
     #     if self.document_type == 'Cédula':
@@ -47,9 +51,9 @@ class Customer(db.Model):
     #             raise ValueError('El número de pasaporte no tiene un formato válido')
     #     else:
     #         raise ValueError('Tipo de documento no válido')
-            
+
     #     return value
-    
+
     # define methods here
     def __repr__(self):
         return f'<Customer {self.first_name} {self.last_name}>'

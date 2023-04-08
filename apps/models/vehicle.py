@@ -3,7 +3,7 @@ from .client import Customer
 from apps import db
 
 
-class Vehiculo(db.Model):
+class Vehicle(db.Model):
     __tablename__ = 'vehicles'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -23,9 +23,9 @@ class Vehiculo(db.Model):
     updated = db.Column(db.DateTime, nullable=False,
                         default=datetime.utcnow, onupdate=datetime.utcnow)
     client_id = db.Column(db.Integer, db.ForeignKey(
-        'clientes.id', onupdate='restrict', ondelete='cascade'))
+        'customers.id', onupdate='restrict', ondelete='cascade'))
     client = db.relationship(
-        'Cliente', backref=db.backref('vehicles', lazy=True))
+        'Customer', backref=db.backref('vehicles', lazy=True))
 
 
 def __init__(self, brand, model, year, fuel_type, license_plate, plate_number, chassis_number, color, transmission, cylinder, status, client):

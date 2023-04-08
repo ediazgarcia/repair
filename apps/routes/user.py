@@ -1,3 +1,4 @@
+from .auth import set_role
 from flask import (
     render_template, Blueprint, flash, g, redirect, request, session, url_for
 )
@@ -9,32 +10,21 @@ from apps import db
 
 user = Blueprint('user', __name__, url_prefix='/user')
 
-
-# función para verificar el rol del usuario
-@user.before_request
-def set_role():
-    if 'user_id' in session:
-        user = User.query.get(session['user_id'])
-        g.role = session['role']
-        g.username = session['username']
-        g.fullname = session['fullname']
-        g.email = session['email']
-    else:
-        g.role = None
-        g.username = None
-        g.fullname = None
-        g.email = None
-
 # GetAllUsers
+
+
 @user.route('/list', methods=('GET', 'POST'))
-def get_user():
+# función para verificar el rol del usuario
+@set_role
+def get_user(user=None):
     user = User.query.all()
     return render_template('admin/settings/users/list.html', user=user)
-    
+
 
 # create
 @user.route('/create', methods=('GET', 'POST'))
-def create_user():
+@set_role
+def create_user(user=None):
     if request.method == 'POST':
         try:
             # receive data from the form
@@ -58,26 +48,27 @@ def create_user():
                 raise ValueError('El rol es requerido.')
 
             # create a new User object
-            new_user = User(fullname, username, email, generate_password_hash(password, method='sha256'), role, active)
-            
+            new_user = User(fullname, username, email, generate_password_hash(
+                password, method='sha256'), role, active)
+
             # save the object into the database
             db.session.add(new_user)
             db.session.commit()
 
             flash('¡Usuario añadido con éxito!')
             return redirect(url_for('user.get_user'))
-        
+
         except ValueError as err:
             flash(f'Error: {str(err)}', category='error')
         except Exception as err:
             flash(f'Error inesperado: {str(err)}', category='error')
-        
+
     return render_template('admin/settings/users/create.html')
 
-    
 
 @user.route("/update/<string:id>", methods=["GET", "POST"])
-def update_user(id):
+@set_role
+def update_user(id, user=None):
     # get contact by Id
     user = User.query.get(id)
 
@@ -92,46 +83,43 @@ def update_user(id):
                 raise ValueError('El correo electrónico es requerido.')
             if not request.form['role']:
                 raise ValueError('El rol es requerido.')
-                
+
             # update user object
             user.fullname = request.form['fullname']
             user.username = request.form['username']
             user.email = request.form['email']
             user.role = request.form['role']
             user.active = bool(int(request.form.get('active')))
-            
+
             db.session.commit()
-            
+
             flash('¡Usuario actualizado con éxito!')
             return redirect(url_for('user.get_user'))
-        
+
         except ValueError as err:
             flash(f'Error: {str(err)}', category='error')
         except Exception as err:
             flash(f'Error inesperado: {str(err)}', category='error')
-        
+
     return render_template('admin/settings/users/update.html', user=user)
 
-    
-    
+
 @user.route("/delete/<id>", methods=["GET"])
-def delete_user(id):
+@set_role
+def delete_user(id, user=None):
     user = User.query.get(id)
-    
+
     if not user:
         flash('Usuario no encontrado', category='error')
         return redirect(url_for('user.get_user'))
-    
+
     try:
         db.session.delete(user)
         db.session.commit()
 
         flash('¡Usuario eliminado con éxito!')
         return redirect(url_for('user.get_user'))
-    
+
     except Exception as err:
         flash(f'Error al eliminar el usuario: {str(err)}', category='error')
         return redirect(url_for('user.get_user'))
-
-
-    

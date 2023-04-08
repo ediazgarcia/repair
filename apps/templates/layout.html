@@ -81,8 +81,10 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Servicios</h6>
-                        <a class="collapse-item" href="{{url_for('vehiclereception.create_vehiclereception')}}">Recepción de Vehículos</a>
-                        <a class="collapse-item" href="{{url_for('assigments.create_assigments')}}">Asignación de Servicios</a>
+                        <a class="collapse-item"
+                            href="{{url_for('vehiclereception.create_vehiclereception')}}">Recepción de Vehículos</a>
+                        <a class="collapse-item" href="{{url_for('assigments.create_assigments')}}">Asignación de
+                            Servicios</a>
                         <h6 class="collapse-header">Ventas y Compras</h6>
                         <a class="collapse-item" href="#">Facturación</a>
                         <a class="collapse-item" href="#">Cotización</a>
@@ -300,8 +302,7 @@
                                     <p> {{ g.fullname }} | {{ g.role }} </p>
                                     {% endif %}
                                 </span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ url_for('static', filename='img/profile.png') }}">
+                                <img class="img-profile rounded-circle" src="{{ g.avatar_url }}">
                             </a>
 
                             <!-- Dropdown - User Information -->
