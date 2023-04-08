@@ -45,3 +45,16 @@
   opacity: 0.5;
   margin-bottom: 15px;
 }
+
+#profile-pic{
+  width: 150px; 
+  z-index: 1; 
+  background-color: #dfdfdf; 
+  border-radius: 100%;
+  border-color: #6f6f6f;
+  border-width: 3px;
+}
+
+#navbar-pic{
+  background-color: #dfdfdf;
+}
