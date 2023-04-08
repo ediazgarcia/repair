@@ -105,6 +105,10 @@ def home(user):
 
 # Cierre de sesión (logout)
 
+@auth.route('/profile')
+@set_role
+def profile(user):
+    return render_template('admin/profile.html')
 
 @auth.route('/logout')
 def logout():
