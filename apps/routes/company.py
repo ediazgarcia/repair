@@ -1,3 +1,4 @@
+from .auth import set_role
 from flask import (
     render_template, Blueprint, flash, g, redirect, request, session, url_for
 )
@@ -8,31 +9,20 @@ from apps import db
 
 company = Blueprint('company', __name__, url_prefix='/company')
 
-# función para verificar el rol del usuario
-@company.before_request
-def set_role():
-    if 'user_id' in session:
-        user = User.query.get(session['user_id'])
-        g.role = session['role']
-        g.username = session['username']
-        g.fullname = session['fullname']
-        g.email = session['email']
-    else:
-        g.role = None
-        g.username = None
-        g.fullname = None
-        g.email = None
 
 # GetAllCompanies
 @company.route('/list', methods=('GET', 'POST'))
-def get_company():
+# función para verificar el rol del usuario
+@set_role
+def get_company(user=None):
     companies = Company.query.all()
     return render_template('admin/settings/company/list.html', companies=companies)
-    
-    
+
+
 # create
 @company.route('/create', methods=('GET', 'POST'))
-def create_company():
+@set_role
+def create_company(user=None):
     if request.method == 'POST':
         try:
             # receive data from the form
@@ -52,7 +42,8 @@ def create_company():
             #     return redirect(url_for('company.create_company'))
 
             # create a new Company object
-            new_company = Company(business_name, rnc_id, trade_name, email, phone, branch_name, address, province, municipality)
+            new_company = Company(business_name, rnc_id, trade_name,
+                                  email, phone, branch_name, address, province, municipality)
 
             # save the object into the database
             db.session.add(new_company)
@@ -60,7 +51,7 @@ def create_company():
 
             flash('Empresa añadida con éxito!')
             return redirect(url_for('company.get_company'))
-        
+
         except ValueError as err:
             flash(f'Error: {str(err)}', category='error')
         except Exception as err:
@@ -69,9 +60,10 @@ def create_company():
     return render_template('admin/settings/company/create.html')
 
 
-#update
+# update
 @company.route("/update/<string:id>", methods=["GET", "POST"])
-def update_company(id):
+@set_role
+def update_company(id, user=None):
     # get company by Id
     company = Company.query.get(id)
 
@@ -103,17 +95,17 @@ def update_company(id):
             return redirect(url_for('company.get_company'))
 
         except Exception as e:
-            flash('Ha ocurrido un error al actualizar la empresa. Por favor, inténtelo de nuevo.')
+            flash(
+                'Ha ocurrido un error al actualizar la empresa. Por favor, inténtelo de nuevo.')
             return redirect(url_for('company.update_company', id=id))
 
     return render_template('admin/settings/company/update.html', company=company)
 
 
-
-
-#delete
+# delete
 @company.route("/delete/<id>", methods=["GET"])
-def delete_company(id):
+@set_role
+def delete_company(id, user=None):
     # get company by Id
     company = Company.query.get(id)
 

@@ -1,3 +1,4 @@
+from .auth import set_role
 from flask import (
     render_template, Blueprint, abort, flash, g, redirect, request, session, url_for
 )
@@ -12,34 +13,22 @@ from apps import db
 
 client = Blueprint('client', __name__, url_prefix='/client')
 
-# función para verificar el rol del usuario
-@client.before_request
-def set_role():
-    if 'user_id' in session:
-        user = User.query.get(session['user_id'])
-        g.role = session['role']
-        g.username = session['username']
-        g.fullname = session['fullname']
-        g.email = session['email']
-    else:
-        g.role = None
-        g.username = None
-        g.fullname = None
-        g.email = None
-
-
 # CRUDS Customer
 # GetAllCustomer
+
+
 @client.route("/list", methods=('GET', 'POST'))
-def get_client():
+# función para verificar el rol del usuario
+@set_role
+def get_client(user=None):
     customers = Customer.query.all()
     return render_template('admin/directory/clients/list.html', customers=customers)
 
 
-
-#create
+# create
 @client.route('/create', methods=['GET', 'POST'])
-def create_client():
+@set_role
+def create_client(user=None):
     if request.method == 'POST':
         try:
             first_name = request.form['first_name']
@@ -85,7 +74,7 @@ def create_client():
             if Customer.query.filter_by(email=email).first() is not None:
                 flash('Este correo electrónico ya está registrado.')
                 return redirect(url_for('client.create_client'))
-            
+
             # check if the document number already exists in the database
             if Customer.query.filter_by(document_number=document_number).first() is not None:
                 flash('Este número de cédula ya está registrado.')
@@ -95,7 +84,8 @@ def create_client():
             new_customer = Customer(first_name=first_name, last_name=last_name, document_type=document_type,
                                     document_number=document_number, email=email, phone=phone, city=city,
                                     address=address, company=company)
-            new_customer.company_name = company_name  # add the company name to the customer object
+            # add the company name to the customer object
+            new_customer.company_name = company_name
 
             # add the new customer to the database
             db.session.add(new_customer)
@@ -104,16 +94,18 @@ def create_client():
             return redirect(url_for('client.get_client'))
 
         except BadRequestKeyError as e:
-            flash('Error en la solicitud revisa que no hay campos vacios: {}'.format(str(e)))
+            flash(
+                'Error en la solicitud revisa que no hay campos vacios: {}'.format(str(e)))
             return redirect(url_for('client.create_client'))
 
     companies = Company.query.all()
     return render_template('admin/directory/clients/create.html', companies=companies)
 
 
-#update
+# update
 @client.route('/update/<int:id>', methods=['GET', 'POST'])
-def update_client(id):
+@set_role
+def update_client(id, user=None):
     client = Customer.query.get_or_404(id)
     companies = Company.query.all()
 
@@ -128,7 +120,6 @@ def update_client(id):
         city = request.form['city']
         address = request.form['address']
         company_id = request.form['company_id']
-
 
         # actualizar los atributos del cliente
         client.first_name = first_name
@@ -152,27 +143,23 @@ def update_client(id):
     return render_template('admin/directory/clients/update.html', client=client, companies=companies, document_type_value=document_type_value)
 
 
-
-
 # Delete
 @client.route("/delete/<id>", methods=["GET"])
-def delete_client(id):
+@set_role
+def delete_client(id, user=None):
     customer = Customer.query.get(id)
-    
+
     if not customer:
         flash('Cliente no encontrado', category='error')
         return redirect(url_for('client.get_client'))
-    
+
     try:
         db.session.delete(customer)
         db.session.commit()
 
         flash('¡Cliente eliminado con éxito!')
         return redirect(url_for('client.get_client'))
-    
+
     except Exception as err:
         flash(f'Error al eliminar el cliente: {str(err)}', category='error')
         return redirect(url_for('client.get_client'))
-
-
-    
