@@ -14,11 +14,13 @@ user = Blueprint('user', __name__, url_prefix='/user')
 
 
 @user.route('/list', methods=('GET', 'POST'))
-# función para verificar el rol del usuario
 @set_role
 def get_user(user=None):
     user = User.query.all()
-    return render_template('admin/settings/users/list.html', user=user)
+    if g.role == 'Administrador':
+        return render_template('admin/settings/users/list.html', user=user)
+    else:
+        return render_template('views/settings/users/list.html', user=user)
 
 
 # create
@@ -63,7 +65,10 @@ def create_user(user=None):
         except Exception as err:
             flash(f'Error inesperado: {str(err)}', category='error')
 
-    return render_template('admin/settings/users/create.html')
+    if g.role == 'Administrador':
+        return render_template('admin/settings/users/create.html')
+    else:
+        return render_template('views/settings/users/create.html')
 
 
 @user.route("/update/<string:id>", methods=["GET", "POST"])
@@ -101,7 +106,10 @@ def update_user(id, user=None):
         except Exception as err:
             flash(f'Error inesperado: {str(err)}', category='error')
 
-    return render_template('admin/settings/users/update.html', user=user)
+    if g.role == 'Administrador':
+        return render_template('admin/settings/users/update.html', user=user)
+    else:
+        return render_template('views/settings/users/update.html', user=user)
 
 
 @user.route("/delete/<id>", methods=["GET"])

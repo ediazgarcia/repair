@@ -35,15 +35,15 @@
                         </th>
                         <th class="th-sm">No. de Documento
                         </th>
+                        <th class="th-sm">Correo Electrónico
+                        </th>
                         <th class="th-sm">Teléfono
                         </th>
-                        <th class="th-sm">Correo Electrónico
+                        <th class="th-sm">Provincia
                         </th>
                         <th class="th-sm">Dirección
                         </th>
-                        <th class="th-sm">Sucursal
-                        </th>
-                        <th class="th-sm">Provincia
+                        <th class="th-sm">Empresa
                         </th>
                         <th class="th-sm">Registrado
                         </th>
@@ -54,17 +54,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for provider in provider%}
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
+                    {% for provider in providers%}
                     <tr>
+                        <td>{{provider.business_name}}</td>
+                        <td>{{provider.trade_name}}</td>
+                        <td>{{provider.document_type}}</td>
+                        <td>{{provider.document_number}}</td>
+                        <td>{{provider.email}}</td>
+                        <td>{{provider.phone}}</td>
+                        <td>{{provider.city}}</td>
+                        <td>{{provider.address}}</td>
+                        <td>{{provider.company.trade_name}}</td>
                         <td>{{provider.created}}</td>
                         <td>{{provider.updated}}</td>
                         <td>
