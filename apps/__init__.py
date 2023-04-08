@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
 from config import Config, DevelopmentConfig, ProductionConfig
 
+
 app = Flask(__name__)
 
 # Cargar las configuraciones

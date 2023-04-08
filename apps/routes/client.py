@@ -2,7 +2,7 @@ from .auth import set_role
 from flask import (
     render_template, Blueprint, abort, flash, g, redirect, request, session, url_for
 )
-import phonenumbers
+# import phonenumbers
 from werkzeug.exceptions import BadRequestKeyError
 
 

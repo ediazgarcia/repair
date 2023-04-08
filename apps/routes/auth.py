@@ -97,6 +97,7 @@ def set_role(f):
 @auth.route('/', methods=['GET', 'POST'])
 @set_role
 def home(user):
+    print(user)
     if g.role == 'Administrador':
         return render_template('admin/index.html', user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
     elif g.role == 'Usuario':
