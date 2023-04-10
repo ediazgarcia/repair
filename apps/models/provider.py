@@ -33,3 +33,6 @@ class Provider(db.Model):
         self.city = city
         self.address = address
         self.company = company
+
+    def __repr__(self) -> str:
+        return f'{self.trade_name}'

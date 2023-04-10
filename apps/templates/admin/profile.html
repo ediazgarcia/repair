@@ -5,6 +5,12 @@
 {% block content %}
 <h1 class="h1 mb-0 text-gray-800 d-flex">Mi Perfil</h1>
 <br>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{url_for('auth.home')}}">Inicio</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Mi Perfil</li>
+    </ol>
+  </nav>
 <!-- Page Heading -->
 <div class="card o-hidden border-0 shadow-lg">
     <div class="card-body p-0">

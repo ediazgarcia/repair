@@ -58,8 +58,8 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for vehicle in vehicle%}
                     <tr>
-                        {% for vehicle in vehicle%}
                         <td>{{vehicle.client}}</td>
                         <td>{{vehicle.brand}}</td>
                         <td>{{vehicle.model}}</td>

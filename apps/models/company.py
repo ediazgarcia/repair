@@ -35,4 +35,4 @@ class Company(db.Model):
         self.municipality = municipality
 
     def __repr__(self) -> str:
-        return f'Business_name: {self.business_name} y {self.rnc_id}'
+        return f'{self.trade_name}'
