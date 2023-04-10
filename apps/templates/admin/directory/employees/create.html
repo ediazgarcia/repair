@@ -7,159 +7,187 @@
 <h1 class="h1 mb-0 text-gray-800 d-flex">Empleados</h1>
 <br>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url_for('employee.get_employee')}}">Empleados</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Nuevo Empleado</li>
-    </ol>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{url_for('employee.get_employee')}}">Empleados</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Nuevo Empleado</li>
+  </ol>
 </nav>
 
 <!-- Content Row -->
 <div class="card o-hidden border-0 shadow-lg my-5">
-    <div class="card-body p-0">
-        <!-- Nested Row within Card Body -->
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="p-5">
-                    <div class="text-left">
-                        <h3 class="text-gray-900 mb-4">Nuevo Empleado</h3>
-                    </div>
-                    <form action="{{url_for('employee.create_employee')}}" method="POST">
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="NombreEm">Nombre</label>
-                          <input type="text" id="NombreEm" class="form-control rounded-imput">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="ApellidoEm">Apellido</label>
-                          <input type="text" id="ApellidoEm" class="form-control rounded-imput">
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="FechaNacEm">Fecha de Nacimiento</label>
-                          <input type="date" name="FechaNacEm" id="FechaNacEm" class="form-control rounded-imput">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="GeneroEm">Género</label>
-                          <select id="GeneroEm" class="form-control rounded-imput">
-                            <option value="" disabled selected></option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="TipoDocCl">Tipo de Documento</label>
-                          <select id="TipoDocCl" class="form-control rounded-imput">
-                            <option value="" disabled selected></option>
-                            <option value="Cédula">Cédula</option>
-                            <option value="Pasaporte">Pasaporte</option>
-                          </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="NoDocCl">No. de Documento</label>
-                          <input type="text" id="NoDocCl" class="form-control rounded-imput">
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-4">
-                          <label for="TelefonoEm">Teléfono</label>
-                          <input type="text" id="TelefonoEm" class="form-control rounded-imput">
-                        </div>
-                        <div class="form-group col-md-8">
-                          <label for="CorreoEm">Correo Electrónico</label>
-                          <input type="mail" id="CorreoEm" class="form-control rounded-imput">
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-8">
-                          <label for="DireccionEm">Dirección</label>
-                          <input type="text" id="DireccionEm" class="form-control rounded-imput">
-                        </div>
-                        <div class="form-group col-md-4">
-                          <label for="ProvinciaEm">Provincia</label>
-                          <input type="text" id="ProvinciaEm" class="form-control rounded-imput">
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="CargoEm">Cargo Laboral</label>
-                          <input type="text" id="CargoEm" class="form-control rounded-imput">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="SueldoEm">Sueldo</label>
-                          <input type="text" id="SueldoEm" class="form-control rounded-imput">
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form group-col-md-12">
-                          <label>Días Laborales</label>
-                          <br>
-                          <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="Domingo">
-                            <label class="custom-control-label" for="Domingo">Dom</label>
-                          </div>
-                          <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="Lunes">
-                            <label class="custom-control-label" for="Lunes">Lun</label>
-                          </div>
-                          <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="Martes">
-                            <label class="custom-control-label" for="Martes">Mar</label>
-                          </div>
-                          <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="Miércoles">
-                            <label class="custom-control-label" for="Miércoles">Mie</label>
-                          </div>
-                          <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="Jueves">
-                            <label class="custom-control-label" for="Jueves">Jue</label>
-                          </div>
-                          <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="Viernes">
-                            <label class="custom-control-label" for="Viernes">Vie</label>
-                          </div>
-                          <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="Sábado">
-                            <label class="custom-control-label" for="Sábado">Sab</label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="EntradaEm">Hora de Entrada</label>
-                          <input type="time" name="EntradaEm" id="EntradaEm" class="form-control rounded-imput">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="SalidaEm">Hora de Salida</label>
-                          <input type="time" name="SalidaEm" id="SalidaEm" class="form-control rounded-imput">
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="EstadoEm">Estado</label>
-                          <select id="EstadoEm" class="form-control rounded-imput">
-                            <option value="" disabled selected></option>
-                            <option value="Activo">Activo</option>
-                            <option value="De Vacaciones">De Vacaciones</option>
-                            <option value="De Licencia">De Licencia</option>
-                            <option value="Inactivo">Inactivo</option>
-                          </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="FechaConEm">Fecha de Contratación</label>
-                          <input type="date" name="FechaConEm" id="FechaConEm" class="form-control rounded-imput">
-                        </div>
-                      </div>
-                        <div class="col-12 text-center">
-                            <button class="btn btn-primary col-6 rounded-button" type="submit">Crear</button>
-                        </div>
-                    </form>
-                </div>
+  <div class="card-body p-0">
+    <!-- Nested Row within Card Body -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="p-5">
+          <div class="text-left">
+            <h3 class="text-gray-900 mb-4">Nuevo Empleado</h3>
+          </div>
+          <form action="{{url_for('employee.create_employee')}}" method="POST">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="first_name">Nombre</label>
+                <input type="text" id="first_name" name="first_name" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="last_name">Apellido</label>
+                <input type="text" id="last_name" name="last_name" class="form-control rounded-imput">
+              </div>
             </div>
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="CorreoEm">Correo Electrónico</label>
+                <input type="email" id="email" name="email" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="phone">Teléfono</label>
+                <input type="tel" id="phone" name="phone" maxlength="10" class="form-control rounded-imput">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="document_type">Tipo de Documento</label>
+                <select id="document_type" name="document_type" class="form-control rounded-imput">
+                  <option value="" disabled selected></option>
+                  <option value="Cédula">Cédula</option>
+                  <option value="Pasaporte">Pasaporte</option>
+                </select>
+              </div>
+              <div class="form-group col-md-8">
+                <label for="document_number">No. de Documento</label>
+                <input type="text" id="document_number" name="document_number" class="form-control rounded-imput">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="birth_date">Fecha de Nacimiento</label>
+                <input type="date" name="birth_date" id="birth_date" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="gender">Género</label>
+                <select id="gender" name="gender" class="form-control rounded-imput">
+                  <option value="" disabled selected></option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="salary">Sueldo</label>
+                <input type="number" id="salary" name="salary" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-8">
+                <label for="address">Dirección</label>
+                <input type="text" id="address" name="address" class="form-control rounded-imput">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="city">Provincia</label>
+                <input type="text" id="city" name="city" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="state">Estado</label>
+                <select id="state" name="state" class="form-control rounded-imput">
+                  <option value="" disabled selected></option>
+                  <option value="Activo" {% if employee.state=='Activo' %}selected{% endif %}>Activo</option>
+                  <option value="Vacaciones" {% if employee.state=='Vacaciones' %}selected{% endif %}>De Vacaciones
+                  </option>
+                  <option value="Licencia" {% if employee.state=='Licencia' %}selected{% endif %}>De Licencia</option>
+                  <option value="Inactivo" {% if employee.state=='Inactivo' %}selected{% endif %}>Inactivo</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="position">Cargo Laboral</label>
+                <select id="position" name="position" class="form-control rounded-imput">
+                  <option value="" disabled selected></option>
+                  <option value="Encargado">Encargado</option>
+                  <option value="Recepcionista">Recepcionista</option>
+                  <option value="Mecánico">Mecánico</option>
+                </select>
+              </div>
+            </div>
+            <!-- Código HTML con checkboxes para días laborales sin comillas ni corchetes -->
+            <div class="form-row">
+              <div class="form-group col-md-12 pb-4">
+                <label for="work_day">Días Laborales</label>
+                <br>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="work_day_dom" name="work_day[]" value="Dom">
+                  <label class="custom-control-label" for="work_day_dom">Dom</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="work_day_lun" name="work_day[]" value="Lun">
+                  <label class="custom-control-label" for="work_day_lun">Lun</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="work_day_mar" name="work_day[]" value="Mar">
+                  <label class="custom-control-label" for="work_day_mar">Mar</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="work_day_mie" name="work_day[]" value="Mie">
+                  <label class="custom-control-label" for="work_day_mie">Mie</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="work_day_jue" name="work_day[]" value="Jue">
+                  <label class="custom-control-label" for="work_day_jue">Jue</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="work_day_vie" name="work_day[]" value="Vie">
+                  <label class="custom-control-label" for="work_day_vie">Vie</label>
+                </div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="work_day_sab" name="work_day[]" value="Sab">
+                  <label class="custom-control-label" for="work_day_sab">Sab</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="start_time">Hora de Entrada</label>
+                <input type="time" name="start_time" id="start_time" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="end_time">Hora de Salida</label>
+                <input type="time" name="end_time" id="end_time" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="hire_date">Fecha de Contratación</label>
+                <input type="date" name="hire_date" id="hire_date" class="form-control rounded-imput">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="company_id">Empresa</label>
+                <select id="company_id" name="company_id" class="form-control rounded-select">
+                  <option value="" disabled selected>Seleccionar empresa</option>
+                  {% for company in companies %}
+                  <option value="{{ company.id }}">{{ company.trade_name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="user_id">Usuario</label>
+                <select id="user_id" name="user_id" class="form-control rounded-select">
+                  <option value="" disabled selected>Seleccionar usuario</option>
+                  {% for user in users %}
+                  <option value="{{ user.id }}">{{ user.username }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="col-12 text-center">
+              <button class="btn btn-primary col-6 rounded-button" type="submit">Crear</button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 {% endblock %}
