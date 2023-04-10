@@ -164,7 +164,7 @@
               <div class="form-group col-md-6">
                 <label for="company_id">Empresa</label>
                 <select id="company_id" name="company_id" class="form-control rounded-select">
-                  <option value="" disabled selected>Seleccionar empresa</option>
+                  <option value="" disabled selected></option>
                   {% for company in companies %}
                   <option value="{{ company.id }}">{{ company.trade_name }}</option>
                   {% endfor %}
@@ -173,7 +173,7 @@
               <div class="form-group col-md-6">
                 <label for="user_id">Usuario</label>
                 <select id="user_id" name="user_id" class="form-control rounded-select">
-                  <option value="" disabled selected>Seleccionar usuario</option>
+                  <option value="" disabled selected></option>
                   {% for user in users %}
                   <option value="{{ user.id }}">{{ user.username }}</option>
                   {% endfor %}
