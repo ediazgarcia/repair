@@ -190,7 +190,7 @@
               <div class="form-group col-md-6">
                 <label for="company_id">Empresa</label>
                 <select id="company_id" name="company_id" class="form-control rounded-select">
-                  <option value="" disabled {% if company_id is none %}selected{% endif %}>Seleccionar empresa</option>
+                  <option value="" disabled {% if company_id is none %}selected{% endif %}></option>
                   {% for company in companies %}
                   <option value="{{ company.id }}" {% if company_id==company.id %}selected{% endif %}>{{
                     company.trade_name }}</option>
@@ -201,7 +201,7 @@
               <div class="form-group col-md-6">
                 <label for="user_id">Usuario</label>
                 <select id="user_id" name="user_id" class="form-control rounded-select">
-                  <option value="" disabled {% if user_id is none %}selected{% endif %}>Seleccionar usuario</option>
+                  <option value="" disabled {% if user_id is none %}selected{% endif %}></option>
                   {% for user in users %}
                   <option value="{{ user.id }}" {% if user_id==user.id %}selected{% endif %}>{{ user.username }}
                   </option>
