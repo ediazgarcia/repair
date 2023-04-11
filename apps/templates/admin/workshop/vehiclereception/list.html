@@ -28,35 +28,25 @@
                     <tr>
                         <th>Vehículo</th>
                         <th>Motivo de Recepción</th>
-                        <th>Registrada</th>
                         <th>Atendida por</th>
+                        <th>Registrada</th>
+                        <th>Actualizada</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for vehiclereception in vehiclereception%}
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
+                    {% for vehicle_reception in vehicle_reception%}
                     <tr>
-                        <td>{{vehiclereception.created}}</td>
-                        <td>{{vehiclereception.updated}}</td>
+                        <td>{{vehicle_reception.vehicle}}</td>
+                        <td>{{vehicle_reception.reception_reason}}</td>
+                        <td>{{vehicle_reception.employee}}</td>
+                        <td>{{vehicle_reception.created}}</td>
+                        <td>{{vehicle_reception.updated}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('vehicle.update_vehicle', id=vehicle.id) }}'">
+                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('vehicle_reception.update_vehicle_reception', id=vehicle_reception.id) }}'">
                                 <i class="fa fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('vehicle.delete_vehicle', id=vehicle.id) }}'">
+                            <button class="btn btn-sm btn-danger">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
