@@ -316,7 +316,7 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Configuración
                                 </a>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#passwordModal">
+                                <a class="dropdown-item" href="{{url_for('user.change_password')}}">
                                     <i class="fas fa fa-unlock fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cambiar Contraseña
                                 </a>
@@ -397,11 +397,11 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{url_for('user.get_user')}}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Mi Perfil
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{url_for('user.change_password')}}">
                                     <i class="fas fa fa-unlock fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cambiar Contraseña
                                 </a>
@@ -472,47 +472,6 @@
         </div>
     </div>
 
-
-     <!-- Password Modal-->
-     <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-     <div class="modal-dialog" role="document">
-         <div class="modal-content">
-             <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalLabel">Cambiar Contraseña</h5>
-                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">×</span>
-                 </button>
-             </div>
-             <div class="modal-body">
-                <form action="">
-                    <div  class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="">Contraseña Actual</label>
-                            <input type="password" name="" class="form-control">
-                          </div>
-                    </div>
-                    <div  class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="">Contraseña Nueva</label>
-                            <input type="password" name="" class="form-control">
-                          </div>
-                    </div>
-                    <div  class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="">Confirma tu Contraseña Nueva</label>
-                            <input type="password" name="" class="form-control">
-                          </div>
-                    </div>
-                </form>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-primary" type="submit">Cambiar</button>
-                </div>
-             </div>
-         </div>
-     </div>
- </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
