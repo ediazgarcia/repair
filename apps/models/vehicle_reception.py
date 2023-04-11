@@ -9,7 +9,7 @@ class VehicleReception(db.Model):
 
     id = db.Column(
         db.Integer, primary_key=True, autoincrement=True)
-    reception_reason = db.Column(db.String(50), nullable=False)
+    reception_reason = db.Column(db.String(100), nullable=False)
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow,)
     updated = db.Column(db.DateTime, nullable=False,
                         default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -18,10 +18,14 @@ class VehicleReception(db.Model):
     employee_id = db.Column(db.Integer, db.ForeignKey(
         'employees.id', onupdate='RESTRICT', ondelete='CASCADE'))
 
-    vehicle = db.relationship('Vehicle', backref='vehicle_receptions')
-    employee = db.relationship('Employee', backref='vehicle_receptions')
+    vehicle = db.relationship('Vehicle', backref=db.backref(
+        'vehicle_receptions', lazy=True))
+    employee = db.relationship(
+        'Employee', backref=db.backref('vehicle_receptions', lazy=True))
 
     def __init__(self, reception_reason, vehicle, employee):
         self.reception_reason = reception_reason
+        self.created = datetime.utcnow()
+        self.updated = datetime.utcnow()
         self.vehicle = vehicle
         self.employee = employee

@@ -6,7 +6,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h1 mb-0 text-gray-800 d-flex">Recepción de Vehículos</h1>
-    <a href="{{url_for('vehiclereception.get_vehiclereception')}}" class="btn btn-primary btn-circle btn-lg ml-auto">
+    <a href="{{url_for('vehicle_reception.get_vehicle_reception')}}" class="btn btn-primary btn-circle btn-lg ml-auto">
         <i class="fa fa-list" aria-hidden="true"></i>
     </a>
 </div>
@@ -27,14 +27,15 @@
                     <div class="text-left">
                         <h3 class="text-gray-900 mb-4">Nueva Recepción de Vehículo</h3>
                     </div>
-                    <form action="{{url_for('vehiclereception.create_vehiclereception')}}" method="POST">
+                    <form action="{{url_for('vehicle_reception.create_vehicle_reception')}}" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="employee_id">Generada por</label>
                                 <select name="employee_id" class="form-control js-example-basic-single">
                                     <option value="" selected disabled></option>
                                     {% for employee in employee%}
-                                    <option value="{{employee.id}}">{{employee.first_name}} {{employee.last_name}}</option>
+                                    <option value="{{employee.id}}">{{employee.first_name}} {{employee.last_name}}
+                                    </option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -45,7 +46,8 @@
                                 <select name="vehicle_id" class="form-control js-example-basic-single">
                                     <option value="" selected disabled></option>
                                     {% for vehicle in vehicle%}
-                                    <option value="{{vehicle.id}}">{{vehicle.brand}} {{vehicle.model}} {{vehicle.year}} {{vehicle.plate_number}}</option>
+                                    <option value="{{vehicle.id}}">{{vehicle.brand}} {{vehicle.model}} {{vehicle.year}}
+                                        {{vehicle.plate_number}}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -57,52 +59,61 @@
                             </div>
                         </div>
                         <h3 class="text-gray-900 mb-4">Detalle de Recepción</h3>
-                        <blockquote>Describe las condiciones en la que se recibió el vehículo y si se encontraron algunas pertenencias en su interior.</blockquote>
+                        <blockquote>Describe las condiciones en la que se recibió el vehículo y si se encontraron
+                            algunas pertenencias en su interior.</blockquote>
                         <br>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="problem_description">Descripción de Recepción</label>
-                                <textarea name="problem_description"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <textarea name="problem_description" cols="1" rows="3"
+                                    class="form-control rounded-imput"></textarea>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="front_condition">Condición Frontal</label>
-                                <textarea name="front_condition"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <textarea name="front_condition" cols="1" rows="3"
+                                    class="form-control rounded-imput"></textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="back_condition">Condición Trasera</label>
-                                <textarea name="back_condition"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <textarea name="back_condition" cols="1" rows="3"
+                                    class="form-control rounded-imput"></textarea>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="left_condition">Condición Lateral Izquierda</label>
-                                <textarea name="left_condition"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <textarea name="left_condition" cols="1" rows="3"
+                                    class="form-control rounded-imput"></textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="right_condition">Condición Lateral Derecha</label>
-                                <textarea name="right_condition"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <textarea name="right_condition" cols="1" rows="3"
+                                    class="form-control rounded-imput"></textarea>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="roof_condition">Condición de Tejado</label>
-                                <textarea name="roof_condition"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <textarea name="roof_condition" cols="1" rows="3"
+                                    class="form-control rounded-imput"></textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="accessories">Accesorios en el Vehículo</label>
-                                <textarea name="accessories"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <textarea name="accessories" cols="1" rows="3"
+                                    class="form-control rounded-imput"></textarea>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="tools">Herramientas en el Vehículo</label>
-                                <textarea name="tools"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <textarea name="tools" cols="1" rows="3" class="form-control rounded-imput"></textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="objects">Pertenencias en el Vehículo</label>
-                                <textarea name="objects"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <textarea name="objects" cols="1" rows="3"
+                                    class="form-control rounded-imput"></textarea>
                             </div>
                         </div>
                         <div class="col-12 text-center">
