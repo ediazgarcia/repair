@@ -4,8 +4,11 @@ from flask import (
 )
 
 from werkzeug.security import generate_password_hash
+from werkzeug.exceptions import BadRequestKeyError
 
 from apps.models.products import Product
+from apps.models.provider import Provider
+from apps.models.company import Company
 from apps.models.user import User
 from apps import db
 
@@ -18,11 +21,51 @@ product = Blueprint('product', __name__, url_prefix='/product')
 # función para verificar el rol del usuario
 @set_role
 def get_product(user=None):
-    products=Product.query.all()
-    return render_template('admin/products/product/list.html', products=products)
+    products = Product.query.all()
+    provider = Provider.query.all()
+    company = Company.query.all()
+    if g.role == 'Administrador':
+        return render_template('admin/products/product/list.html', products=products, provider=provider, company=company)
+    else:
+        return render_template('views/products/product/list.html', products=products, provider=provider, company=company)
 
 
-@product.route("/create")
+@product.route("/create", methods=['GET', 'POST'])
 @set_role
 def create_product(user=None):
-    return render_template('admin/products/product/create.html')
+
+    if request.method == "POST":
+        try:
+            description = request.form['description']
+            type = request.form['type']
+            category = request.form['category']
+            cost = request.form['cost']
+            price = request.form['price']
+            status = request.form['status']
+            supplier_id = request.form['supplier_id']
+            company_id = request.form['company_id']
+
+            # fetch the provider name from the database
+            provider = Provider.query.filter_by(id=supplier_id).first()
+
+            # fetch the company name from the database
+            company = Company.query.filter_by(id=company_id).first()
+
+            new_product = Product(
+                description, type, category, cost, price, status, provider, company)
+
+            db.session.add(new_product)
+            db.session.commit()
+            flash('¡Producto añadido con éxito!')
+            return redirect(url_for('product.get_product'))
+
+        except BadRequestKeyError as err:
+            flash(f'Error: {str(err)}', category='error')
+            return redirect(url_for('product.create_product'))
+
+    company = Company.query.all()
+    prodivers = Provider.query.all()
+    if g.role == 'Administrador':
+        return render_template('admin/products/product/create.html', company=company, providers=prodivers)
+    else:
+        return render_template('views/products/product/create.html', company=company, providers=prodivers)

@@ -39,6 +39,10 @@
                         </th>
                         <th class="th-sm">Estado
                         </th>
+                        <th class="th-sm">Creado
+                        </th>
+                        <th class="th-sm">Actualizado
+                        </th>
                         <th class="th-sm">Proveedor
                         </th>
                         <th class="th-sm">Empresa
@@ -48,16 +52,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%for products in products%}
+                    {%for product in products%}
                     <tr>
-                        <td>{{products.description}}</td>
-                        <td>{{products.type}}</td>
-                        <td>{{products.category}}</td>
-                        <td>{{products.cost}}</td>
-                        <td>{{products.price}}</td>
-                        <td>{{products.status}}</td>
-                        <td>{{products.supplier_id}}</td>
-                        <td>{{products.company_id}}</td>
+                        <td>{{product.description}}</td>
+                        <td>{{product.type}}</td>
+                        <td>{{product.category}}</td>
+                        <td>{{product.cost}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.status}}</td>
+                        <td>{{product.created}}</td>
+                        <td>{{product.updated}}</td>
+                        <td>{{product.supplier}}</td>
+                        <td>{{product.company}}</td>
                         <td>
                             <button class="btn  btn-sm btn-primary">
                                 <i class="fa fa-edit"></i>
