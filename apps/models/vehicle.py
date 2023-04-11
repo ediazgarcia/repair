@@ -27,16 +27,18 @@ class Vehicle(db.Model):
                         default=datetime.utcnow, onupdate=datetime.utcnow)
 
 
-def __init__(self, client, brand, model, year, fuel_type, plate_number, chassis_number, color, transmission, cylinder, status ):
-    self.client = client
-    self.brand = brand
-    self.model = model
-    self.year = year
-    self.fuel_type = fuel_type
-    self.plate_number = plate_number
-    self.chassis_number = chassis_number
-    self.color = color
-    self.transmission = transmission
-    self.cylinder = cylinder
-    self.status = status
-    
+    def __init__(self, client, brand, model, year, fuel_type, plate_number, chassis_number, color, transmission, cylinder, status):
+        self.client = client
+        self.brand = brand
+        self.model = model
+        self.year = year
+        self.fuel_type = fuel_type
+        self.plate_number = plate_number
+        self.chassis_number = chassis_number
+        self.color = color
+        self.transmission = transmission
+        self.cylinder = cylinder
+        self.status = status
+
+    def __repr__(self):
+        return f'{self.brand} {self.model} {self.year} {self.plate_number}'
