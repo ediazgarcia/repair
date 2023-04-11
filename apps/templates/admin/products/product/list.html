@@ -62,13 +62,14 @@
                         <td>{{product.status}}</td>
                         <td>{{product.created}}</td>
                         <td>{{product.updated}}</td>
-                        <td>{{product.supplier}}</td>
+                        <td>{{product.supplier|default('Ninguno',true)}}</td>
                         <td>{{product.company}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary">
+                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('product.update_product', id=product.id) }}'">
                                 <i class="fa fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger">
+                            <button class="btn btn-sm btn-danger"
+                                onclick="location.href='{{ url_for('product.delete_product', id=product.id) }}'">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

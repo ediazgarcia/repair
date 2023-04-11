@@ -89,6 +89,7 @@
                 <label for="supplier_id">Proveedor</label>
                 <select name="supplier_id" class="form-control js-example-basic-single">
                   <option value="" selected disabled></option>
+                  <option value="0">Ninguno</option>
                   {% for provider in providers%}
                   <option value="{{provider.id}}">{{provider.trade_name}}</option>
                   {% endfor %}
