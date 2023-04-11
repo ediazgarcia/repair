@@ -92,7 +92,6 @@
               <div class="form-group col-md-4">
                 <label for="status">Estado</label>
                 <select class="form-control rounded-imput" name="status">
-                  <option value="" disabled selected></option>
                   <option value="Activo" {% if vehicle.status=="Activo" %}selected{% endif %}>Activo</option>
                   <option value="Inactivo" {% if vehicle.status=="Inactivo" %}selected{% endif %}>Inactivo</option>
                 </select>

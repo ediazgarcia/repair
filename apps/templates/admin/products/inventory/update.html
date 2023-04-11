@@ -23,37 +23,37 @@
           <div class="text-left">
             <h3 class="text-gray-900 mb-4">Editar Producto en Inventario</h3>
           </div>
-          <form action="{{url_for('inventory.update_inventory')}}" method="POST">
+          <form action="{{url_for('inventory.update_inventory', id=inventory.id)}}" method="POST">
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label for="">Producto</label>
-                <select name="" id="" class="form-control js-example-basic-single">
-                    <option value=""></option>
+                <select name="product_id" class="form-control js-example-basic-single" disabled>
+                  <option value="{{inventory.product_id}}" selected>{{inventory.product}}</option>
                 </select>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="">Stock Mínimo</label>
-                <input type="number" name="" id="" class="form-control rounded-imput">
+                <label for="min_stock">Stock Mínimo</label>
+                <input type="number" name="min_stock" class="form-control rounded-imput" value="{{inventory.min_stock}}">
               </div>
               <div class="form-group col-md-6">
-                <label for="">Stock Actual</label>
-                <input type="number" name="" id="" class="form-control rounded-imput">
+                <label for="set_stock">Stock Actual</label>
+                <input type="number" name="set_stock" class="form-control rounded-imput"  value="{{inventory.set_stock}}">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="active">Tipo</label>
-                <select name="" id="" class="form-control rounded-select">
-                  <option value="" disabled selected></option>
-                  <option value="Venta">Venta</option>
-                  <option value="Almacén">Almacén</option>
+                <label for="type">Tipo</label>
+                <select name="type" class="form-control rounded-select">
+                  <option value="" {% if not inventory.type %}selected{% endif %} disabled></option>
+                  <option value="Venta" {% if inventory.type=="Venta" %}selected{% endif %}>Venta</option>
+                  <option value="Almacen" {% if inventory.type=="Almacen" %}selected{% endif %}>Almacen</option>
                 </select>
               </div>
               <div class="form-group col-md-6">
-                <label for="active">Ubicación</label>
-                <input type="text" name="" id="" class="form-control rounded-imput">
+                <label for="location">Ubicación</label>
+                <input type="text" name="location" class="form-control rounded-imput" value="{{inventory.location}}">
               </div>
             </div>
             <div class="col-12 text-center">

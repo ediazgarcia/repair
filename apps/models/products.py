@@ -38,3 +38,6 @@ class Product(db.Model):
         self.updated = datetime.utcnow()
         self.supplier = supplier
         self.company = company
+
+    def __repr__(self) -> str:
+        return f'{self.description}'
