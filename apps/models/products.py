@@ -14,21 +14,27 @@ class Product(db.Model):
     cost = db.Column(db.Numeric(10, 2), nullable=False)
     price = db.Column(db.Numeric(10, 2), nullable=False)
     status = db.Column(db.String(20), nullable=False)
+    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    updated = db.Column(db.DateTime, nullable=False,
+                        default=datetime.utcnow, onupdate=datetime.utcnow)
     supplier_id = db.Column(db.Integer, db.ForeignKey(
         'suppliers.id', onupdate='RESTRICT', ondelete='CASCADE'))
     company_id = db.Column(db.Integer, db.ForeignKey(
         'companies.id', onupdate='RESTRICT', ondelete='CASCADE'))
 
-    supplier = db.relationship('Provider', backref='products')
-    company = db.relationship('Company', backref='products')
+    supplier = db.relationship('Provider', backref=db.backref(
+        'products', lazy=True))
+    company = db.relationship('Company', backref=db.backref(
+        'products', lazy=True))
 
-    def __init__(self, description, type, category, cost, price, image, status, supplier, company):
+    def __init__(self, description, type, category, cost, price, status, supplier, company):
         self.description = description
         self.type = type
         self.category = category
         self.cost = cost
         self.price = price
-        self.image = image
         self.status = status
+        self.created = datetime.utcnow()
+        self.updated = datetime.utcnow()
         self.supplier = supplier
         self.company = company
