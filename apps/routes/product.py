@@ -64,8 +64,56 @@ def create_product(user=None):
             return redirect(url_for('product.create_product'))
 
     company = Company.query.all()
-    prodivers = Provider.query.all()
+    providers = Provider.query.all()
     if g.role == 'Administrador':
-        return render_template('admin/products/product/create.html', company=company, providers=prodivers)
+        return render_template('admin/products/product/create.html', company=company, providers=providers)
     else:
-        return render_template('views/products/product/create.html', company=company, providers=prodivers)
+        return render_template('views/products/product/create.html', company=company, providers=providers)
+
+@product.route("/update/<int:id>", methods=["GET", "POST"])
+@set_role
+def update_product(id, user=None):
+    product = Product.query.get_or_404(id)
+
+    if request.method == "POST":
+            description = request.form['description']
+            type = request.form['type']
+            category = request.form['category']
+            cost = request.form['cost']
+            price = request.form['price']
+            status = request.form['status']
+
+            product.description=description
+            product.type=type
+            product.category=category
+            product.cost=cost
+            product.price=price
+            product.status=status
+
+            db.session.commit()
+
+            flash('¡Producto actualizado con éxito!')
+            return redirect(url_for('product.get_product'))
+
+    return render_template('admin/products/product/update.html', product=product) 
+
+@product.route("/delete/<int:id>", methods=["GET"])
+@set_role
+def delete_product(id, user=None):
+    product = Product.query.get(id)
+
+    if not product:
+        flash('Producto no encontrado', category='error')
+        return redirect(url_for('product.get_product'))
+
+    try:
+        db.session.delete(product)
+        db.session.commit()
+
+        flash('¡Producto eliminado con éxito!')
+        return redirect(url_for('product.get_product'))
+
+    except Exception as err:
+        flash(
+            f'Error al eliminar el producto: {str(err)}', category='error')
+        return redirect(url_for('product.get_product'))

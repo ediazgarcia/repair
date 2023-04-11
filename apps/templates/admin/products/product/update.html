@@ -23,64 +23,77 @@
           <div class="text-left">
             <h3 class="text-gray-900 mb-4">Editar Producto</h3>
           </div>
-          <form action="{{url_for('product.update_product')}}" method="POST">
+          <form action="{{url_for('product.update_product', id=product.id)}}" method="POST">
             <div class="form-row">
               <div class="form-group col-md-12">
-                <label for="">Descripción</label>
-                <input type="text" name="" id="" class="form-control rounded-imput">
+                <label for="description">Descripción</label>
+                <input type="text" name="description" class="form-control rounded-imput" value="{{product.description}}">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="">Tipo</label>
-                <select id="" class="form-control rounded-imput">
-                  <option value="" disabled selected></option>
-                  <option value="Producto">Producto</option>
-                  <option value="Servicio">Servicio</option>
+                <label for="type">Tipo</label>
+                <select name="type" class="form-control rounded-imput">
+                  <option value="" {% if not product.type %}selected{% endif %} disabled></option>
+                  <option value="Producto" {% if product.type=="Producto" %}selected{% endif %}>Producto</option>
+                  <option value="Servicio" {% if product.type=="Servicio" %}selected{% endif %}>Servicio</option>
                 </select>
               </div>
               <div class="form-group col-md-8">
-                <label for="">Categoría</label>
-                <select name="" id="" class="form-control js-example-basic-single">
-                  <option value="" disabled selected></option>
-                  <option value="Aceites y Lubricantes">Aceites y Lubricantes</option>
-                  <option value="Adornos y Accesorios">Adornos y Accesorios</option>
-                  <option value="Aire Acondicionado y Calefacción">Aire Acondicionado y Calefacción</option>
-                  <option value="Carga y Remolque">Carga y Remolque</option>
-                  <option value="Carrocería">Carrocería</option>
-                  <option value="Combustible">Combustible</option>
-                  <option value="Diagnóstico">Diagnóstico</option>
-                  <option value="Frenos">Frenos</option>
-                  <option value="Herramientas">Herramientas</option>
-                  <option value="Iluminación">Iluminación</option>
-                  <option value="Limpieza">Limpieza</option>
-                  <option value="Motor y Escape">Motor y Escape</option>
-                  <option value="Neumáticos">Neumáticos</option>
-                  <option value="Pintura">Pintura</option>
-                  <option value="Seguridad">Seguridad</option>
-                  <option value="Sistema de Electricidad y Encendido">Sistema de Electricidad y Encendido</option>
-                  <option value="Sonido y Multimedia">Sonido y Multimedia</option>
-                  <option value="Suspensión">Suspensión</option>
-                  <option value="Transmisión">Transmisión</option>
-                  <option value="Otros">Otros</option>                  
+                <label for="category">Categoría</label>
+                <select name="category" class="form-control js-example-basic-single">
+                  <option value="" {% if not product.category %}selected{% endif %} disabled></option>
+                  <option value="Aceites y Lubricantes" {% if product.category=="Aceites y Lubricantes" %}selected{% endif %}>Aceites y Lubricantes</option>
+                  <option value="Adornos y Accesorios" {% if product.category=="Adornos y Accesorios" %}selected{% endif %}>Adornos y Accesorios</option>
+                  <option value="Aire Acondicionado y Calefacción" {% if product.category=="Aire Acondicionado y Calefacción" %}selected{% endif %}>Aire Acondicionado y Calefacción</option>
+                  <option value="Carga y Remolque" {% if product.category=="Carga y Remolque" %}selected{% endif %}>Carga y Remolque</option>
+                  <option value="Carrocería" {% if product.category=="Carrocería" %}selected{% endif %}>Carrocería</option>
+                  <option value="Combustible" {% if product.category=="Combustible" %}selected{% endif %}>Combustible</option>
+                  <option value="Diagnóstico" {% if product.category=="Diagnóstico" %}selected{% endif %}>Diagnóstico</option>
+                  <option value="Frenos" {% if product.category=="Frenos" %}selected{% endif %}>Frenos</option>
+                  <option value="Herramientas" {% if product.category=="Herramientas" %}selected{% endif %}>Herramientas</option>
+                  <option value="Iluminación" {% if product.category=="Iluminación" %}selected{% endif %}>Iluminación</option>
+                  <option value="Limpieza" {% if product.category=="Limpieza" %}selected{% endif %}>Limpieza</option>
+                  <option value="Motor y Escape" {% if product.category=="Motor y Escape" %}selected{% endif %}>Motor y Escape</option>
+                  <option value="Neumáticos" {% if product.category=="Neumáticos" %}selected{% endif %}>Neumáticos</option>
+                  <option value="Pintura" {% if product.category=="Pintura" %}selected{% endif %}>Pintura</option>
+                  <option value="Seguridad" {% if product.category=="Seguridad" %}selected{% endif %}>Seguridad</option>
+                  <option value="Sistema de Electricidad y Encendido" {% if product.category=="Sistema de Electricidad y Encendido" %}selected{% endif %}>Sistema de Electricidad y Encendido</option>
+                  <option value="Sonido y Multimedia" {% if product.category=="Sonido y Multimedia" %}selected{% endif %}>Sonido y Multimedia</option>
+                  <option value="Suspensión" {% if product.category=="Suspensión" %}selected{% endif %}>Suspensión</option>
+                  <option value="Transmisión" {% if product.category=="Transmisión" %}selected{% endif %}>Transmisión</option>
+                  <option value="Otros" {% if product.category=="Otros" %}selected{% endif %}>Otros</option>                  
                 </select>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="">Costo</label>
-                <input type="number" name="" id="" class="form-control rounded-select">
+                <label for="cost">Costo</label>
+                <input type="number" name="cost" class="form-control rounded-select" value="{{product.cost}}">
               </div>
               <div class="form-group col-md-4">
-                <label for="">Precio</label>
-                <input type="number" name="" id="" class="form-control rounded-select">
+                <label for="price">Precio</label>
+                <input type="number" name="price" class="form-control rounded-select" value="{{product.price}}">
               </div>
               <div class="form-group col-md-4">
-                <label for="active">Estado</label>
-                <select id="active" name="active" class="form-control rounded-select">
-                  <option value="" disabled selected></option>
-                  <option value="1">Activo</option>
-                  <option value="0">Inactivo</option>
+                <label for="status">Estado</label>
+                <select name="status" class="form-control rounded-select">
+                  <option value="Activo" {% if product.status=="Activo" %}selected{% endif %}>Activo</option>
+                  <option value="Inactivo" {% if product.status=="Inactivo" %}selected{% endif %}>Inactivo</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="supplier_id">Proveedor</label>
+                <select name="supplier_id" class="form-control js-example-basic-single" disabled>
+                  <option value="{{product.supplier_id}}" selected>{{product.supplier}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="company_id">Empresa</label>
+                <select name="company_id" class="form-control js-example-basic-single" disabled>
+                  <option value="{{product.company_id}}" selected>{{product.company}}</option>
                 </select>
               </div>
             </div>
