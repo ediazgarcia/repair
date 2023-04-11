@@ -30,16 +30,30 @@
                     <form action="{{url_for('vehiclereception.create_vehiclereception')}}" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="">Vehículo</label>
-                                <select name="" id="" class="form-control js-example-basic-single">
-                                    <option value=""></option>
+                                <label for="employee_id">Generada por</label>
+                                <select name="employee_id" class="form-control js-example-basic-single">
+                                    <option value="" selected disabled></option>
+                                    {% for employee in employee%}
+                                    <option value="{{employee.id}}">{{employee.first_name}} {{employee.last_name}}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="">Motivo de Recepción</label>
-                                <input type="text" id="" class="form-control rounded-imput">
+                                <label for="vehicle_id">Vehículo</label>
+                                <select name="vehicle_id" class="form-control js-example-basic-single">
+                                    <option value="" selected disabled></option>
+                                    {% for vehicle in vehicle%}
+                                    <option value="{{vehicle.id}}">{{vehicle.brand}} {{vehicle.model}} {{vehicle.year}} {{vehicle.plate_number}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="reception_reason">Motivo de Recepción</label>
+                                <input type="text" name="reception_reason" class="form-control rounded-imput">
                             </div>
                         </div>
                         <h3 class="text-gray-900 mb-4">Detalle de Recepción</h3>
@@ -47,48 +61,48 @@
                         <br>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="">Descripción de Recepción</label>
-                                <textarea name="" id="" cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <label for="problem_description">Descripción de Recepción</label>
+                                <textarea name="problem_description"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="">Condición Frontal</label>
-                                <textarea name="" id="" cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <label for="front_condition">Condición Frontal</label>
+                                <textarea name="front_condition"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="">Condición Trasera</label>
-                                <textarea name="" id="" cols="1" rows="3" class="form-control rounded-imput"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="">Condición Lateral Izquierda</label>
-                                <textarea name="" id="" cols="1" rows="3" class="form-control rounded-imput"></textarea>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="">Condición Lateral Derecha</label>
-                                <textarea name="" id="" cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <label for="back_condition">Condición Trasera</label>
+                                <textarea name="back_condition"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="">Condición de Tejado</label>
-                                <textarea name="" id="" cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <label for="left_condition">Condición Lateral Izquierda</label>
+                                <textarea name="left_condition"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="">Accesorios en el Vehículo</label>
-                                <textarea name="" id="" cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <label for="right_condition">Condición Lateral Derecha</label>
+                                <textarea name="right_condition"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="">Herramientas en el Vehículo</label>
-                                <textarea name="" id="" cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <label for="roof_condition">Condición de Tejado</label>
+                                <textarea name="roof_condition"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="">Pertenencias en el Vehículo</label>
-                                <textarea name="" id="" cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                                <label for="accessories">Accesorios en el Vehículo</label>
+                                <textarea name="accessories"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="tools">Herramientas en el Vehículo</label>
+                                <textarea name="tools"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="objects">Pertenencias en el Vehículo</label>
+                                <textarea name="objects"  cols="1" rows="3" class="form-control rounded-imput"></textarea>
                             </div>
                         </div>
                         <div class="col-12 text-center">
