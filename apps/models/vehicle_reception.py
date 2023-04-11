@@ -10,7 +10,6 @@ class VehicleReception(db.Model):
     id = db.Column(
         db.Integer, primary_key=True, autoincrement=True)
     reception_reason = db.Column(db.String(50), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow,)
     updated = db.Column(db.DateTime, nullable=False,
                         default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -22,8 +21,7 @@ class VehicleReception(db.Model):
     vehicle = db.relationship('Vehicle', backref='vehicle_receptions')
     employee = db.relationship('Employee', backref='vehicle_receptions')
 
-    def __init__(self, reception_reason, date, vehicle, employee):
+    def __init__(self, reception_reason, vehicle, employee):
         self.reception_reason = reception_reason
-        self.date = date
         self.vehicle = vehicle
         self.employee = employee

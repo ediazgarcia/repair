@@ -60,3 +60,7 @@ class Employee(db.Model):
         self.updated = datetime.utcnow()
         self.company = company
         self.user = user
+    
+        def __repr__(self):
+        #Employee
+            return f' {self.first_name} {self.last_name}'
