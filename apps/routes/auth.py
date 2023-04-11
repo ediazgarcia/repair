@@ -104,12 +104,18 @@ def home(user):
         return render_template('views/index.html', user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
     return redirect(url_for('auth.login'))
 
-# Cierre de sesión (logout)
 
 @auth.route('/profile')
 @set_role
 def profile(user):
-    return render_template('admin/profile.html')
+    if g.role == 'Administrador':
+        return render_template('admin/profile.html')
+    elif g.role == 'Usuario':
+        return render_template('views/profile.html')
+    return redirect(url_for('auth.login'))
+
+# Cierre de sesión (logout)
+
 
 @auth.route('/logout')
 def logout():
