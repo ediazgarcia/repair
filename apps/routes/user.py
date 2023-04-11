@@ -3,7 +3,7 @@ from flask import (
     render_template, Blueprint, flash, g, redirect, request, session, url_for
 )
 
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from apps.models.user import User
 from apps import db
@@ -110,6 +110,45 @@ def update_user(id, user=None):
         return render_template('admin/settings/users/update.html', user=user)
     else:
         return render_template('views/settings/users/update.html', user=user)
+
+
+# change_password
+@user.route('/change_password', methods=('GET', 'POST'))
+@set_role
+def change_password(user=None):
+    # Obtén el usuario actual
+    if request.method == 'POST':
+        try:
+            # Obtener el usuario actual
+            user = User.query.filter_by(id=session['user_id']).first()
+
+            # Obtener la contraseña actual y la nueva contraseña del formulario
+            current_password = request.form['current_password']
+            new_password = request.form['new_password']
+
+            # Validar que se proporcionen ambas contraseñas
+            if not current_password or not new_password:
+                flash('Se requiere la contraseña actual y la nueva contraseña.')
+                return redirect(url_for('user.change_password'))
+
+            # Verificar que la contraseña actual sea correcta
+            if not check_password_hash(user.password, current_password):
+                flash('La contraseña actual es incorrecta.')
+                return redirect(url_for('user.change_password'))
+
+            # Actualizar la contraseña del usuario en la base de datos
+            user.password = generate_password_hash(
+                new_password, method='sha256')
+            db.session.commit()
+
+            flash('¡Contraseña cambiada exitosamente!')
+            return redirect(url_for('auth.profile'))
+
+        except ValueError as err:
+            flash(f'Error: {str(err)}', category='error')
+            return redirect(url_for('user.change_password'))
+
+    return render_template('/change_password.html', decrypted_current_password=session.get('current_password', ''), user=user)
 
 
 @user.route("/delete/<id>", methods=["GET"])
