@@ -23,7 +23,6 @@ vehicle_reception = Blueprint(
 def get_vehicle_reception(user=None):
     vehicle_reception = VehicleReception.query.all()
     vehicle_reception_detail = VehicleReceptionDetail.query.all()
-
     if g.role == 'Administrador':
         return render_template('admin/workshop/vehiclereception/list.html', vehicle_reception=vehicle_reception, vehicle_reception_detail=vehicle_reception_detail)
     else:
@@ -74,3 +73,42 @@ def create_vehicle_reception(user=None):
     employee = Employee.query.all()
     vehicle_reception = VehicleReception.query.all()
     return render_template('admin/workshop/vehiclereception/create.html', vehicle=vehicle, employee=employee, vehicle_reception=vehicle_reception)
+
+@vehicle_reception.route("/update/<int:id>", methods=["GET", "POST"])
+@set_role
+def update_vehicle_reception(id, user=None):
+    vehicle_reception=VehicleReception.query.get_or_404(id)
+    vehicle_reception_details=VehicleReceptionDetail.query.get_or_404(id)
+    if request.method == 'POST':
+        reception_reason = request.form['reception_reason']
+        # Campos Detalle
+        problem_description = request.form['problem_description']
+        front_condition = request.form['front_condition']
+        back_condition = request.form['back_condition']
+        left_condition = request.form['left_condition']
+        right_condition = request.form['right_condition']
+        roof_condition = request.form['roof_condition']
+        accessories = request.form['accessories']
+        tools = request.form['tools']
+        objects = request.form['objects']
+
+        vehicle_reception.reception_reason=reception_reason
+        vehicle_reception_details.problem_description=problem_description
+        vehicle_reception_details.front_condition=front_condition
+        vehicle_reception_details.back_condition=back_condition
+        vehicle_reception_details.left_condition=left_condition
+        vehicle_reception_details.right_condition=right_condition
+        vehicle_reception_details.roof_condition=roof_condition
+        vehicle_reception_details.accessories=accessories
+        vehicle_reception_details.tools=tools
+        vehicle_reception_details.objects=objects
+        
+        db.session.commit()
+
+        flash('¡Recepción de vehículo actualizada con éxito!')
+        return redirect(url_for('vehicle_reception.get_vehicle_reception'))
+    
+    if g.role == 'Administrador':
+        return render_template('admin/workshop/vehiclereception/update.html', vehicle_reception=vehicle_reception, vehicle_reception_details=vehicle_reception_details)
+    else:
+        return render_template('views/workshop/vehiclereception/update.html', vehicle_reception=vehicle_reception, vehicle_reception_details=vehicle_reception_details)

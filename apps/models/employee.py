@@ -61,6 +61,5 @@ class Employee(db.Model):
         self.company = company
         self.user = user
     
-        def __repr__(self):
-        #Employee
-            return f' {self.first_name} {self.last_name}'
+    def __repr__(self):
+        return f' {self.first_name} {self.last_name}'
