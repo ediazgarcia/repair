@@ -31,12 +31,14 @@
                     <div class="text-left">
                         <h3 class="text-gray-900 mb-4">Editar Recepción de Vehículo</h3>
                     </div>
-                    <form action="{{url_for('vehicle_reception.update_vehicle_reception', id=vehicle_reception.id)}}" method="POST">
+                    <form action="{{url_for('vehicle_reception.update_vehicle_reception', id=vehicle_reception.id)}}"
+                        method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="employee_id">Generada por</label>
                                 <select name="employee_id" class="form-control js-example-basic-single" disabled>
-                                    <option value="{{vehicle_reception.employee_id}}" selected>{{vehicle_reception.employee}}</option>
+                                    <option value="{{vehicle_reception.employee_id}}" selected>
+                                        {{vehicle_reception.employee}}</option>
                                 </select>
                             </div>
                         </div>
@@ -44,14 +46,16 @@
                             <div class="form-group col-md-12">
                                 <label for="vehicle_id">Vehículo</label>
                                 <select name="vehicle_id" class="form-control js-example-basic-single" disabled>
-                                    <option value="{{vehicle_reception.vehicle_id}}" selected>{{vehicle_reception.vehicle}}</option>
+                                    <option value="{{vehicle_reception.vehicle_id}}" selected>
+                                        {{vehicle_reception.vehicle}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="reception_reason">Motivo de Recepción</label>
-                                <input type="text" name="reception_reason" class="form-control rounded-imput" value="{{vehicle_reception.reception_reason}}">
+                                <input type="text" name="reception_reason" class="form-control rounded-imput"
+                                    value="{{vehicle_reception.reception_reason}}">
                             </div>
                         </div>
                         <h3 class="text-gray-900 mb-4">Detalle de Recepción</h3>
@@ -61,55 +65,57 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="problem_description">Descripción de Recepción</label>
-                                <textarea name="problem_description" cols="1" rows="3"
-                                    class="form-control rounded-imput" value="{{vehicle_reception_details.problem_description}}"></textarea>
+                                <input type="text" name="problem_description" cols="1" rows="3"
+                                    class="form-control rounded-imput"
+                                    value="{{vehicle_reception_detail.problem_description}}" />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="front_condition">Condición Frontal</label>
-                                <textarea name="front_condition" cols="1" rows="3"
-                                    class="form-control rounded-imput" value="{{vehicle_reception_details.front_condition}}"></textarea>
+                                <input type="text" name="front_condition" class="form-control rounded-imput"
+                                    value="{{vehicle_reception_detail.front_condition}}"></input>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="back_condition">Condición Trasera</label>
-                                <textarea name="back_condition" cols="1" rows="3"
-                                    class="form-control rounded-imput" value="{{vehicle_reception_details.back_condition}}"></textarea>
+                                <input type="text" name="back_condition" class="form-control rounded-imput"
+                                    value="{{vehicle_reception_detail.back_condition}}"></input>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="left_condition">Condición Lateral Izquierda</label>
-                                <textarea name="left_condition" cols="1" rows="3"
-                                    class="form-control rounded-imput" value="{{vehicle_reception_details.left_condition}}"></textarea>
+                                <input type="text" name="left_condition" class="form-control rounded-imput"
+                                    value="{{vehicle_reception_detail.left_condition}}"></input>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="right_condition">Condición Lateral Derecha</label>
-                                <textarea name="right_condition" cols="1" rows="3"
-                                    class="form-control rounded-imput" value="{{vehicle_reception_details.right_condition}}"></textarea>
+                                <input name="right_condition" type="text" class="form-control rounded-imput"
+                                    value="{{vehicle_reception_detail.right_condition}}"></input>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="roof_condition">Condición de Tejado</label>
-                                <textarea name="roof_condition" cols="1" rows="3"
-                                    class="form-control rounded-imput" value="{{vehicle_reception_details.roof_condition}}"></textarea>
+                                <input type="text" name="roof_condition" class="form-control rounded-imput"
+                                    value="{{vehicle_reception_detail.roof_condition}}"></input>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="accessories">Accesorios en el Vehículo</label>
-                                <textarea name="accessories" cols="1" rows="3"
-                                    class="form-control rounded-imput" value="{{vehicle_reception_details.accessories}}"></textarea>
+                                <input name="accessories" type="text" class="form-control rounded-imput"
+                                    value="{{vehicle_reception_detail.accessories}}"></input>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="tools">Herramientas en el Vehículo</label>
-                                <textarea name="tools" cols="1" rows="3" class="form-control rounded-imput" value="{{vehicle_reception_details.tools}}"></textarea>
+                                <input name="tools" type="text" class="form-control rounded-imput"
+                                    value="{{vehicle_reception_detail.tools}}"></input>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="objects">Pertenencias en el Vehículo</label>
-                                <textarea name="objects" cols="1" rows="3"
-                                    class="form-control rounded-imput" value="{{vehicle_reception_details.objects}}"></textarea>
+                                <input name="objects" type="text" class="form-control rounded-imput"
+                                    value="{{vehicle_reception_detail.objects}}"></input>
                             </div>
                         </div>
                         <div class="col-12 text-center">
