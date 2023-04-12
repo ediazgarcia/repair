@@ -29,4 +29,4 @@ class VehicleReception(db.Model):
         self.employee = employee
 
     def __repr__(self):
-        return f'{self.reception_reason} del {self.vehicle}'
+        return f'Orden {self.order_num} {self.reception_reason} del {self.vehicle}'
