@@ -8,7 +8,7 @@
 <br>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url_for('assigments.create_assigments')}}">Asignación de Servicios</a></li>
+        <li class="breadcrumb-item"><a href="{{url_for('orders_services.create_orders_services')}}">Asignación de Servicios</a></li>
         <li class="breadcrumb-item active" aria-current="page">Historial de Asignaciones</li>
     </ol>
 </nav>
@@ -25,8 +25,10 @@
             <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Rececpcíon Asignada</th>
+                        <th>Recepción de Vehículo</th>
+                        <th>Servicio a realizar</th>
                         <th>Mecánico Asignado</th>
+                        <th>Observaciones</th>
                         <th>Fecha/Hora de Recepción</th>
                         <th>Fecha/Hora de Entrega</th>
                         <th>Estado</th>
@@ -34,22 +36,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for assigments in assigments%}
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
+                    {% for orders_services in orders_services%}
                     <tr>
-                        <td>{{assigments.created}}</td>
-                        <td>{{assigments.updated}}</td>
+                        <td>{{orders_services.vehicle_reception}}</td>
+                        <td>{{orders_services.description}}</td>
+                        <td>{{orders_services.employee}}</td>
+                        <td>{{orders_services.observations}}</td>
+                        <td>{{orders_services.start_date}}</td>
+                        <td>{{orders_services.end_date}}</td>
+                        <td>{{orders_services.status}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('vehicle.update_vehicle', id=vehicle.id) }}'">
+                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('orders_services.update_orders_services', id=orders_services.id) }}'">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('vehicle.delete_vehicle', id=vehicle.id) }}'">
+                                onclick="location.href='{{ url_for('orders_services.delete_orders_services', id=orders_services.id) }}'">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
