@@ -26,6 +26,7 @@
             <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>No. de Orden</th>
                         <th>Vehículo</th>
                         <th>Motivo de Recepción</th>
                         <th>Atendida por</th>
@@ -37,6 +38,7 @@
                 <tbody>
                     {% for vehicle_reception in vehicle_reception%}
                     <tr>
+                        <td>{{vehicle_reception.order_num}}</td>
                         <td>{{vehicle_reception.vehicle}}</td>
                         <td>{{vehicle_reception.reception_reason}}</td>
                         <td>{{vehicle_reception.employee}}</td>

@@ -8,7 +8,8 @@
 <br>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url_for('orders_services.create_orders_services')}}">Asignación de Servicios</a></li>
+        <li class="breadcrumb-item"><a href="{{url_for('orders_services.create_orders_services')}}">Asignación de
+                Servicios</a></li>
         <li class="breadcrumb-item active" aria-current="page">Historial de Asignaciones</li>
     </ol>
 </nav>
@@ -25,6 +26,7 @@
             <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>No. de Orden</th>
                         <th>Recepción de Vehículo</th>
                         <th>Servicio a realizar</th>
                         <th>Mecánico Asignado</th>
@@ -38,6 +40,7 @@
                 <tbody>
                     {% for orders_services in orders_services%}
                     <tr>
+                        <td>{{orders_services.order_num}}</td>
                         <td>{{orders_services.vehicle_reception}}</td>
                         <td>{{orders_services.description}}</td>
                         <td>{{orders_services.employee}}</td>
@@ -46,7 +49,8 @@
                         <td>{{orders_services.end_date}}</td>
                         <td>{{orders_services.status}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('orders_services.update_orders_services', id=orders_services.id) }}'">
+                            <button class="btn  btn-sm btn-primary"
+                                onclick="location.href='{{ url_for('orders_services.update_orders_services', id=orders_services.id) }}'">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
