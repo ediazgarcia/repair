@@ -47,15 +47,30 @@
   margin-bottom: 15px;
 }
 
-#profile-pic{
-  width: 150px; 
-  z-index: 1; 
-  background-color: #dfdfdf; 
+#profile-pic {
+  width: 150px;
+  z-index: 1;
+  background-color: #dfdfdf;
   border-radius: 100%;
   border-color: #6f6f6f;
   border-width: 3px;
 }
 
-#navbar-pic{
+#navbar-pic {
   background-color: #dfdfdf;
+}
+
+.zoom-img {
+  padding: 10px;
+  margin: 10px;
+  transition: transform 0.3s ease;
+}
+
+.zoom-img:hover {
+  transform: scale(1.2);
+}
+
+.img-cover {
+  object-fit: cover;
+  object-position: center;
 }
