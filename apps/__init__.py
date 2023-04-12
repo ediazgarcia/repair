@@ -22,7 +22,7 @@ from apps.routes.vehicle import vehicle
 from apps.routes.product import product
 from apps.routes.inventory import inventory
 from apps.routes.vehicle_reception import vehicle_reception
-from apps.routes.assigments import assigments
+from apps.routes.orders_services import orders_services
 from apps.routes.billing import billing
 from apps.routes.quotation import quotation
 from apps.routes.shopping import shopping
@@ -38,7 +38,7 @@ app.register_blueprint(vehicle)
 app.register_blueprint(product)
 app.register_blueprint(inventory)
 app.register_blueprint(vehicle_reception)
-app.register_blueprint(assigments)
+app.register_blueprint(orders_services)
 app.register_blueprint(billing)
 app.register_blueprint(quotation)
 app.register_blueprint(shopping)

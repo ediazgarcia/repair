@@ -14,9 +14,6 @@ class ServiceOrder(db.Model):
     end_date = db.Column(db.DateTime)
     status = db.Column(db.String(30), nullable=False)
     observations = db.Column(db.Text)
-    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated = db.Column(db.DateTime, nullable=False,
-                        default=datetime.utcnow, onupdate=datetime.utcnow)
     vehicle_reception_id = db.Column(db.Integer, db.ForeignKey(
         'vehicle_receptions.id', onupdate='RESTRICT', ondelete='CASCADE'))
     employee_id = db.Column(db.Integer, db.ForeignKey(
@@ -32,7 +29,7 @@ class ServiceOrder(db.Model):
     product = db.relationship(
         'Product', backref=db.backref('services_orders', lazy=True))
 
-    def __init__(self, description, start_date, end_date, status, observations, vehicle_reception, employee):
+    def __init__(self, description, start_date, end_date, status, observations, vehicle_reception, employee, product):
         self.description = description
         self.start_date = start_date
         self.end_date = end_date
@@ -40,3 +37,7 @@ class ServiceOrder(db.Model):
         self.observations = observations
         self.vehicle_reception = vehicle_reception
         self.employee = employee
+        self.product = product
+
+    def __repr__(self) -> str:
+        return f'{self.description}'
