@@ -23,3 +23,6 @@ class VehicleReception(db.Model):
         self.updated = datetime.utcnow()
         self.vehicle = vehicle
         self.employee = employee
+
+    def __repr__(self):
+        return f'{self.reception_reason} del {self.vehicle}'
