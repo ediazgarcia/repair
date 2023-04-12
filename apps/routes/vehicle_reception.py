@@ -74,14 +74,18 @@ def create_vehicle_reception(user=None):
     vehicle_reception = VehicleReception.query.all()
     return render_template('admin/workshop/vehiclereception/create.html', vehicle=vehicle, employee=employee, vehicle_reception=vehicle_reception)
 
+
 @vehicle_reception.route("/update/<int:id>", methods=["GET", "POST"])
 @set_role
 def update_vehicle_reception(id, user=None):
-    vehicle_reception=VehicleReception.query.get_or_404(id)
-    vehicle_reception_details=VehicleReceptionDetail.query.get_or_404(id)
+    vehicle_reception = VehicleReception.query.get(id)
+    vehicle_reception_detail = VehicleReceptionDetail.query.filter_by(
+        vehicle_reception_id=id).first()
+
     if request.method == 'POST':
         reception_reason = request.form['reception_reason']
-        # Campos Detalle
+
+        # Detalle de Recepción
         problem_description = request.form['problem_description']
         front_condition = request.form['front_condition']
         back_condition = request.form['back_condition']
@@ -92,23 +96,66 @@ def update_vehicle_reception(id, user=None):
         tools = request.form['tools']
         objects = request.form['objects']
 
-        vehicle_reception.reception_reason=reception_reason
-        vehicle_reception_details.problem_description=problem_description
-        vehicle_reception_details.front_condition=front_condition
-        vehicle_reception_details.back_condition=back_condition
-        vehicle_reception_details.left_condition=left_condition
-        vehicle_reception_details.right_condition=right_condition
-        vehicle_reception_details.roof_condition=roof_condition
-        vehicle_reception_details.accessories=accessories
-        vehicle_reception_details.tools=tools
-        vehicle_reception_details.objects=objects
-        
+        # Actualizar la recepción de vehículo existente en la base de datos
+        vehicle_reception.reception_reason = reception_reason
+
+        # Actualizar el detalle de la recepción de vehículo existente en la base de datos
+        vehicle_reception_detail.problem_description = problem_description
+        vehicle_reception_detail.front_condition = front_condition
+        vehicle_reception_detail.back_condition = back_condition
+        vehicle_reception_detail.left_condition = left_condition
+        vehicle_reception_detail.right_condition = right_condition
+        vehicle_reception_detail.roof_condition = roof_condition
+        vehicle_reception_detail.accessories = accessories
+        vehicle_reception_detail.tools = tools
+        vehicle_reception_detail.objects = objects
+
         db.session.commit()
 
-        flash('¡Recepción de vehículo actualizada con éxito!')
+        flash('¡Recepción de Vehículo actualizada con éxito!')
         return redirect(url_for('vehicle_reception.get_vehicle_reception'))
-    
+
+    vehicle = Vehicle.query.all()
+    employee = Employee.query.all()
+    # print(
+    #     f' DETALLES RECEPCION VEHICLE: {vehicle_reception_detail.problem_description}')
     if g.role == 'Administrador':
-        return render_template('admin/workshop/vehiclereception/update.html', vehicle_reception=vehicle_reception, vehicle_reception_details=vehicle_reception_details)
+        return render_template('admin/workshop/vehiclereception/update.html', vehicle_reception=vehicle_reception, vehicle_reception_detail=vehicle_reception_detail, vehicle=vehicle, employee=employee)
     else:
-        return render_template('views/workshop/vehiclereception/update.html', vehicle_reception=vehicle_reception, vehicle_reception_details=vehicle_reception_details)
+        return render_template('views/workshop/vehiclereception/update.html', vehicle_reception=vehicle_reception, vehicle_reception_detail=vehicle_reception_detail, vehicle=vehicle, employee=employee)
+
+
+# Delete
+@vehicle_reception.route("/delete/<id>", methods=["GET"])
+@set_role
+def delete_vehicle_reception(id, user=None):
+    vehicle_reception = VehicleReception.query.get(id)
+
+    if not vehicle_reception:
+        flash('Recepción de Vehículo no encontrada', category='error')
+        return redirect(url_for('vehicle_reception.get_vehicle_reception'))
+
+    try:
+        # Obtener los registros relacionados en la tabla vehicle_reception_details
+        vehicle_reception_details = VehicleReceptionDetail.query.filter_by(
+            vehicle_reception_id=id).all()
+
+        # Eliminar los registros en la tabla vehicle_reception_details
+        for vehicle_reception_detail in vehicle_reception_details:
+            db.session.delete(vehicle_reception_detail)
+
+        # Confirmar los cambios en la base de datos
+        db.session.commit()
+
+        # Eliminar la recepción de vehículo
+        db.session.delete(vehicle_reception)
+        db.session.commit()
+
+        flash('¡Recepción de Vehículo eliminada con éxito!')
+        return redirect(url_for('vehicle_reception.get_vehicle_reception'))
+
+    except Exception as err:
+        db.session.rollback()  # Deshacer los cambios en caso de error
+        flash(
+            f'Error al eliminar la Recepción de Vehículo: {str(err)}', category='error')
+        return redirect(url_for('vehicle_reception.get_vehicle_reception'))

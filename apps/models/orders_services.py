@@ -1,6 +1,7 @@
 from datetime import datetime
 from .vehicle_reception import VehicleReception
 from .employee import Employee
+from .products import Product
 from apps import db
 
 
@@ -21,9 +22,15 @@ class ServiceOrder(db.Model):
     employee_id = db.Column(db.Integer, db.ForeignKey(
         'employees.id', onupdate='RESTRICT', ondelete='CASCADE'))
 
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        'products.id', onupdate='RESTRICT', ondelete='CASCADE'))
+
     vehicle_reception = db.relationship(
-        'VehicleReception', backref='services_orders')
-    employee = db.relationship('Employee', backref='services_orders')
+        'VehicleReception',  backref=db.backref('services_orders', lazy=True))
+    employee = db.relationship(
+        'Employee', backref=db.backref('services_orders', lazy=True))
+    product = db.relationship(
+        'Product', backref=db.backref('services_orders', lazy=True))
 
     def __init__(self, description, start_date, end_date, status, observations, vehicle_reception, employee):
         self.description = description
