@@ -43,10 +43,12 @@
                         <td>{{vehicle_reception.created}}</td>
                         <td>{{vehicle_reception.updated}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('vehicle_reception.update_vehicle_reception', id=vehicle_reception.id) }}'">
+                            <button class="btn  btn-sm btn-primary"
+                                onclick="location.href='{{ url_for('vehicle_reception.update_vehicle_reception', id=vehicle_reception.id) }}'">
                                 <i class="fa fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger">
+                            <button class="btn btn-sm btn-danger"
+                                onclick="location.href='{{ url_for('vehicle_reception.delete_vehicle_reception', id=vehicle_reception.id) }}'">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
