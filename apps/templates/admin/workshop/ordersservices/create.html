@@ -34,9 +34,8 @@
                                 <select name="vehicle_reception_id" class="form-control js-example-basic-single">
                                     <option value="" disabled selected></option>
                                     {% for vehicle_reception in vehicle_reception%}
-                                    <option value="{{vehicle_reception.id}}">{{vehicle_reception.reception_reason}} del
-                                        {{vehicle_reception.vehicle}} (No. de Orden ( {{ vehicle_reception.order_num
-                                        }}))
+                                    <option value="{{vehicle_reception.id}}">Orden {{vehicle_reception.order_num}} {{vehicle_reception.reception_reason}} del
+                                        {{vehicle_reception.vehicle}}
                                     </option>
                                     {% endfor %}
                                 </select>

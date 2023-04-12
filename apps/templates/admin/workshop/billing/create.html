@@ -23,29 +23,47 @@
             <div class="col-lg-12">
                 <div class="p-5">
                     <div class="text-left">
-                        <h3 class="text-gray-900 mb-4">Generar Factura</h3>
+                        <h3 class="text-gray-900 mb-4">Nueva Factura</h3>
                         <form action="" method="post">
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="">Tipo de Factura</label>
-                                    <select name="" id="" class="form-control rounded-select">
-                                        <option value="" disabled selected></option>
-                                        <option value="Venta">Venta</option>
-                                        <option value="Despacho de Servicio">Despacho de Servicio</option>
-                                    </select>
+                                    <label for="type">Tipo de Factura</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="type"
+                                            value="Despacho de Servicio" checked>
+                                        <label class="form-check-label" for="type">
+                                            Despacho de Servicio
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="type" value="Venta de Productos>
+                                        <label class=" form-check-label" for="type">
+                                        Venta de Productos
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="">Buscar Cliente</label>
-                                    <select name="" id="" class="form-control js-example-basic-single">
-                                        <option value=""></option>
+                                    <label for="client_id">Buscar Cliente</label>
+                                    <select name="client_id" class="form-control js-example-basic-single">
+                                        <option value="" selected disabled></option>
+                                        {% for customer in customers %}
+                                        <option value="{{customer.id}}">{{customer.first_name}} {{customer.last_name}}
+                                        </option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="">Buscar Orden de Servicio</label>
-                                    <select name="" id="" class="form-control js-example-basic-single">
-                                        <option value=""></option>
+                                    <select name="orders_services_id" class="form-control js-example-basic-single">
+                                        <option value="" disabled selected></option>
+                                        {% for orders_services in orders_services%}
+                                        <option value="{{orders_services.id}}">Orden {{orders_services.order_num}}
+                                            {{orders_services.description}} por
+                                            {{orders_services.employee}}
+                                        </option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -55,18 +73,22 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="">Buscar Producto</label>
-                                    <select name="" id="" class="form-control js-example-basic-single">
-                                        <option value=""></option>
+                                    <label for="product_id">Buscar Producto</label>
+                                    <select name="product_id" class="form-control js-example-basic-single">
+                                        <option value="" disabled selected></option>
+                                        {% for product in product%}
+                                        <option value="{{product.id}}">{{product.description}} | {{product.type}}
+                                        </option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="">Cantidad</label>
-                                    <input type="number" name="" id="" class="form-control">
+                                    <label for="lot">Cantidad</label>
+                                    <input type="number" name="lot" class="form-control">
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="">Descuento</label>
-                                    <input type="number" name="" id="" class="form-control">
+                                    <label for="discount">Descuento</label>
+                                    <input type="number" name="discount" class="form-control">
                                 </div>
                                 <div class="form-group col-md-2">
                                     <a class="btn btn-primary form-control mt-4">
@@ -98,6 +120,25 @@
                                     </td>
                                 </tbody>
                             </table>
+                            <br>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="">Tipo de Pago</label>
+                                    <select name="" class="form-control">
+                                        {% for payments in payments%}
+                                        <option value="{{payments.id}}">{{payments.description}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="">Recibido</label>
+                                    <input type="number" name="" class="form-control">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="">Cambio</label>
+                                    <input type="number" name="" class="form-control">
+                                </div>
+                            </div>
                             <br>
                             <div class="d-flex align-items-start flex-column mb-3">
                                 <h5 class="p-2 text-gray-900">Descuento: RD$ ####</h5>

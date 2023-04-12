@@ -28,6 +28,7 @@
               <div class="form-group col-md-12">
                 <label for="client_id">Cliente</label>
                 <select name="client_id" class="form-control js-example-basic-single">
+                  <option value="" selected disabled></option>
                   {% for customer in customers %}
                   <option value="{{customer.id}}">{{customer.first_name}} {{customer.last_name}}</option>
                   {% endfor %}
