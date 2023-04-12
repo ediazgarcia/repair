@@ -2,7 +2,8 @@ from .auth import set_role
 from flask import (
     render_template, Blueprint, flash, g, redirect, request, session, url_for
 )
-
+# Importar el contador
+from itertools import count
 from werkzeug.security import generate_password_hash
 
 
@@ -29,6 +30,10 @@ def get_vehicle_reception(user=None):
         return render_template('views/workshop/vehiclereception/list.html', vehicle_reception=vehicle_reception, vehicle_reception_detail=vehicle_reception_detail)
 
 
+# Crear un contador que inicie en 100
+order_num_counter = count(start=100)
+
+
 @vehicle_reception.route("/create", methods=['GET', 'POST'])
 @set_role
 def create_vehicle_reception(user=None):
@@ -47,13 +52,16 @@ def create_vehicle_reception(user=None):
         tools = request.form['tools']
         objects = request.form['objects']
 
+        # Generar el order_num con prefijo "RV-"
+        order_num = "RV-" + str(next(order_num_counter))
+
         # fetch the vehicle name from the database
         vehicle = Vehicle.query.filter_by(id=vehicle_id).first()
 
         # fetch the user name from the database
         employee = Employee.query.filter_by(id=employee_id).first()
 
-        new_vehicle_reception = VehicleReception(reception_reason=reception_reason, vehicle=vehicle,
+        new_vehicle_reception = VehicleReception(order_num=order_num, reception_reason=reception_reason, vehicle=vehicle,
                                                  employee=employee)
 
         db.session.add(new_vehicle_reception)
