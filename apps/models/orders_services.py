@@ -9,6 +9,7 @@ class ServiceOrder(db.Model):
     __tablename__ = 'services_orders'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    order_num = db.Column(db.String(20), unique=True)
     description = db.Column(db.Text, nullable=False)
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
@@ -29,7 +30,8 @@ class ServiceOrder(db.Model):
     product = db.relationship(
         'Product', backref=db.backref('services_orders', lazy=True))
 
-    def __init__(self, description, start_date, end_date, status, observations, vehicle_reception, employee, product):
+    def __init__(self, order_num, description, start_date, end_date, status, observations, vehicle_reception, employee, product):
+        self.order_num = order_num
         self.description = description
         self.start_date = start_date
         self.end_date = end_date
