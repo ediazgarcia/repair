@@ -8,8 +8,7 @@ from werkzeug.security import generate_password_hash
 
 
 from sqlalchemy import func
-from apps.models.vehicle_reception import VehicleReception
-from apps.models.vehicle_reception_details import VehicleReceptionDetail
+from apps.models.vehicle_reception import VehicleReception, VehicleReceptionDetail
 from apps.models.vehicle import Vehicle
 from apps.models.employee import Employee
 from apps import db
