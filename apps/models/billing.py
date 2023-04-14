@@ -4,7 +4,6 @@ from .company import Company
 from .client import Customer
 from .employee import Employee
 from .orders_services import ServiceOrder
-from .payments import Payments
 
 from .products import Product
 
@@ -15,14 +14,10 @@ class Billing(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     order_num = db.Column(db.String(20), unique=True)
     type = db.Column(db.String(30), nullable=False)
-    itbis = db.Column(db.Numeric(10, 2), nullable=False)
-    discount = db.Column(db.Numeric(10, 2), nullable=False)
-    sub_total = db.Column(db.Numeric(10, 2), nullable=False)
+    date = db.Column(db.Date, nullable=False)
     total = db.Column(db.Numeric(10, 2), nullable=False)
-    status = db.Column(db.String(20), nullable=False)
-    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    updated = db.Column(db.DateTime, nullable=False,
-                        default=datetime.utcnow, onupdate=datetime.utcnow)
+    details = db.relationship('BillingDetail', backref='billings', lazy=True)
+
     company_id = db.Column(db.Integer, db.ForeignKey(
         'companies.id', onupdate='RESTRICT', ondelete='CASCADE'))
     company = db.relationship(
@@ -39,24 +34,18 @@ class Billing(db.Model):
         'services_orders.id', onupdate='RESTRICT', ondelete='CASCADE'))
     orders_services = db.relationship(
         'ServiceOrder', backref=db.backref('billings', lazy=True))
-    payments_id = db.Column(db.Integer, db.ForeignKey(
-        'payments.id', onupdate='RESTRICT', ondelete='CASCADE'))
-    payments = db.relationship(
-        'Payments', backref=db.backref('billings', lazy=True))
+    billing = db.relationship(
+        'BillingDetail', backref=db.backref('billings', lazy=True))
 
-    def __init__(self, order_num, type, itbis, discount, sub_total, total, status, company, client, employee, order_services, payments):
+    def __init__(self, order_num, type, date, total, company, client, employee, orders_services):
         self.order_num = order_num
         self.type = type
-        self.itbis = itbis
-        self.discount = discount
-        self.sub_total = sub_total
+        self.date = date
         self.total = total
-        self.status = status
         self.company = company
         self.client = client
         self.employee = employee
-        self.orders_services = order_services
-        self.payments = payments
+        self.orders_services = orders_services
 
     def __repr__(self):
         return f'Factura {self.order_num}'
@@ -66,28 +55,25 @@ class BillingDetail(db.Model):
     __tablename__ = 'billings_details'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    lot = db.Column(db.Integer, nullable=False)
-    itbis = db.Column(db.Numeric(10, 2), nullable=False)
-    discount = db.Column(db.Numeric(10, 2), nullable=False)
-    sub_total = db.Column(db.Numeric(10, 2), nullable=False)
+    description = db.Column(db.String(100), nullable=False)
+    unit_price = db.Column(db.Float, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
     total = db.Column(db.Numeric(10, 2), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(
         'products.id', onupdate='RESTRICT', ondelete='CASCADE'))
     product = db.relationship(
         'Product', backref=db.backref('billings_details', lazy=True))
-    billing_id = db.Column(db.Integer, db.ForeignKey(
-        'billings.id', onupdate='RESTRICT', ondelete='CASCADE'))
-    billing = db.relationship(
-        'Billing', backref=db.backref('billings_details', lazy=True))
 
-    def __init__(self, lot, itbis, discount, sub_total, total, product, billing):
-        self.lot = lot
-        self.itbis = itbis
-        self.discount = discount
-        self.sub_total = sub_total
+    billing_id = db.Column(db.Integer, db.ForeignKey(
+        'billings.id'), nullable=False)
+
+    def __init__(self, description, unit_price, quantity, total, product, billing):
+        self.description = description
+        self.unit_price = unit_price
+        self.quantity = quantity
         self.total = total
         self.product = product
         self.billing = billing
 
     def __repr__(self):
-        return f'Payment: {self.lot} {self.product} {self.discount} {self.itbis} {self.sub_total} {self.total}'
+        return f'Payment: {self.description} {self.unit_price} {self.quantity}'
