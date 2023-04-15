@@ -15,8 +15,9 @@ class Billing(db.Model):
     order_num = db.Column(db.String(20), unique=True)
     type = db.Column(db.String(30), nullable=False)
     date = db.Column(db.Date, nullable=False)
+    received = db.Column(db.Numeric(10, 2), nullable=False)
+    change = db.Column(db.Numeric(10, 2), nullable=False)
     total = db.Column(db.Numeric(10, 2), nullable=False)
-    details = db.relationship('BillingDetail', backref='billings', lazy=True)
 
     company_id = db.Column(db.Integer, db.ForeignKey(
         'companies.id', onupdate='RESTRICT', ondelete='CASCADE'))
@@ -26,16 +27,14 @@ class Billing(db.Model):
         'customers.id', onupdate='RESTRICT', ondelete='CASCADE'))
     client = db.relationship(
         'Customer', backref=db.backref('billings', lazy=True))
-    employee_id = db.Column(db.Integer, db.ForeignKey(
-        'employees.id', onupdate='RESTRICT', ondelete='CASCADE'))
-    employee = db.relationship(
-        'Employee', backref=db.backref('billings', lazy=True))
     orders_services_id = db.Column(db.Integer, db.ForeignKey(
         'services_orders.id', onupdate='RESTRICT', ondelete='CASCADE'))
     orders_services = db.relationship(
         'ServiceOrder', backref=db.backref('billings', lazy=True))
-    billing = db.relationship(
-        'BillingDetail', backref=db.backref('billings', lazy=True))
+    payments_id = db.Column(db.Integer, db.ForeignKey(
+        'payments.id', onupdate='RESTRICT', ondelete='CASCADE'))
+    payments = db.relationship(
+        'Payments', backref=db.backref('billings', lazy=True))
 
     def __init__(self, order_num, type, date, total, company, client, employee, orders_services):
         self.order_num = order_num
@@ -66,6 +65,8 @@ class BillingDetail(db.Model):
 
     billing_id = db.Column(db.Integer, db.ForeignKey(
         'billings.id'), nullable=False)
+    billing=db.relationship(
+        'Billing', backref=db.backref('billings_details', lazy=True))
 
     def __init__(self, description, unit_price, quantity, total, product, billing):
         self.description = description
