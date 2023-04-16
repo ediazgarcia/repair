@@ -2,52 +2,46 @@
 <html lang="es">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/Icono.ico')}}" type="image/x-icon">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/Icono.ico')}}" type="image/x-icon" />
     <title>AIE Repair Suite | {% block title %}{% endblock %}</title>
 
     <!-- Custom fonts for this template-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+        rel="stylesheet" />
 
     <!-- Custom styles for this template-->
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/sb-admin-2.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/sb-admin-2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/sb-admin-2.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/sb-admin-2.min.css')}}" />
 
     <!-- Custom styles for this page -->
     <link rel="stylesheet" type="text/css"
-        href="{{url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/select2.min.css')}}">
+        href="{{url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/select2.min.css')}}" />
     <!-- MDB -->
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" /> -->
-
-
 </head>
 
 <body id="page-top">
-
     <!-- Page Wrapper -->
     <div id="wrapper">
-
         <!-- Sidebar -->
         <!-- Sidebar -->
 
         {% if g.role == 'Administrador' %}
 
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
-
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url_for('auth.home')}}">
                 <div class="sidebar-brand-icon">
-                    <img class="logo" src="{{ url_for('static', filename='img/Logo_White.png') }}" alt="">
+                    <img class="logo" src="{{ url_for('static', filename='img/Logo_White.png') }}" alt="" />
                 </div>
             </a>
             <!-- Nav Item - Dashboard -->
@@ -83,8 +77,8 @@
                         <h6 class="collapse-header">Servicios</h6>
                         <a class="collapse-item"
                             href="{{url_for('vehicle_reception.create_vehicle_reception')}}">Recepción de Vehículos</a>
-                        <a class="collapse-item" href="{{url_for('orders_services.create_orders_services')}}">Asignación de
-                            Servicios</a>
+                        <a class="collapse-item" href="{{url_for('orders_services.create_orders_services')}}">Asignación
+                            de Servicios</a>
                         <h6 class="collapse-header">Ventas y Compras</h6>
                         <a class="collapse-item" href="{{url_for('billing.create_billing')}}">Facturación</a>
                         <a class="collapse-item" href="{{url_for('quotation.create_quotation')}}">Cotización</a>
@@ -141,18 +135,16 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
         </ul>
         <!-- End of Sidebar -->
 
         {% else %}
 
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
-
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url_for('auth.home')}}">
                 <div class="sidebar-brand-icon">
-                    <img class="logo" src="{{ url_for('static', filename='img/Logo_White.png') }}" alt="">
+                    <img class="logo" src="{{ url_for('static', filename='img/Logo_White.png') }}" alt="" />
                 </div>
             </a>
             <!-- Nav Item - Dashboard -->
@@ -236,16 +228,13 @@
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Navbar -->
                 <!-- Topbar -->
                 {% if g.role == 'Administrador' %}
 
-                <nav class="navbar navbar-expand navbar-light topbar  bg-white mb-4 static-top shadow">
-
+                <nav class="navbar navbar-expand navbar-light topbar bg-white mb-4 static-top shadow">
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -256,7 +245,7 @@
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                                aria-label="Search" aria-describedby="basic-addon2" />
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -267,7 +256,6 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -280,7 +268,8 @@
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Buscar..." aria-label="Search" aria-describedby="basic-addon2">
+                                            placeholder="Buscar..." aria-label="Search"
+                                            aria-describedby="basic-addon2" />
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -291,18 +280,17 @@
                             </div>
                         </li>
 
-
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    {% if 'user_id' in session and session['role'] == 'Administrador' %}
+                                    {% if 'user_id' in session and session['role'] ==
+                                    'Administrador' %}
                                     <p class="m-0">{{ g.fullname }}</p>
                                     {% endif %}
                                 </span>
-                                <img class="img-profile rounded-circle" src="{{ g.avatar_url }}" id="navbar-pic">
+                                <img class="img-profile rounded-circle" src="{{ g.avatar_url }}" id="navbar-pic" />
                             </a>
 
                             <!-- Dropdown - User Information -->
@@ -332,8 +320,7 @@
 
                 {% else %}
 
-                <nav class="navbar navbar-expand navbar-light topbar  bg-white mb-4 static-top shadow">
-
+                <nav class="navbar navbar-expand navbar-light topbar bg-white mb-4 static-top shadow">
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -344,7 +331,7 @@
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                                aria-label="Search" aria-describedby="basic-addon2" />
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -355,7 +342,6 @@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -368,7 +354,8 @@
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Buscar..." aria-label="Search" aria-describedby="basic-addon2">
+                                            placeholder="Buscar..." aria-label="Search"
+                                            aria-describedby="basic-addon2" />
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -379,19 +366,18 @@
                             </div>
                         </li>
 
-
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    {% if 'user_id' in session and session['role'] == 'Usuario' %}
-                                    <p> {{ g.fullname }} | {{ g.role }} </p>
+                                    {% if 'user_id' in session and session['role'] == 'Usuario'
+                                    %}
+                                    <p>{{ g.fullname }} | {{ g.role }}</p>
                                     {% endif %}
                                 </span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ url_for('static', filename='img/profile.png') }}">
+                                    src="{{ url_for('static', filename='img/profile.png') }}" />
                             </a>
 
                             <!-- Dropdown - User Information -->
@@ -426,23 +412,17 @@
                     <div id="flash-message" class="alert alert-success fade show" role="alert">
                         <strong>{{ message }}</strong>
                     </div>
-                    {% endfor %}
-
-
-                    {% block content %}{% endblock %}
+                    {% endfor %} {% block content %}{% endblock %}
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->
             {% include 'partials/_footer.html' %}
             <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
 
@@ -457,58 +437,28 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">¿Quieres cerrar sesión?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        ¿Quieres cerrar sesión?
+                    </h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Selecciona "Cerrar sesión" a continuación para finalizar la sesión
-                    actual.</div>
+                <div class="modal-body">
+                    Selecciona "Cerrar sesión" a continuación para finalizar la sesión
+                    actual.
+                </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                        Cancelar
+                    </button>
                     <a class="btn btn-primary" href="{{url_for('auth.logout')}}">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{{url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="{{url_for('static', filename='js/sb-admin-2.min.js')}}"></script>
-    <!-- Page level plugins -->
-    <script src="{{url_for('static', filename='vendor/chart.js/Chart.min.js')}}"></script>
-    <!-- Page level custom scripts -->
-    <script src="{{url_for('static', filename='js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{url_for('static', filename='js/demo/chart-pie-demo.js')}}"></script>
-
-
-
-    <!-- Page level plugins -->
-    <script src="{{url_for('static', filename='vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{url_for('static', filename='js/demo/datatables-demo.js')}}"></script>
-    <script src="{{url_for('static', filename='js/main.js')}}"></script>
-    <script src="{{url_for('static', filename='js/select2.min.js')}}"></script>
-    <script src="{{url_for('static', filename='js/i18n/es.js')}}"></script>
-    <script>
-        // Ocultar el mensaje flash después de 3 segundos
-        setTimeout(function () {
-            document.getElementById("flash-message").style.display = "none";
-        }, 3000);
-    </script>
-
-    <!-- MDB -->
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script> -->
-
-
+    {% block JS %}
+    {% endblock %}
 </body>
 
 </html>
