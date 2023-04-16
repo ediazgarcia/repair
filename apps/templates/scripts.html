@@ -1,0 +1,36 @@
+{% block JS %}
+
+<!-- Bootstrap core JavaScript-->
+<script src="{{url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
+<!-- Incluir jQuery desde un CDN -->
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script>
+    // Ocultar el mensaje flash después de 3 segundos
+    setTimeout(function () {
+        document.getElementById("flash-message").style.display = "none";
+        // document.getElementById("flash-message");
+    }, 3000);
+</script>
+<!-- MDB -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script> -->
+<!-- Core plugin JavaScript-->
+<script src="{{url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+<!-- Custom scripts for all pages-->
+<script src="{{url_for('static', filename='js/sb-admin-2.min.js')}}"></script>
+<!-- Page level plugins -->
+<script src="{{url_for('static', filename='vendor/chart.js/Chart.min.js')}}"></script>
+<!-- Page level custom scripts -->
+<script src="{{url_for('static', filename='js/demo/chart-area-demo.js')}}"></script>
+<script src="{{url_for('static', filename='js/demo/chart-pie-demo.js')}}"></script>
+
+<!-- Page level plugins -->
+<script src="{{url_for('static', filename='vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{url_for('static', filename='js/demo/datatables-demo.js')}}"></script>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+<script src="{{url_for('static', filename='js/select2.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/i18n/es.js')}}"></script>
+{% endblock %}
