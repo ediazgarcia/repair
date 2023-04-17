@@ -5,6 +5,7 @@ from .client import Customer
 from .employee import Employee
 from .orders_services import ServiceOrder
 
+
 from .products import Product
 
 
@@ -13,10 +14,8 @@ class Billing(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     order_num = db.Column(db.String(20), unique=True)
-    type = db.Column(db.String(30), nullable=False)
     total = db.Column(db.Numeric(10, 2), nullable=False)
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow,)
-
     company_id = db.Column(db.Integer, db.ForeignKey(
         'companies.id', onupdate='RESTRICT', ondelete='CASCADE'))
     company = db.relationship(
@@ -30,9 +29,8 @@ class Billing(db.Model):
     orders_services = db.relationship(
         'ServiceOrder', backref=db.backref('billings', lazy=True))
 
-    def __init__(self, order_num, type, total, company, client, orders_services):
+    def __init__(self, order_num, total, company, client, orders_services):
         self.order_num = order_num
-        self.type = type
         self.total = total
         self.created = datetime.utcnow()
         self.company = company
@@ -47,23 +45,23 @@ class BillingDetail(db.Model):
     __tablename__ = 'billings_details'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    unit_price = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    total = db.Column(db.Numeric(10, 2), nullable=False)
+    description= db.Column(db.String(100), nullable=False)
+    unit_price = db.Column(db.Float, nullable=False)
+    total_price = db.Column(db.Numeric(10, 2), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(
         'products.id', onupdate='RESTRICT', ondelete='CASCADE'))
     product = db.relationship(
         'Product', backref=db.backref('billings_details', lazy=True))
-
     billing_id = db.Column(db.Integer, db.ForeignKey(
         'billings.id'), nullable=False)
     billing = db.relationship(
         'Billing', backref=db.backref('billings_details', lazy=True))
 
-    def __init__(self, unit_price, quantity, total, product, billing):
+    def __init__(self, unit_price, quantity, total_price, product, billing):
         self.unit_price = unit_price
         self.quantity = quantity
-        self.total = total
+        self.total_price = total_price
         self.product = product
         self.billing = billing
 
