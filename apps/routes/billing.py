@@ -80,7 +80,7 @@ def create_billing(user=None):
         listaDetalle = request.form.get('listaDetalle')
         listaDetalle = json.loads(listaDetalle)
         for row in listaDetalle:
-            add_detail = BillingDetail(quantity=int(quantity.text), description=description.text, unit_price=float(unit_price.text), total_price=float(total_price.text),product=product,billing=billing)
+            add_detail = BillingDetail(product=product,billing=billing)
             session.add(add_detail)
         # Confirmar los cambios en la base de datos       
         db.session.commit()
