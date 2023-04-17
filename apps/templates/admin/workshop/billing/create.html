@@ -5,6 +5,7 @@
 
 
 {% block content %}
+
 <!-- Page Heading -->
 <div class="d-sm-flex justify-content-end mb-4">
     <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Facturación</h1>
@@ -12,6 +13,19 @@
         <i class="fas fa-list"></i>
     </a>
 </div>
+
+<script>
+    // Función para agregar una nueva fila a la tabla de detalles
+    function agregarDetalle() {
+        var fila = '<tr>' +
+            '<td><input type="text" name="detalle" required></td>' +
+            '<td><input type="number" name="cantidad" required></td>' +
+            '<td><input type="number" name="precio_unitario" required></td>' +
+            '</tr>';
+        $('#tabla-detalles').append(fila);
+    }
+</script>
+
 <!-- Content Row -->
 <div class="card o-hidden border-0 shadow-lg my-5">
     <div class="card-body p-0">
@@ -21,114 +35,35 @@
                 <div class="p-5">
                     <div class="text-left">
                         <h3 class="text-gray-900 mb-4">Nueva Factura</h3>
+
                         <form method="post" action="{{url_for('billing.create_billing')}}">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="">Orden de Servicio</label>
-                                    <select id="orders_services_id" name="orders_services_id"
-                                        class="form-control js-example-basic-single">
-                                        <option value="" disabled selected></option>
-                                        <option value="0">Ninguna</option>
-                                        {% for order_service in order_service%}
-                                        <option value="{{order_service.id}}">Orden {{order_service.order_num}}
-                                            "{{order_service.description}}" por
-                                            {{order_service.employee}}
-                                        </option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="company_id">Datos de la Empresa</label>
-                                    <select id="company_id" name="company_id"
-                                        class="form-control rounded-select js-example-basic-single">
-                                        <option value="" disabled selected></option>
-                                        {% for company in companies %}
-                                        <option value="{{ company.id }}">{{ company.trade_name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label for="client_id">Datos del Cliente</label>
-                                    <select id="client_id" name="client_id"
-                                        class="form-control js-example-basic-single">
-                                        <option value="" selected disabled></option>
-                                        <option value="0">Venta Rápida</option>
-                                        {% for customer in customers %}
-                                        <option value="{{customer.id}}">{{customer.first_name}} {{customer.last_name}}
-                                        </option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            </div>
+                            <label for="numero">Número de Factura:</label>
+                            <input type="text" id="numero" name="numero" required>
                             <br>
-                            <!-- Formulario para agregar factura -->
-                            <h3 class="text-gray-900 mb-4">Añadir Productos</h3>
-                            <form id="formDetails" method="get">
-                                <div class="form-row">
-                                    <div class="form-group col-md-2">
-                                        <label for="">Cantidad</label>
-                                        <input type="number" name="quantity" id="quantity"
-                                            oninput="cargarPrecioUnitario()" class="form-control" min="1">
-                                    </div>
-                                    <div class="form-group col-md-5">
-                                        <label for="description">Seleccionar Producto</label>
-                                        <select class="form-control js-example-basic-single" id="product_id"
-                                            name="product_id" onchange="cargarPrecioUnitario()">
-                                            <option value="0" selected disabled></option>
-                                            {% for product in product %}
-                                            <option value="{{ product['id'] }}"
-                                                data-unit-price="{{ product['price'] }}">{{
-                                                product['description'] }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="">Precio Unitario</label>
-                                        <input type="number" name="unit_price" id="unit_price" value="unitPrice"
-                                            class="form-control" readonly>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="">Precio Total</label>
-                                        <input type="number" name="total_price" id="total_price" class="form-control"
-                                            value="totalPrice" readonly>
-                                    </div>
-                                    <div class="form-group col-md-1">
-                                        <a class="btn btn-primary mt-4 form-control" id="agregarProducto"
-                                            onclick="agregarProducto()">Agregar</a>
-                                    </div>
-                                </div>
-                                <br>
-                                <!-- Tabla para mostrar el detalle de factura -->
-                                <h3 class="text-gray-900 mb-4">Detalle de la Factura</h3>
-                                <table id="tabla-productos" class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Cantidad</th>
-                                            <th>ID</th>
-                                            <th>Descripción</th>
-                                            <th>Precio Unitario</th>
-                                            <th>Precio Total</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="bodyTable">
-                                        <!-- Aquí se mostrarán los productos agregados en tiempo real -->
-                                    </tbody>
-                                </table>
-                                <div class="d-flex align-items-end flex-column mb-3">
-                                    <h3 class="p-2 text-gray-900">Total a Pagar</h3>
-                                    <div class="form-group col-md-2">
-                                        <input type="number" name="total" id="total" value="0" class="form-control"
-                                            readonly>
-                                    </div>
-                                </div>
-                                <div class="col-12 text-center">
-                                    <input type="hidden" name="listaDetalle" value="{{listaDetalle}}">
-                                    <button class="btn btn-primary col-6" type="submit">Facturar</button>
-                                </div>
-                            </form>
+                            <label for="fecha">Fecha:</label>
+                            <input type="date" id="fecha" name="fecha" required>
+                            <br>
+                            <label for="detalles">Detalles de Factura:</label>
+                            <table id="tabla-detalles">
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unitario</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="detalle" required></td>
+                                    <td><input type="number" name="cantidad" required></td>
+                                    <td><input type="number" name="precio_unitario" required></td>
+                                </tr>
+                            </table>
+                            <br>
+                            <input type="button" value="Agregar Detalle" onclick="agregarDetalle()">
+                            <!-- Botón para agregar detalle -->
+                            <br>
+                            <input type="submit" value="Crear Factura">
+                        </form>
+
+
                     </div>
                 </div>
             </div>
@@ -136,107 +71,6 @@
     </div>
 </div>
 
-<script>
-    //Enviar datos del detalle a la DB
-    var listaDetalle = [];
-    $('#tabla-productos tbody tr').each(function () {
-        var row = {};
-        $(this).find('td').each(function (index, value) {
-            row['col' + index] = $(value).text();
-        });
-        listaDetalle.push(row);
-    });
-    var jsonData = JSON.stringify(listaDetalle);
-    var form = $('form');
-    form.find('[name="listaDetalle"]').val(jsonData);
 
-    // Variables globales
-    // Función para agregar un producto a la tabla de detalles de factura
-    function agregarProducto() {
-        var quantity = document.getElementById("quantity").value;
-        var selectedProduct = document.getElementById("product_id");
-        var pro_id = document.getElementById("product_id").value;
-        var product_id = selectedProduct.options[selectedProduct.selectedIndex].text;
-        var unitPrice = selectedProduct.options[selectedProduct.selectedIndex].getAttribute("data-unit-price");
-        var total_price = quantity * unitPrice;
-
-        var tableBody = document.getElementById("bodyTable");
-
-        // Buscar si el producto ya existe en la tabla
-        var productExists = false;
-        for (var i = 0; i < tableBody.rows.length; i++) {
-            var row = tableBody.rows[i];
-            var rowDescription = row.cells[2].innerHTML;
-            if (rowDescription === product_id) {
-                // Si el producto ya existe, sumar la cantidad y actualizar el total
-                var existingQuantity = parseInt(row.cells[0].innerHTML);
-                var newQuantity = existingQuantity + parseInt(quantity);
-                row.cells[0].innerHTML = newQuantity;
-                row.cells[4].innerHTML = newQuantity * parseFloat(unitPrice);
-                productExists = true;
-                break;
-            }
-        }
-
-        if (!productExists) {
-            // Si el producto no existe, crear una nue444va fila en la tabla
-            var row = tableBody.insertRow();
-            var cellQuantity = row.insertCell(0);
-            var cellID = row.insertCell(1);
-            var cellDescription = row.insertCell(2);
-            var cellUnitPrice = row.insertCell(3);
-            var cellTotal = row.insertCell(4);
-            var cellActions = row.insertCell(5);
-
-            cellQuantity.innerHTML = quantity;
-            cellID.innerHTML = pro_id;
-            cellDescription.innerHTML = product_id;
-            cellUnitPrice.innerHTML = unitPrice.toString(); // Convertir a cadena de texto
-            cellTotal.innerHTML = total_price;
-            cellActions.innerHTML = "<button class='btn btn-danger' onclick='eliminarProducto(this)'>Eliminar</button>";
-        }
-
-        // Calcular y actualizar el total de factura y total a pagar
-        // Limpiar campos de entrada
-        document.getElementById("quantity").value = "1";
-        document.getElementById("product_id").selectedIndex = 0;
-        document.getElementById("unit_price").value = "";
-        document.getElementById("total_price").value = "";
-    }
-
-    // Función para cargar el precio unitario al seleccionar un producto
-    function cargarPrecioUnitario() {
-        var selectedProduct = document.getElementById("product_id");
-        var unitPrice = selectedProduct.options[selectedProduct.selectedIndex].getAttribute("data-unit-price");
-        document.getElementById("unit_price").value = unitPrice;
-
-        var quantity = document.getElementById("quantity").value;
-        if (quantity < 1) {
-            alert("La cantidad no puede ser menor a 1");
-            document.getElementById("quantity").value = "";
-            return;
-        }
-        var totalPrice = unitPrice * quantity;
-        document.getElementById("total_price").value = totalPrice;
-    }
-
-    function sumarPrecioTotal() {
-        var totalFactura = 0;
-        var filas = document.getElementById("tabla-productos").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-        for (var i = 0; i < filas.length; i++) {
-            var celdaPrecioTotal = filas[i].getElementsByTagName("td")[4]; // Columna del Precio Total
-            var precioTotal = parseFloat(celdaPrecioTotal.innerHTML);
-            totalFactura += precioTotal;
-        }
-        document.getElementById("total").value = totalFactura; // Actualizar el valor del input de "Total de Factura"
-        console.log(totalFactura)
-    }
-
-    // Función para eliminar un producto de la tabla
-    function eliminarProducto(button) {
-        var row = button.parentNode.parentNode;
-        row.parentNode.removeChild(row);
-    }
-</script>
 
 {% endblock %}

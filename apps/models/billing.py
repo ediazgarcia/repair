@@ -67,3 +67,35 @@ class BillingDetail(db.Model):
 
     def __repr__(self):
         return f'Payment: {self.unit_price} {self.quantity}'
+
+# Definir el modelo de Factura
+
+
+class Factura(db.Model):
+    __tablename__ = 'factura'
+    id = db.Column(db.Integer, primary_key=True)
+    numero = db.Column(db.String(20), nullable=False)
+    fecha = db.Column(db.String(10), nullable=False)
+    detalles = db.relationship('DetalleFactura', backref='factura', lazy=True)
+
+    def __init__(self, numero, fecha):
+        self.numero = numero
+        self.fecha = fecha
+
+# Definir el modelo de DetalleFactura
+
+
+class DetalleFactura(db.Model):
+    __tablename__ = 'factura_detalles'
+    id = db.Column(db.Integer, primary_key=True)
+    descripcion = db.Column(db.String(100), nullable=False)
+    cantidad = db.Column(db.Integer, nullable=False)
+    precio_unitario = db.Column(db.Float, nullable=False)
+    factura_id = db.Column(db.Integer, db.ForeignKey(
+        'factura.id'), nullable=False)
+
+    def __init__(self, factura_id, descripcion, cantidad, precio_unitario):
+        self.factura_id = factura_id
+        self.descripcion = descripcion
+        self.cantidad = cantidad
+        self.precio_unitario = precio_unitario
