@@ -46,7 +46,7 @@ class BillingDetail(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     quantity = db.Column(db.Integer, nullable=False)
-    description= db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(100), nullable=False)
     unit_price = db.Column(db.Float, nullable=False)
     total_price = db.Column(db.Numeric(10, 2), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(

@@ -7,7 +7,6 @@ from itertools import count
 from werkzeug.security import generate_password_hash
 
 from sqlalchemy import func
-from bs4 import BeautifulSoup
 
 from apps.models.billing import Billing, BillingDetail
 from apps.models.user import User
@@ -62,11 +61,13 @@ def create_billing(user=None):
         # Fetch los objetos relacionados desde la base de datos
         company = Company.query.filter_by(id=company_id).first()
         client = Customer.query.filter_by(id=client_id).first()
-        orders_services = ServiceOrder.query.filter_by(id=orders_services_id).first()
+        orders_services = ServiceOrder.query.filter_by(
+            id=orders_services_id).first()
         # payments = ServiceOrder.query.filter_by(id=payments_id).first()
 
         # Crear una instancia de la clase Billing
-        billing = Billing(order_num=order_num, total=total,company=company, client=client,orders_services=orders_services)
+        billing = Billing(order_num=order_num, total=total, company=company,
+                          client=client, orders_services=orders_services)
 
         # Guardar la factura en la base de datos
         db.session.add(billing)
@@ -74,25 +75,22 @@ def create_billing(user=None):
 
         # Obtener id de la ultima factura
         max_id = db.session.query(func.max(Billing.id)).scalar()
-        billing_id=max_id
+        billing_id = max_id
         billing = Billing.query.filter_by(id=billing_id).first()
 
-        listaDetalle = request.form.get('listaDetalle')
-        listaDetalle = json.loads(listaDetalle)
-        for row in listaDetalle:
-            add_detail = BillingDetail(product=product,billing=billing)
-            session.add(add_detail)
-        # Confirmar los cambios en la base de datos       
+        # Confirmar los cambios en la base de datos
         db.session.commit()
         flash('¡Factura emitida con éxito!')
-        return redirect(url_for('billing.create_billing')) 
+        return redirect(url_for('billing.create_billing'))
+
     billings = Billing.query.all()
     billing_detail = BillingDetail.query.all()
     customers = Customer.query.all()
     companies = Company.query.all()
     order_service = ServiceOrder.query.all()
     # payments = Payments.query.all()
-    product = db.session.query(Product).join(Inventory).filter(Inventory.set_stock>Inventory.min_stock).all()
+    product = db.session.query(Product).join(Inventory).filter(
+        Inventory.set_stock > Inventory.min_stock).all()
     if g.role == 'Administrador':
         return render_template('admin/workshop/billing/create.html', billings=billings, billing_detail=billing_detail,
                                customers=customers, companies=companies, order_service=order_service, product=product)
