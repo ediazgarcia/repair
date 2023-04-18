@@ -33,7 +33,7 @@ billing = Blueprint('billing', __name__, url_prefix='/billing')
 # función para verificar el rol del usuario
 @set_role
 def get_billing(user=None):
-    factura=Factura.query.all()
+    factura = Factura.query.all()
     if g.role == 'Administrador':
         return render_template('admin/workshop/billing/list.html', factura=factura)
     else:
@@ -43,6 +43,7 @@ def get_billing(user=None):
 # Crear un contador que inicie en 100
 order_num_counter = count(start=100)
 
+
 @billing.route("/create", methods=['GET', 'POST'])
 @set_role
 def create_billing(user=None):
@@ -50,10 +51,11 @@ def create_billing(user=None):
         company_id = request.form['company_id']
         client_id = request.form['client_id']
         orders_services_id = request.form['orders_services_id']
-        #order_num = "FT-" + str(next(order_num_counter))
+        # order_num = "FT-" + str(next(order_num_counter))
         company = Company.query.filter_by(id=company_id).first()
         client = Customer.query.filter_by(id=client_id).first()
-        orders_services= ServiceOrder.query.filter_by(id=orders_services_id).first()
+        orders_services = ServiceOrder.query.filter_by(
+            id=orders_services_id).first()
         # Obtener una lista de los valores del campo "detalle"
         detalles = request.form.getlist('detalle')
         # Obtener una lista de los valores del campo "cantidad"
@@ -70,31 +72,32 @@ def create_billing(user=None):
                 pass
         total = sum(subtotal)
 
-        factura = Factura(total=total,order_num=None,company=company, client=client,orders_services=orders_services)
+        factura = Factura(total=total, order_num=None, company=company,
+                          client=client, orders_services=orders_services)
 
         db.session.add(factura)
         db.session.commit()
-        
-        #Añadir orden de servicio al detalle factura
-        #if orders_services_id != None:
-            #orders_services_id=factura.orders_services_id
-            #product_id=ServiceOrder.product
-            #factura_id = factura.id
-            #cantidad=1
-            #precio_unitario=Product.price
-            #precio_total=precio_unitario
-            #detalle_factura = DetalleFactura(
-            #factura_id=factura_id, producto_id=product_id, cantidad=cantidad, precio_unitario=precio_unitario, precio_total=precio_total)
-            #db.session.add(detalle_factura)
+
+        # Añadir orden de servicio al detalle factura
+        # if orders_services_id != None:
+        # orders_services_id=factura.orders_services_id
+        # product_id=ServiceOrder.product
+        # factura_id = factura.id
+        # cantidad=1
+        # precio_unitario=Product.price
+        # precio_total=precio_unitario
+        # detalle_factura = DetalleFactura(
+        # factura_id=factura_id, producto_id=product_id, cantidad=cantidad, precio_unitario=precio_unitario, precio_total=precio_total)
+        # db.session.add(detalle_factura)
 
         # Procesar los detalles de la factura
         for i in range(len(detalles)):
             factura_id = factura.id
             product_id = detalles[i]
             cantidad = cantidades[i]
-            #cantidad_inv = int(cantidades[i])
+            # cantidad_inv = int(cantidades[i])
             precio_unitario = precios_unitarios[i]
-            precio_total = precios_totales[i] 
+            precio_total = precios_totales[i]
 
             detalle_factura = DetalleFactura(
                 factura_id=factura_id, producto_id=product_id, cantidad=cantidad, precio_unitario=precio_unitario, precio_total=precio_total)
@@ -104,7 +107,7 @@ def create_billing(user=None):
 
         flash('Factura creada exitosamente')
         return redirect(url_for('billing.ready_billing'))
-    
+
     customers = Customer.query.all()
     companies = Company.query.all()
     order_service = ServiceOrder.query.all()
@@ -116,7 +119,8 @@ def create_billing(user=None):
     else:
         return render_template('views/workshop/billing/create.html',
                                customers=customers, companies=companies, order_service=order_service, product=product)
-    
+
+
 @billing.route("/done")
 # función para verificar el rol del usuario
 @set_role
@@ -126,36 +130,40 @@ def ready_billing(user=None):
         return render_template('admin/workshop/billing/done.html')
     else:
         return render_template('views/workshop/billing/done.html')
-    
+
 # Delete
-@billing.route("/delete/<id>", methods=["GET"])
+
+
+@billing.route("/delete/<int:id>", methods=["GET"])
 @set_role
 def delete_billing(id, user=None):
-    factura = Factura.query.get(id)
+    facturas = Factura.query.get(id)
 
-    if not factura:
+    if not facturas:
         flash('Factura no encontrada', category='error')
         return redirect(url_for('billing.get_billing'))
 
     try:
-        # Obtener la clave foránea de la factura
+        # Obtener los registros relacionados en la tabla vehicle_reception_details
+        factura_detalles = DetalleFactura.query.filter_by(
+            factura_id=id).all()
 
-        # Buscar todos los registros relacionados con esa clave foránea
-        eliminar_detalles = DetalleFactura.query.filter_by(factura_id=factura).all()
+        # Eliminar los registros en la tabla vehicle_reception_details
+        for factura_detalle in factura_detalles:
+            db.session.delete(factura_detalle)
 
-        # Eliminar cada uno de los registros relacionados
-        for registro in eliminar_detalles:
-            db.session.delete(registro)
-        # Eliminar el registro principal
-        db.session.delete(factura)
+        # Confirmar los cambios en la base de datos
+        db.session.commit()
 
-        # Guardar los cambios en la base de datos
+        # Eliminar la recepción de vehículo
+        db.session.delete(facturas)
         db.session.commit()
 
         flash('¡factura eliminada con éxito!')
         return redirect(url_for('billing.get_billing'))
 
     except Exception as err:
-        flash(f'Error al eliminar la factura: {str(err)} {str (factura)}', category='error')
+        db.session.rollback()  # Deshacer los cambios en caso de error
+        flash(
+            f'Error al eliminar la factura:: {str(err)}', category='error')
         return redirect(url_for('billing.get_billing'))
-
