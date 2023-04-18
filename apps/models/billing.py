@@ -42,6 +42,7 @@ class DetalleFactura(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey(
         'products.id'), nullable=False)
+    product = db.relationship('Product', backref=db.backref('factura_detalles', lazy=True))
     cantidad = db.Column(db.Integer, nullable=False)
     precio_unitario = db.Column(db.Float, nullable=False)
     precio_total = db.Column(db.Float, nullable=False)

@@ -32,6 +32,7 @@ class ShoppingDetail(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey(
         'products.id'), nullable=False)
+    product = db.relationship('Product', backref=db.backref('shoppings_details', lazy=True))
     quantity = db.Column(db.Integer, nullable=False)
     unt_cost = db.Column(db.Float, nullable=False)
     total_cost = db.Column(db.Float, nullable=False)

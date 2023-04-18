@@ -40,10 +40,11 @@
                         <td>{{shopping.total}}</td>
                         <td>{{shopping.created}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary">
+                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('shopping.print_shopping', id=shopping.id) }}'">
                                 <i class="fa fa-print"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger">
+                            <button class="btn btn-sm btn-danger"
+                                onclick="location.href='{{ url_for('shopping.delete_shopping', id=shopping.id) }}'">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

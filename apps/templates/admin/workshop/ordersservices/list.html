@@ -1,14 +1,14 @@
 {% extends 'layout.html' %}
 {% set current_page = 'Taller' %}
-<h2>{% block title %}Historial de Asignación de Servicios{% endblock %}</h2>
+<h2>{% block title %}Historial de Órdenes de Servicios{% endblock %}</h2>
 
 {% block content %}
 <!-- Page Heading -->
-<h1 class="h1 mb-0 text-gray-800 d-flex">Asignación de Servicios</h1>
+<h1 class="h1 mb-0 text-gray-800 d-flex">Órdenes de Servicios</h1>
 <br>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url_for('orders_services.create_orders_services')}}">Asignación de
+        <li class="breadcrumb-item"><a href="{{url_for('orders_services.create_orders_services')}}">Órdenes de
                 Servicios</a></li>
         <li class="breadcrumb-item active" aria-current="page">Historial de Asignaciones</li>
     </ol>
@@ -18,11 +18,11 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-5">
     <div class="card-header py-2">
-        <h3 class="text-gray-900 mb-4">Historial de Asignación de Servicios</h3>
+        <h3 class="text-gray-900 mb-4">Historial de Órdenes de Servicios</h3>
     </div>
     <div class="card-body table-custom">
         <div class="table-responsive">
-            <blockquote>Pulsa en "Editar" en la asinación deseada para ver más información.</blockquote>
+            <blockquote>Pulsa en "Editar" en la órden deseada para ver más información.</blockquote>
             <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
