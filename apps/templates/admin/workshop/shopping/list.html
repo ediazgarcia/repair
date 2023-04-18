@@ -21,39 +21,29 @@
     </div>
     <div class="card-body table-custom">
         <div class="table-responsive">
-            <blockquote>Pulsa en "Editar" en la compra deseada para ver más información.</blockquote>
+            <blockquote>Pulsa en "Imprimir" en la compra deseada para ver más información.</blockquote>
             <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>No. de Compra</th>
                         <th>Proveedor</th>
-                        <th>Descripción</th>
-                        <th>Sub-Total</th>
-                        <th>ITBIS</th>
-                        <th>Descuento</th>
                         <th>Total</th>
                         <th>Creada</th>
-                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for assigments in assigments%}
+                    {% for shopping in shopping%}
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{shopping.orden_num}}</td>
+                        <td>{{shopping.provider}}</td>
+                        <td>{{shopping.total}}</td>
+                        <td>{{shopping.created}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('vehicle.update_vehicle', id=vehicle.id) }}'">
-                                <i class="fa fa-edit"></i>
+                            <button class="btn  btn-sm btn-primary">
+                                <i class="fa fa-print"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('vehicle.delete_vehicle', id=vehicle.id) }}'">
+                            <button class="btn btn-sm btn-danger">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
