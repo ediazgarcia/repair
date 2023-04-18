@@ -1,19 +1,13 @@
 
 from flask import (render_template, Blueprint, flash, g,
-                   redirect, request, session, url_for, jsonify)
+                   redirect, request, session, url_for, jsonify,Response)
 
 from flask import json
 # Importar el contador
 from itertools import count
 from werkzeug.security import generate_password_hash
 
-from reportlab.lib.pagesizes import letter
-from reportlab.lib import colors
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib.units import inch
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
-
-from sqlalchemy import func, MetaData, Table, select
+from sqlalchemy import func, MetaData, Table, select, engine
 
 from apps.models.billing import Factura, DetalleFactura
 from apps.models.user import User
@@ -25,6 +19,10 @@ from apps.models.inventory import Inventory
 from apps.models.orders_services import ServiceOrder
 from apps import db
 from .auth import set_role
+
+from io import BytesIO
+from reportlab.pdfgen import canvas
+
 
 billing = Blueprint('billing', __name__, url_prefix='/billing')
 
@@ -38,7 +36,6 @@ def get_billing(user=None):
         return render_template('admin/workshop/billing/list.html', factura=factura)
     else:
         return render_template('views/workshop/billing/list.html', factura=factura)
-
 
 # Crear un contador que inicie en 100
 order_num_counter = count(start=100)
@@ -125,11 +122,11 @@ def create_billing(user=None):
 # función para verificar el rol del usuario
 @set_role
 def ready_billing(user=None):
-
+    ultimo_id = Factura.query.order_by(db.desc(Factura.id)).first().id
     if g.role == 'Administrador':
-        return render_template('admin/workshop/billing/done.html')
+        return render_template('admin/workshop/billing/done.html',ultimo_id=ultimo_id)
     else:
-        return render_template('views/workshop/billing/done.html')
+        return render_template('views/workshop/billing/done.html',ultimo_id=ultimo_id)
 
 # Delete
 
@@ -144,11 +141,11 @@ def delete_billing(id, user=None):
         return redirect(url_for('billing.get_billing'))
 
     try:
-        # Obtener los registros relacionados en la tabla vehicle_reception_details
+        # Obtener los registros relacionados en la tabla de los detalles
         factura_detalles = DetalleFactura.query.filter_by(
             factura_id=id).all()
 
-        # Eliminar los registros en la tabla vehicle_reception_details
+        # Eliminar los registros en la tabla de los detalles
         for factura_detalle in factura_detalles:
             db.session.delete(factura_detalle)
 
@@ -159,7 +156,7 @@ def delete_billing(id, user=None):
         db.session.delete(facturas)
         db.session.commit()
 
-        flash('¡factura eliminada con éxito!')
+        flash('¡Factura eliminada con éxito!')
         return redirect(url_for('billing.get_billing'))
 
     except Exception as err:
@@ -167,3 +164,50 @@ def delete_billing(id, user=None):
         flash(
             f'Error al eliminar la factura:: {str(err)}', category='error')
         return redirect(url_for('billing.get_billing'))
+
+
+@billing.route("/print/<int:id>", methods=["GET"])
+@set_role
+def print_billing(id, user=None):
+    factura = Factura.query.get(id)
+    detalles = DetalleFactura.query.filter_by(factura_id=id).all()
+
+    # Crear el documento PDF utilizando ReportLab
+    buffer = BytesIO()
+    pdf = canvas.Canvas(buffer)
+
+    # Agregar la información de la factura al documento
+    pdf.drawString(270, 750, f'{factura.company}')
+    pdf.drawString(275, 725, 'Factura')
+    pdf.drawString(60, 700, f'{factura.order_num}')
+    pdf.drawString(60, 675, f'Cliente: {factura.client}')
+
+    # Agregar los detalles de la factura al documento
+    pdf.drawString(60, 630, 'Descripción')
+    pdf.drawString(300, 630, 'Cantidad')
+    pdf.drawString(380, 630, 'Precio Unitario')
+    pdf.drawString(480, 630, 'Precio Total')
+    y = 600
+    for detalle in detalles:
+        product = detalle.product
+        cantidad = detalle.cantidad
+        precio_unitario = detalle.precio_unitario
+        precio_total = detalle.precio_total
+        pdf.drawString(300, y, f'{cantidad}')
+        pdf.drawString(60, y, f'{product}')
+        pdf.drawString(380, y, f'{precio_unitario}')
+        pdf.drawString(480, y, f'{precio_total}')
+        y -= 30
+
+    pdf.drawString(400, 200, f'Total a Pagar: {factura.total}')
+    pdf.drawString(250, 80, 'Gracias por preferirnos!')
+
+    # Guardar y cerrar el documento
+    pdf.showPage()
+    pdf.save()
+
+    # Generar la respuesta con el PDF generado
+    buffer.seek(0)
+    response = Response(buffer.getvalue(), mimetype='application/pdf')
+    response.headers['Content-Disposition'] = f'inline; filename=factura_{factura.id}.pdf'
+    return response

@@ -1,7 +1,8 @@
 {% extends 'layout.html' %}
 {% set current_page = 'Taller' %}
+context = {'ultimo_id': ultimo_id}
 <h2>{% block title %}Facturación{% endblock %}</h2>
-<!-- <script src="{{url_for('static', filename='js/billing.js')}}"></script> -->
+
 
 
 {% block content %}
@@ -30,7 +31,7 @@
                     <div class="col-12 text-center">
                         <img src="{{url_for('static', filename='img/check.png')}}" alt="" width="150">
                         <h1 class="mb-4">Factura Emitida</h1>
-                        <a href="" class="btn btn-primary col-2 rounded-button">Imprimir Factura</a>
+                        <a href="{{ url_for('billing.print_billing', id=ultimo_id) }}" class="btn btn-primary col-2 rounded-button">Imprimir Factura</a>
                         <a href="{{url_for('billing.create_billing')}}" class="btn btn-secondary col-2 rounded-button">Volver a Facturación</a>
                     </div>
                 </div>

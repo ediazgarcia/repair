@@ -1,5 +1,5 @@
 from flask import (
-    render_template, Blueprint, flash, g, redirect, request, session, url_for
+    render_template, Blueprint, flash, g, redirect, request, session, url_for, Response
 )
 
 from werkzeug.security import generate_password_hash
@@ -13,6 +13,9 @@ from apps.models.shopping import Shopping, ShoppingDetail
 from apps.models.provider import Provider
 from apps.models.products import Product
 from apps.models.inventory import Inventory
+
+from io import BytesIO
+from reportlab.pdfgen import canvas
 
 shopping = Blueprint('shopping', __name__, url_prefix='/shopping')
 
@@ -56,7 +59,7 @@ def create_shopping(user=None):
 
         db.session.add(new_shopping)
         db.session.commit()
-        # Procesar los detalles de la factura
+        # Procesar los detalles de la compra
         for i in range(len(detalles)):
             shopping_id = new_shopping.id
             product_id = detalles[i]
@@ -83,8 +86,87 @@ def create_shopping(user=None):
 # función para verificar el rol del usuario
 @set_role
 def ready_shopping(user=None):
-
+    ultimo_id = Shopping.query.order_by(db.desc(Shopping.id)).first().id
     if g.role == 'Administrador':
-        return render_template('admin/workshop/shopping/done.html')
+        return render_template('admin/workshop/shopping/done.html',ultimo_id=ultimo_id)
     else:
-        return render_template('views/workshop/shopping/done.html')
+        return render_template('views/workshop/shopping/done.html',ultimo_id=ultimo_id)
+    
+@shopping.route("/delete/<int:id>", methods=["GET"])
+@set_role
+def delete_shopping(id, user=None):
+    shoppings = Shopping.query.get(id)
+
+    if not shoppings:
+        flash('Compra no encontrada', category='error')
+        return redirect(url_for('shopping.get_shopping'))
+
+    try:
+        # Obtener los registros relacionados en la tabla de los detalles
+        shoppings_details = ShoppingDetail.query.filter_by(
+            shopping_id=id).all()
+
+        # Eliminar los registros en la tabla de los detalles
+        for shopping_detail in shoppings_details:
+            db.session.delete(shopping_detail)
+
+        # Confirmar los cambios en la base de datos
+        db.session.commit()
+
+        # Eliminar la recepción de vehículo
+        db.session.delete(shoppings)
+        db.session.commit()
+
+        flash('¡Compra eliminada con éxito!')
+        return redirect(url_for('shopping.get_shopping'))
+
+    except Exception as err:
+        db.session.rollback()  # Deshacer los cambios en caso de error
+        flash(
+            f'Error al eliminar la compra: {str(err)}', category='error')
+        return redirect(url_for('shopping.get_shopping'))
+    
+@shopping.route("/print/<int:id>", methods=["GET"])
+@set_role
+def print_shopping(id, user=None):
+    shopping = Shopping.query.get(id)
+    detalles = ShoppingDetail.query.filter_by(shopping_id=id).all()
+
+    # Crear el documento PDF utilizando ReportLab
+    buffer = BytesIO()
+    pdf = canvas.Canvas(buffer)
+
+    # Agregar la información de la factura al documento
+    pdf.drawString(270, 750, f'{shopping.company}')
+    pdf.drawString(275, 725, 'Compra')
+    pdf.drawString(60, 700, f'{shopping.order_num}')
+    pdf.drawString(60, 675, f'Proveedor: {shopping.provider}')
+
+    # Agregar los detalles de la factura al documento
+    pdf.drawString(60, 630, 'Descripción')
+    pdf.drawString(300, 630, 'Cantidad')
+    pdf.drawString(380, 630, 'Costo Unitario')
+    pdf.drawString(480, 630, 'Costo Total')
+    y = 600
+    for detalle in detalles:
+        product = detalle.product
+        quantity = detalle.quantity
+        unt_cost = detalle.unt_cost
+        total_cost = detalle.total_cost
+        pdf.drawString(300, y, f'{quantity}')
+        pdf.drawString(60, y, f'{product}')
+        pdf.drawString(380, y, f'{unt_cost}')
+        pdf.drawString(480, y, f'{total_cost}')
+        y -= 30
+
+    pdf.drawString(400, 200, f'Total de la Compra: {shopping.total}')
+
+    # Guardar y cerrar el documento
+    pdf.showPage()
+    pdf.save()
+
+    # Generar la respuesta con el PDF generado
+    buffer.seek(0)
+    response = Response(buffer.getvalue(), mimetype='application/pdf')
+    response.headers['Content-Disposition'] = f'inline; filename=compra_{shopping.id}.pdf'
+    return response
