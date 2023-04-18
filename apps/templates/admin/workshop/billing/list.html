@@ -21,39 +21,32 @@
     </div>
     <div class="card-body table-custom">
         <div class="table-responsive">
-            <blockquote>Pulsa en "Editar" en la factura deseada para ver más información.</blockquote>
+            <blockquote>Pulsa en "Imprimir" en la factura deseada para ver más información.</blockquote>
             <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>No. de factura</th>
                         <th>Cliente</th>
-                        <th>Tipo de Factura</th>
-                        <th>Sub-Total</th>
-                        <th>ITBIS</th>
-                        <th>Descuento</th>
                         <th>Total</th>
+                        <th>No. de Orden</th>
                         <th>Creada</th>
-                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for assigments in assigments%}
+                    {% for factura in factura%}
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{factura.orden_num}}</td>
+                        <td>{{factura.client|default('Venta Rápida',true)}}</td>
+                        <td>{{factura.total}}</td>
+                        <td>{{factura.order_services|default('Ninguna',true)}}</td>
+                        <td>{{factura.created}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('vehicle.update_vehicle', id=vehicle.id) }}'">
-                                <i class="fa fa-edit"></i>
+                            <button class="btn  btn-sm btn-primary">
+                                <i class="fa fa-print"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('vehicle.delete_vehicle', id=vehicle.id) }}'">
+                            onclick="location.href='{{ url_for('billing.delete_billing', id=factura.id) }}'">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

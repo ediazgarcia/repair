@@ -2,32 +2,30 @@ from datetime import datetime
 from apps import db
 from .company import Company
 from .client import Customer
-from .employee import Employee
 from .orders_services import ServiceOrder
-
-
 from .products import Product
 
+# Definir el modelo de Factura
 
-class Billing(db.Model):
-    __tablename__ = 'billings'
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+class Factura(db.Model):
+    __tablename__ = 'factura'
+    id = db.Column(db.Integer, primary_key=True)
     order_num = db.Column(db.String(20), unique=True)
-    total = db.Column(db.Numeric(10, 2), nullable=False)
+    total = db.Column(db.Numeric(10, 2))
     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow,)
     company_id = db.Column(db.Integer, db.ForeignKey(
         'companies.id', onupdate='RESTRICT', ondelete='CASCADE'))
     company = db.relationship(
-        'Company', backref=db.backref('billings', lazy=True))
+        'Company', backref=db.backref('factura', lazy=True))
     client_id = db.Column(db.Integer, db.ForeignKey(
         'customers.id', onupdate='RESTRICT', ondelete='CASCADE'))
     client = db.relationship(
-        'Customer', backref=db.backref('billings', lazy=True))
+        'Customer', backref=db.backref('factura', lazy=True))
     orders_services_id = db.Column(db.Integer, db.ForeignKey(
         'services_orders.id', onupdate='RESTRICT', ondelete='CASCADE'))
     orders_services = db.relationship(
-        'ServiceOrder', backref=db.backref('billings', lazy=True))
+        'ServiceOrder', backref=db.backref('factura', lazy=True))
+    detalles = db.relationship('DetalleFactura', backref='factura', lazy=True)
 
     def __init__(self, order_num, total, company, client, orders_services):
         self.order_num = order_num
@@ -37,65 +35,21 @@ class Billing(db.Model):
         self.client = client
         self.orders_services = orders_services
 
-    def __repr__(self):
-        return f'Factura {self.order_num}'
-
-
-class BillingDetail(db.Model):
-    __tablename__ = 'billings_details'
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    quantity = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(100), nullable=False)
-    unit_price = db.Column(db.Float, nullable=False)
-    total_price = db.Column(db.Numeric(10, 2), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey(
-        'products.id', onupdate='RESTRICT', ondelete='CASCADE'))
-    product = db.relationship(
-        'Product', backref=db.backref('billings_details', lazy=True))
-    billing_id = db.Column(db.Integer, db.ForeignKey(
-        'billings.id'), nullable=False)
-    billing = db.relationship(
-        'Billing', backref=db.backref('billings_details', lazy=True))
-
-    def __init__(self, unit_price, quantity, total_price, product, billing):
-        self.unit_price = unit_price
-        self.quantity = quantity
-        self.total_price = total_price
-        self.product = product
-        self.billing = billing
-
-    def __repr__(self):
-        return f'Payment: {self.unit_price} {self.quantity}'
-
-# Definir el modelo de Factura
-
-
-class Factura(db.Model):
-    __tablename__ = 'factura'
-    id = db.Column(db.Integer, primary_key=True)
-    numero = db.Column(db.String(20), nullable=False)
-    fecha = db.Column(db.String(10), nullable=False)
-    detalles = db.relationship('DetalleFactura', backref='factura', lazy=True)
-
-    def __init__(self, numero, fecha):
-        self.numero = numero
-        self.fecha = fecha
-
 # Definir el modelo de DetalleFactura
-
 
 class DetalleFactura(db.Model):
     __tablename__ = 'factura_detalles'
     id = db.Column(db.Integer, primary_key=True)
-    descripcion = db.Column(db.String(100), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        'products.id'), nullable=False)
     cantidad = db.Column(db.Integer, nullable=False)
     precio_unitario = db.Column(db.Float, nullable=False)
-    factura_id = db.Column(db.Integer, db.ForeignKey(
-        'factura.id'), nullable=False)
+    precio_total = db.Column(db.Float, nullable=False)
+    factura_id = db.Column(db.Integer, db.ForeignKey('factura.id'), nullable=False)
 
-    def __init__(self, factura_id, descripcion, cantidad, precio_unitario):
+    def __init__(self, factura_id, cantidad, precio_unitario, precio_total, producto_id):
         self.factura_id = factura_id
-        self.descripcion = descripcion
+        self.product_id=producto_id
         self.cantidad = cantidad
         self.precio_unitario = precio_unitario
+        self.precio_total=precio_total
