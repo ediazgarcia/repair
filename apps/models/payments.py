@@ -15,4 +15,4 @@ class Payments(db.Model):
         self.type = type
 
     def __repr__(self):
-        return f'Payment: {self.description}'
+        return f'{self.description}'

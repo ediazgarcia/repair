@@ -9,7 +9,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex justify-content-end mb-4">
     <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Facturación</h1>
-    <a href="{{url_for('billing.get_billing')}}" class="btn btn-primary btn-circle btn-lg m-1">
+    <a href="{{url_for('billing.get_billing')}}" class="btn btn-primary btn-circle btn-lg m-1" title="Ver Historial de Facturas">
         <i class="fas fa-list"></i>
     </a>
 </div>
@@ -97,10 +97,21 @@
                                 </tr>
                             </table>
                             <br>
-                            <input type="button" value="Agregar Producto" class="btn btn-primary"
+                            <input type="button" value="Agregar Producto" class="btn btn-primary rounded-button"
                                 onclick="agregarDetalle()">
                             <!-- Botón para agregar detalle -->
                             <br>
+                            <br>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="payments_id">Tipo de Pago</label>
+                                    <select name="payments_id" class="form-control">
+                                        {% for payments in payments%}
+                                        <option value="{{payments.id}}">{{payments.description}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-12 text-center">
                                 <input type="submit" class="btn btn-primary col-6 rounded-button" value="Facturar">
                             </div>

@@ -4,8 +4,12 @@
 
 {% block content %}
 <!-- Page Heading -->
-<h1 class="h1 mb-0 text-gray-800 d-flex">Recepción de Vehículos</h1>
-<br>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Recepción de Vehículos</h1>
+    <a href="{{url_for('vehicle_reception.create_vehicle_reception')}}" class="btn btn-primary btn-circle btn-lg ml-auto" title="Nueva Recepción de Vehículo">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+</div>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url_for('vehicle_reception.create_vehicle_reception')}}">Recepción de

@@ -27,7 +27,7 @@ def get_inventory(user=None):
 @inventory.route("/create", methods=['GET', 'POST'])
 @set_role
 def create_inventory(user=None):
-    products = Product.query.all()
+    products = Product.query.filter(Product.type=='Producto').filter(Product.status=='Activo').all()
 
     if request.method == "POST":
             min_stock = request.form['min_stock']

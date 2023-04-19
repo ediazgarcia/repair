@@ -67,8 +67,8 @@ def create_orders_services(user=None):
         flash(f'Error inesperado: {str(err)}', category='error')
 
     vehicle_reception = VehicleReception.query.all()
-    product = Product.query.all()
-    employee = Employee.query.all()
+    product = Product.query.filter(Product.type=="Servicio").filter(Product.status=="Activo").all()
+    employee = Employee.query.filter(Employee.position=="Mecánico").all()
     if g.role == 'Administrador':
         return render_template('admin/workshop/ordersservices/create.html', orders_services=orders_services, employee=employee, product=product, vehicle_reception=vehicle_reception)
     else:
