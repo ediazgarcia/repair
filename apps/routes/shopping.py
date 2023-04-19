@@ -60,11 +60,11 @@ def create_shopping(user=None):
         # Generar un nuevo número de orden
         # Crear un contador que inicie en 100
         order_num_counter_service = count(start=100)
-        order_num = "C-" + str(next(order_num_counter_service))
+        order_num = "CM-" + str(next(order_num_counter_service))
 
         # Verificar si el número de orden ya existe en la base de datos
         while Shopping.numero_orden_existe_en_bd(order_num):
-            order_num = "C-" + str(next(order_num_counter_service))
+            order_num = "CM-" + str(next(order_num_counter_service))
 
         new_shopping = Shopping(
             total=total, order_num=order_num, company=company, provider=provider)
