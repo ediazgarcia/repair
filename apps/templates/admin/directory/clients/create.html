@@ -4,7 +4,12 @@
 
 {% block content %}
 <!-- Page Heading -->
-<h1 class="h1 mb-0 text-gray-800 d-flex">Clientes</h1>
+<div class="d-sm-flex justify-content-end mb-4">
+  <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Clientes</h1>
+  <a href="{{url_for('client.get_client')}}" class="btn btn-primary btn-circle btn-lg m-1" title="Ver Todos los Clientes">
+      <i class="fas fa-list"></i>
+  </a>
+</div>
 <br>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -75,7 +80,7 @@
               <div class="form-group col-md-6">
                 <label for="company_id">Empresa</label>
                 <select id="company_id" name="company_id" class="form-control rounded-select">
-                  <option value="" disabled selected>Seleccionar empresa</option>
+                  <option value="" disabled selected></option>
                   {% for company in companies %}
                   <option value="{{ company.id }}">{{ company.trade_name }}</option>
                   {% endfor %}

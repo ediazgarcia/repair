@@ -4,8 +4,12 @@
 
 {% block content %}
 <!-- Page Heading -->
-<h1 class="h1 mb-0 text-gray-800 d-flex">Empleados</h1>
-<br>
+<div class="d-sm-flex justify-content-end mb-4">
+  <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Empleados</h1>
+  <a href="{{url_for('employee.get_employee')}}" class="btn btn-primary btn-circle btn-lg m-1" title="Ver Todos los Empleados">
+      <i class="fas fa-list"></i>
+  </a>
+</div>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{url_for('employee.get_employee')}}">Empleados</a></li>

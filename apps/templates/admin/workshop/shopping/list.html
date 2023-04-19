@@ -4,11 +4,16 @@
 
 {% block content %}
 <!-- Page Heading -->
-<h1 class="h1 mb-0 text-gray-800 d-flex">Compras</h1>
-<br>
+<h1 class="h1 mb-0 text-gray-800 d-flex"></h1>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Compras</h1>
+    <a href="{{url_for('shopping.create_shopping')}}" class="btn btn-primary btn-circle btn-lg ml-auto" title="Nueva Compra">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+</div>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url_for('billing.create_billing')}}">Compras</a></li>
+        <li class="breadcrumb-item"><a href="{{url_for('shopping.create_shopping')}}">Compras</a></li>
         <li class="breadcrumb-item active" aria-current="page">Historial de Compras</li>
     </ol>
 </nav>

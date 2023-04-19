@@ -98,7 +98,7 @@ def create_employee(user=None):
             return redirect(url_for('employee.create_employee'))
 
     companies = Company.query.all()
-    users = User.query.all()
+    users = User.query.filter(User.active).all()
 
     if g.role == 'Administrador':
         return render_template('admin/directory/employees/create.html', companies=companies, users=users, employee=employee)
@@ -169,7 +169,7 @@ def update_employee(id, user=None):
             return redirect(url_for('employee.update_employee', id=id))
 
     companies = Company.query.all()
-    users = User.query.all()
+    users = User.query.filter(User.active).all()
 
     if g.role == 'Administrador':
         return render_template('admin/directory/employees/update.html', employee=employee, companies=companies, users=users)

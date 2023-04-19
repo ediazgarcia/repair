@@ -16,6 +16,7 @@ from apps.models.company import Company
 from apps.models.employee import Employee
 from apps.models.products import Product
 from apps.models.inventory import Inventory
+from apps.models.payments import Payments
 from apps.models.orders_services import ServiceOrder
 from apps import db
 from .auth import set_role
@@ -48,7 +49,9 @@ def create_billing(user=None):
         company_id = request.form['company_id']
         client_id = request.form['client_id']
         orders_services_id = request.form['orders_services_id']
+        payments_id = request.form['payments_id']
         # order_num = "FT-" + str(next(order_num_counter))
+        payments = Payments.query.filter_by(id=payments_id).first()
         company = Company.query.filter_by(id=company_id).first()
         client = Customer.query.filter_by(id=client_id).first()
         orders_services = ServiceOrder.query.filter_by(
@@ -78,11 +81,31 @@ def create_billing(user=None):
         while Factura.numero_orden_existe_en_bd(order_num):
             order_num = "FT-" + str(next(order_num_counter_service))
 
-        factura = Factura(order_num=order_num, client=client, total=total, orders_services=orders_services, company=company,
-                          )
+        factura = Factura(order_num=order_num, client=client, total=total, orders_services=orders_services, company=company, payments=payments)
 
         db.session.add(factura)
         db.session.commit()
+
+        #Añadir orden de serivicio al detalle
+        #if orders_services_id != None:
+           #orders_services_id=factura.orders_services_id
+           #product_id=ServiceOrder.product
+           #factura_id = factura.id
+           #cantidad=1
+           #precio_unitario=Product.price
+            #precio_total=precio_unitario
+            #detalle_factura = DetalleFactura(
+           #factura_id=factura_id, producto_id=product_id, cantidad=cantidad, precio_unitario=precio_unitario, precio_total=precio_total)
+            #db.session.add(detalle_factura)
+
+        #Actualizar el total de la factura
+        #factura=Factura.query.get(id)
+        #total=total+Product.price
+
+        #db.session.commit()
+
+
+        #detalle_factura=DetalleFactura()
 
         # Procesar los detalles de la factura
         for i in range(len(detalles)):
@@ -103,16 +126,17 @@ def create_billing(user=None):
         return redirect(url_for('billing.ready_billing'))
 
     customers = Customer.query.all()
+    payments= Payments.query.all()
     companies = Company.query.all()
-    order_service = ServiceOrder.query.all()
+    order_service = ServiceOrder.query.filter(ServiceOrder.status=="Finalizada").all()
     product = db.session.query(Product).join(Inventory).filter(
         Inventory.set_stock > Inventory.min_stock).all()
     if g.role == 'Administrador':
         return render_template('admin/workshop/billing/create.html',
-                               customers=customers, companies=companies, order_service=order_service, product=product)
+                               customers=customers, companies=companies, order_service=order_service, product=product, payments=payments)
     else:
         return render_template('views/workshop/billing/create.html',
-                               customers=customers, companies=companies, order_service=order_service, product=product)
+                               customers=customers, companies=companies, order_service=order_service, product=product, payments=payments)
 
 
 @billing.route("/done")
@@ -197,6 +221,7 @@ def print_billing(id, user=None):
         y -= 30
 
     pdf.drawString(400, 200, f'Total a Pagar: {factura.total}')
+    pdf.drawString(400, 240, f'Método de Pago: {factura.payments}')
     pdf.drawString(250, 80, 'Gracias por preferirnos!')
 
     # Guardar y cerrar el documento

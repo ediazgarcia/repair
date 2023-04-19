@@ -4,8 +4,13 @@
 
 {% block content %}
 <!-- Page Heading -->
-<h1 class="h1 mb-0 text-gray-800 d-flex">Facturación</h1>
-<br>
+<h1 class="h1 mb-0 text-gray-800 d-flex"></h1>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Facturación</h1>
+    <a href="{{url_for('billing.create_billing')}}" class="btn btn-primary btn-circle btn-lg ml-auto" title="Nueva Factura">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+</div>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url_for('billing.create_billing')}}">Facturación</a></li>
@@ -27,6 +32,7 @@
                     <tr>
                         <th>No. de factura</th>
                         <th>Cliente</th>
+                        <th>Método de Pago</th>
                         <th>Total</th>
                         <th>No. de Orden</th>
                         <th>Creada</th>
@@ -38,6 +44,7 @@
                     <tr>
                         <td>{{factura.order_num}}</td>
                         <td>{{factura.client|default('Venta Rápida',true)}}</td>
+                        <td>{{factura.payments}}</td>
                         <td>{{factura.total}}</td>
                         <td>{{factura.order_services|default('Ninguna',true)}}</td>
                         <td>{{factura.created}}</td>

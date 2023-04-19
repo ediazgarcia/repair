@@ -26,15 +26,20 @@ class Factura(db.Model):
         'services_orders.id', onupdate='RESTRICT', ondelete='CASCADE'))
     orders_services = db.relationship(
         'ServiceOrder', backref=db.backref('factura', lazy=True))
+    payments_id = db.Column(db.Integer, db.ForeignKey(
+        'payments.id', onupdate='RESTRICT', ondelete='CASCADE'))
+    payments = db.relationship(
+        'Payments', backref=db.backref('billings', lazy=True))
     detalles = db.relationship('DetalleFactura', backref='factura', lazy=True)
 
-    def __init__(self, order_num, total, company, client, orders_services):
+    def __init__(self, order_num, total, company, client, orders_services, payments):
         self.order_num = order_num
         self.total = total
         self.created = datetime.utcnow()
         self.company = company
         self.client = client
         self.orders_services = orders_services
+        self.payments=payments
 
     @staticmethod
     def numero_orden_existe_en_bd(order_num):

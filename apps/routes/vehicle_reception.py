@@ -86,7 +86,7 @@ def create_vehicle_reception(user=None):
 
         flash('¡Recepción de Vehículo añadida con éxito!')
     vehicle = Vehicle.query.all()
-    employee = Employee.query.all()
+    employee = Employee.query.filter(Employee.position!="Mecánico").all()
     vehicle_reception = VehicleReception.query.all()
     return render_template('admin/workshop/vehiclereception/create.html', vehicle=vehicle, employee=employee, vehicle_reception=vehicle_reception)
 
