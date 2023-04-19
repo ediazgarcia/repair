@@ -1,6 +1,6 @@
 
 from flask import (render_template, Blueprint, flash, g,
-                   redirect, request, session, url_for, jsonify,Response)
+                   redirect, request, session, url_for, jsonify, Response)
 
 from flask import json
 # Importar el contador
@@ -38,7 +38,7 @@ def get_billing(user=None):
         return render_template('views/workshop/billing/list.html', factura=factura)
 
 # Crear un contador que inicie en 100
-order_num_counter = count(start=100)
+# order_num_counter = count(start=100)
 
 
 @billing.route("/create", methods=['GET', 'POST'])
@@ -69,23 +69,20 @@ def create_billing(user=None):
                 pass
         total = sum(subtotal)
 
-        factura = Factura(total=total, order_num=None, company=company,
-                          client=client, orders_services=orders_services)
+        # Generar un nuevo número de orden
+        # Crear un contador que inicie en 100
+        order_num_counter_service = count(start=100)
+        order_num = "FT-" + str(next(order_num_counter_service))
+
+        # Verificar si el número de orden ya existe en la base de datos
+        while Factura.numero_orden_existe_en_bd(order_num):
+            order_num = "FT-" + str(next(order_num_counter_service))
+
+        factura = Factura(order_num=order_num, client=client, total=total, orders_services=orders_services, company=company,
+                          )
 
         db.session.add(factura)
         db.session.commit()
-
-        # Añadir orden de servicio al detalle factura
-        # if orders_services_id != None:
-        # orders_services_id=factura.orders_services_id
-        # product_id=ServiceOrder.product
-        # factura_id = factura.id
-        # cantidad=1
-        # precio_unitario=Product.price
-        # precio_total=precio_unitario
-        # detalle_factura = DetalleFactura(
-        # factura_id=factura_id, producto_id=product_id, cantidad=cantidad, precio_unitario=precio_unitario, precio_total=precio_total)
-        # db.session.add(detalle_factura)
 
         # Procesar los detalles de la factura
         for i in range(len(detalles)):
@@ -124,9 +121,9 @@ def create_billing(user=None):
 def ready_billing(user=None):
     ultimo_id = Factura.query.order_by(db.desc(Factura.id)).first().id
     if g.role == 'Administrador':
-        return render_template('admin/workshop/billing/done.html',ultimo_id=ultimo_id)
+        return render_template('admin/workshop/billing/done.html', ultimo_id=ultimo_id)
     else:
-        return render_template('views/workshop/billing/done.html',ultimo_id=ultimo_id)
+        return render_template('views/workshop/billing/done.html', ultimo_id=ultimo_id)
 
 # Delete
 

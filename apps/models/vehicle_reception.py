@@ -31,6 +31,15 @@ class VehicleReception(db.Model):
     def __repr__(self):
         return f'Orden {self.order_num} {self.reception_reason} del {self.vehicle}'
 
+    @staticmethod
+    def numero_orden_existe_en_bd(order_num):
+        # Verificar si el número de orden ya existe en la base de datos
+        order = VehicleReception.query.filter_by(order_num=order_num).first()
+        if order:
+            return True
+        else:
+            return False
+
 
 class VehicleReceptionDetail(db.Model):
     __tablename__ = 'vehicle_reception_details'

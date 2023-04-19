@@ -28,10 +28,6 @@ def get_orders_services(user=None):
         return render_template('views/workshop/ordersservices/list.html', orders_services=orders_services)
 
 
-# Crear un contador que inicie en 100
-order_num_counter = count(start=100)
-
-
 @orders_services.route("/create", methods=['GET', 'POST'])
 @set_role
 def create_orders_services(user=None):
@@ -46,8 +42,14 @@ def create_orders_services(user=None):
             employee_id = request.form['employee_id']
             product_id = request.form['product_id']
 
-            # Generar el order_num con prefijo "RV-"
-            order_num = "OS-" + str(next(order_num_counter))
+            # Generar un nuevo número de orden
+            # Crear un contador que inicie en 100
+            order_num_counter_service = count(start=100)
+            order_num = "OS-" + str(next(order_num_counter_service))
+
+            # Verificar si el número de orden ya existe en la base de datos
+            while ServiceOrder.numero_orden_existe_en_bd(order_num):
+                order_num = "OS-" + str(next(order_num_counter_service))
 
             vehicle_reception = VehicleReception.query.filter_by(
                 id=vehicle_reception_id).first()

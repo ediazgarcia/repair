@@ -30,7 +30,7 @@ def get_vehicle_reception(user=None):
 
 
 # Crear un contador que inicie en 100
-order_num_counter = count(start=100)
+# order_num_counter = count(start=100)
 
 
 @vehicle_reception.route("/create", methods=['GET', 'POST'])
@@ -52,7 +52,16 @@ def create_vehicle_reception(user=None):
         objects = request.form['objects']
 
         # Generar el order_num con prefijo "RV-"
-        order_num = "RV-" + str(next(order_num_counter))
+        # order_num = "RV-" + str(next(order_num_counter))
+
+        # Generar un nuevo número de orden
+        # Crear un contador que inicie en 100
+        order_num_counter_service = count(start=100)
+        order_num = "RV-" + str(next(order_num_counter_service))
+
+        # Verificar si el número de orden ya existe en la base de datos
+        while VehicleReception.numero_orden_existe_en_bd(order_num):
+            order_num = "RV-" + str(next(order_num_counter_service))
 
         # fetch the vehicle name from the database
         vehicle = Vehicle.query.filter_by(id=vehicle_id).first()

@@ -41,5 +41,14 @@ class ServiceOrder(db.Model):
         self.employee = employee
         self.product = product
 
+    @staticmethod
+    def numero_orden_existe_en_bd(order_num):
+        # Verificar si el número de orden ya existe en la base de datos
+        order = ServiceOrder.query.filter_by(order_num=order_num).first()
+        if order:
+            return True
+        else:
+            return False
+
     def __repr__(self) -> str:
         return f'{self.description}'

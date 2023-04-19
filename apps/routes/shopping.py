@@ -1,10 +1,11 @@
 from flask import (
     render_template, Blueprint, flash, g, redirect, request, session, url_for, Response
 )
-
+# Importar el contador
+from itertools import count
 from werkzeug.security import generate_password_hash
 
-#from apps.models.shopping import shopping
+# from apps.models.shopping import shopping
 from apps.models.user import User
 from apps import db
 from .auth import set_role
@@ -19,15 +20,16 @@ from reportlab.pdfgen import canvas
 
 shopping = Blueprint('shopping', __name__, url_prefix='/shopping')
 
+
 @shopping.route("/list")
 # función para verificar el rol del usuario
 @set_role
 def get_shopping(user=None):
-    shopping=Shopping.query.all()
+    shopping = Shopping.query.all()
     if g.role == 'Administrador':
-        return render_template('admin/workshop/shopping/list.html',shopping=shopping)
+        return render_template('admin/workshop/shopping/list.html', shopping=shopping)
     else:
-        return render_template('views/workshop/shopping/list.html',shopping=shopping)
+        return render_template('views/workshop/shopping/list.html', shopping=shopping)
 
 
 @shopping.route("/create", methods=['GET', 'POST'])
@@ -36,7 +38,7 @@ def create_shopping(user=None):
     if request.method == 'POST':
         company_id = request.form['company_id']
         provider_id = request.form['provider_id']
-        #order_num = "FT-" + str(next(order_num_counter))
+        # order_num = "FT-" + str(next(order_num_counter))
         company = Company.query.filter_by(id=company_id).first()
         provider = Provider.query.filter_by(id=provider_id).first()
         # Obtener una lista de los valores del campo "detalle"
@@ -54,8 +56,18 @@ def create_shopping(user=None):
             except ValueError:
                 pass
         total = sum(subtotal)
-        
-        new_shopping = Shopping(total=total,order_num=None,company=company, provider=provider)
+
+        # Generar un nuevo número de orden
+        # Crear un contador que inicie en 100
+        order_num_counter_service = count(start=100)
+        order_num = "C-" + str(next(order_num_counter_service))
+
+        # Verificar si el número de orden ya existe en la base de datos
+        while Shopping.numero_orden_existe_en_bd(order_num):
+            order_num = "C-" + str(next(order_num_counter_service))
+
+        new_shopping = Shopping(
+            total=total, order_num=order_num, company=company, provider=provider)
 
         db.session.add(new_shopping)
         db.session.commit()
@@ -64,9 +76,9 @@ def create_shopping(user=None):
             shopping_id = new_shopping.id
             product_id = detalles[i]
             quantity = cantidades[i]
-            #cantidad_inv = int(cantidades[i])
+            # cantidad_inv = int(cantidades[i])
             unt_cost = precios_unitarios[i]
-            total_cost = precios_totales[i] 
+            total_cost = precios_totales[i]
 
             new_detail = ShoppingDetail(
                 shopping_id=shopping_id, product_id=product_id, quantity=quantity, unt_cost=unt_cost, total_cost=total_cost)
@@ -77,10 +89,11 @@ def create_shopping(user=None):
         flash('Compra creada exitosamente')
         return redirect(url_for('shopping.ready_shopping'))
     companies = Company.query.all()
-    provider= Provider.query.all()
+    provider = Provider.query.all()
     product = db.session.query(Product).join(Inventory).filter(
         Inventory.set_stock > 0).all()
-    return render_template('admin/workshop/shopping/create.html',companies=companies,product=product,provider=provider)
+    return render_template('admin/workshop/shopping/create.html', companies=companies, product=product, provider=provider)
+
 
 @shopping.route("/done")
 # función para verificar el rol del usuario
@@ -88,10 +101,11 @@ def create_shopping(user=None):
 def ready_shopping(user=None):
     ultimo_id = Shopping.query.order_by(db.desc(Shopping.id)).first().id
     if g.role == 'Administrador':
-        return render_template('admin/workshop/shopping/done.html',ultimo_id=ultimo_id)
+        return render_template('admin/workshop/shopping/done.html', ultimo_id=ultimo_id)
     else:
-        return render_template('views/workshop/shopping/done.html',ultimo_id=ultimo_id)
-    
+        return render_template('views/workshop/shopping/done.html', ultimo_id=ultimo_id)
+
+
 @shopping.route("/delete/<int:id>", methods=["GET"])
 @set_role
 def delete_shopping(id, user=None):
@@ -125,7 +139,8 @@ def delete_shopping(id, user=None):
         flash(
             f'Error al eliminar la compra: {str(err)}', category='error')
         return redirect(url_for('shopping.get_shopping'))
-    
+
+
 @shopping.route("/print/<int:id>", methods=["GET"])
 @set_role
 def print_shopping(id, user=None):

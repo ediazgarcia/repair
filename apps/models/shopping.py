@@ -4,6 +4,7 @@ from .company import Company
 from .provider import Provider
 from .products import Product
 
+
 class Shopping(db.Model):
     __tablename__ = 'shoppings'
     id = db.Column(db.Integer, primary_key=True)
@@ -14,9 +15,9 @@ class Shopping(db.Model):
         'companies.id', onupdate='RESTRICT', ondelete='CASCADE'))
     company = db.relationship(
         'Company', backref=db.backref('shoppings', lazy=True))
-    provider_id= db.Column(db.Integer, db.ForeignKey(
+    provider_id = db.Column(db.Integer, db.ForeignKey(
         'suppliers.id', onupdate='RESTRICT', ondelete='CASCADE'))
-    provider= db.relationship(
+    provider = db.relationship(
         'Provider', backref=db.backref('shoppings', lazy=True))
     details = db.relationship('ShoppingDetail', backref='shoppings', lazy=True)
 
@@ -27,21 +28,32 @@ class Shopping(db.Model):
         self.company = company
         self.provider = provider
 
+    @staticmethod
+    def numero_orden_existe_en_bd(order_num):
+        # Verificar si el número de orden ya existe en la base de datos
+        order = Shopping.query.filter_by(order_num=order_num).first()
+        if order:
+            return True
+        else:
+            return False
+
+
 class ShoppingDetail(db.Model):
     __tablename__ = 'shoppings_details'
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey(
         'products.id'), nullable=False)
-    product = db.relationship('Product', backref=db.backref('shoppings_details', lazy=True))
+    product = db.relationship(
+        'Product', backref=db.backref('shoppings_details', lazy=True))
     quantity = db.Column(db.Integer, nullable=False)
     unt_cost = db.Column(db.Float, nullable=False)
     total_cost = db.Column(db.Float, nullable=False)
     shopping_id = db.Column(db.Integer, db.ForeignKey(
         'shoppings.id'), nullable=False)
 
-    def __init__(self, shopping_id, quantity, unt_cost, total_cost , product_id):
+    def __init__(self, shopping_id, quantity, unt_cost, total_cost, product_id):
         self.shopping_id = shopping_id
-        self.product_id=product_id
+        self.product_id = product_id
         self.quantity = quantity
         self.unt_cost = unt_cost
-        self.total_cost=total_cost
+        self.total_cost = total_cost
