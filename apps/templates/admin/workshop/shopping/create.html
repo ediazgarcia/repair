@@ -16,29 +16,6 @@
     </ol>
 </nav>
 <!-- Content Row -->
-<script>
-    // Función para agregar una nueva fila a la tabla de detalles
-    function agregarDetalle() {
-        var fila = '<tr>' +
-            '<td><select class="form-control js-example-basic-single" name="detalle" id="detalle" onchange="calcularSubtotal(this)"> <option value="0" selected disabled></option>{% for product in product %}<option value="{{ product["id"] }}" data-unit-price="{{ product["price"] }}">{{product["description"] }}</option>{% endfor %}</select></td>' +
-            '<td><input type="number" name="cantidad" class="form-control" oninput="calcularSubtotal(this)" required></td>' +
-            '<td><input type="number" name="precio_unitario" class="form-control" oninput="calcularSubtotal(this)" readonly></td>' +
-            '<td><input type="number" name="subtotal" class="form-control" readonly></td>' +
-            '</tr>';
-        $('#tabla-detalles').append(fila);
-    }
-        // Función para calcular el subtotal en base a la cantidad y precio unitario ingresados
-        function calcularSubtotal(input) {
-        var selectedProduct = document.getElementById("detalle");
-        var cantidad = parseFloat($(input).closest('tr').find('input[name="cantidad"]').val());
-        var precioUnitario = selectedProduct.options[selectedProduct.selectedIndex].getAttribute("data-unit-price");
-        var subtotal = cantidad * precioUnitario;
-        $(input).closest('tr').find('input[name="precio_unitario"]').val(precioUnitario);
-        $(input).closest('tr').find('input[name="subtotal"]').val(subtotal.toFixed(2)); // Actualiza el valor del subtotal en el input correspondiente
-    }
-</script>
-
-<!-- Content Row -->
 <div class="card o-hidden border-0 shadow-lg my-5">
     <div class="card-body p-0">
         <!-- New Row Form cabecera de factura -->
@@ -51,7 +28,8 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="">Datos del Proveedor</label>
-                                    <select id="provider_id" name="provider_id" class="form-control js-example-basic-single">
+                                    <select id="provider_id" name="provider_id"
+                                        class="form-control js-example-basic-single">
                                         <option value="" disabled selected></option>
                                         {% for provider in provider %}
                                         <option value="{{ provider.id }}">{{ provider.trade_name }}</option>
@@ -60,7 +38,8 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="company_id">Datos de la Empresa</label>
-                                    <select id="company_id" name="company_id" class="form-control rounded-select js-example-basic-single">
+                                    <select id="company_id" name="company_id"
+                                        class="form-control rounded-select js-example-basic-single">
                                         <option value="" disabled selected></option>
                                         {% for company in companies %}
                                         <option value="{{ company.id }}">{{ company.trade_name }}</option>
@@ -78,18 +57,30 @@
                                     <th>Costo Total</th>
                                 </tr>
                                 <tr>
-                                    <td><select class="form-control js-example-basic-single" name="detalle" id="detalle" onchange="calcularSubtotal(this)"> <option value="0" selected disabled></option>{% for product in product %}<option value="{{ product["id"] }}" data-unit-price="{{ product["price"] }}">{{product["description"] }}</option>{% endfor %}</select></td>
-                                    <td><input type="number" name="cantidad" class="form-control" oninput="calcularSubtotal(this)" required min="1"></td>
-                                    <td><input type="number" name="precio_unitario" class="form-control" oninput="calcularSubtotal(this)" readonly></td>
-                                    <td><input type="number" name="subtotal" class="form-control" readonly></td>
+                                    <td><select class="form-control js-example-basic-single" name="detalle" id="detalle"
+                                            onchange="cargarPrecioUnitario(this)">
+                                            <option value="0" selected disabled></option>
+                                            {% for product in product %}
+                                            <option value="{{ product['id'] }}" data-unit-price="{{ product['price']}}">
+                                                {{product["description"] }}
+                                            </option>
+                                            {% endfor %}
+                                        </select></td>
+                                    <td><input type="number" name="cantidad" class="form-control"
+                                            oninput="calcularSubtotal(this)" required min="1"></td>
+                                    <td><input type="number" name="precio_unitario" class="form-control"
+                                            oninput="calcularSubtotal(this)" readonly></td>
+                                    <td><input type="number" name="subtotal" oninput="calcularSubtotal(this)"
+                                            class="form-control" readonly></td>
                                 </tr>
                             </table>
                             <br>
-                            <input type="button" value="Agregar Producto" class="btn btn-primary" onclick="agregarDetalle()">
+                            <input type="button" value="Agregar Producto" class="btn btn-primary"
+                                onclick="agregarDetalle()">
                             <!-- Botón para agregar detalle -->
                             <br>
                             <div class="col-12 text-center">
-                            <input type="submit" class="btn btn-primary col-6 rounded-button" value="Comprar">
+                                <input type="submit" class="btn btn-primary col-6 rounded-button" value="Comprar">
                             </div>
                         </form>
                     </div>
@@ -98,5 +89,81 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    // Función para agregar una nueva fila a la tabla
+    function agregarDetalle() {
+
+        var fila = '<tr>' +
+            '<td><select class="form-control js-example-basic-single" name="detalle" id="detalle" onchange="cargarPrecioUnitario(this)">' +
+            '<option value="0" selected disabled></option>{% for product in product %}<option value="{{ product["id"] }}" data-unit-price="{{ product["price"] }}">{{product["description"] }}</option>{% endfor %}</select></td>' +
+            '<td><input type="number" name="cantidad" class="form-control" oninput="calcularSubtotal(this)" required></td>' +
+            '<td><input type="number" name="precio_unitario" class="form-control" oninput="calcularSubtotal(this)" readonly></td>' +
+            '<td><input type="number" name="subtotal"  class="form-control" oninput="calcularSubtotal(this)" readonly></td>' +
+            '<td><button type="button" class="btn btn-danger" onclick="eliminarFila(this)"><i class="fa fa-trash"></i></button></td>' + // Agrega un botón de eliminación
+            '</tr>';
+        $('#tabla-detalles').append(fila);
+        sumarCantidad(); // Agregar esta línea para llamar a la función sumarCantidad() después de agregar la nueva fila
+    }
+
+    // Función para eliminar una fila de la tabla
+    function eliminarFila(buttonElement) {
+        var fila = $(buttonElement).closest('tr');
+        fila.remove();
+        sumarCantidad(); // Llama a la función sumarCantidad() después de eliminar la fila
+    }
+
+    // Función para cargar el precio unitario en base al producto seleccionado
+    function cargarPrecioUnitario(selectElement) {
+        var unitPrice = selectElement.options[selectElement.selectedIndex].getAttribute('data-unit-price');
+        var row = selectElement.parentNode.parentNode;
+        var precioUnitarioInput = row.querySelector('input[name="precio_unitario"]');
+        precioUnitarioInput.value = unitPrice;
+    }
+
+    // Función para calcular el subtotal en base a la cantidad y precio unitario ingresados
+    function calcularSubtotal(inputElement) {
+        var row = inputElement.parentNode.parentNode;
+        var cantidadInput = row.querySelector('input[name="cantidad"]');
+        var subtotalInput = row.querySelector('input[name="subtotal"]');
+        var cantidad = cantidadInput.value;
+        var precioUnitario = row.querySelector('input[name="precio_unitario"]').value;
+        var subtotal = precioUnitario * cantidad;
+        subtotalInput.value = subtotal;
+    }
+
+    // Función para sumar la cantidad si es el mismo producto y no agregar una fila nueva
+    function sumarCantidad() {
+        var detalleSelects = document.getElementsByName('detalle');
+        var detalleArray = Array.from(detalleSelects);
+        var selectedValues = detalleArray.map(function (selectElement) {
+            return selectElement.value;
+        });
+        var duplicados = selectedValues.filter(function (value, index, self) {
+            return self.indexOf(value) !== index;
+        });
+
+        duplicados.forEach(function (value) {
+            var filas = $('#tabla-detalles tr');
+            var subtotal = 0;
+            filas.each(function () {
+                var detalle = $(this).find('select[name="detalle"]').val();
+                var cantidad = parseInt($(this).find('input[name="cantidad"]').val());
+                if (detalle === value) {
+                    subtotal += cantidad;
+                    $(this).remove();
+                }
+            });
+
+            var nuevaFila = $('#tabla-detalles tr:last');
+            var nuevoSelect = nuevaFila.find('select[name="detalle"]');
+            nuevoSelect.val(value);
+            nuevoSelect.change();
+            nuevaFila.find('input[name="cantidad"]').val(subtotal);
+            calcularSubtotal(nuevaFila.find('input[name="cantidad"]')[0]);
+        });
+    }
+</script>
 
 {% endblock %}
