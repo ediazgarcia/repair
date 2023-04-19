@@ -36,7 +36,7 @@
                 <tbody>
                     {% for factura in factura%}
                     <tr>
-                        <td>{{factura.orden_num}}</td>
+                        <td>{{factura.order_num}}</td>
                         <td>{{factura.client|default('Venta Rápida',true)}}</td>
                         <td>{{factura.total}}</td>
                         <td>{{factura.order_services|default('Ninguna',true)}}</td>
