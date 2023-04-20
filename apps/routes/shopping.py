@@ -68,6 +68,7 @@ def create_shopping(user=None):
 
         new_shopping = Shopping(
             total=total, order_num=order_num, company=company, provider=provider)
+        new_shopping.details = []
 
         db.session.add(new_shopping)
         db.session.commit()
@@ -76,15 +77,15 @@ def create_shopping(user=None):
             shopping_id = new_shopping.id
             product_id = detalles[i]
             quantity = cantidades[i]
-            # cantidad_inv = int(cantidades[i])
             unt_cost = precios_unitarios[i]
             total_cost = precios_totales[i]
 
             new_detail = ShoppingDetail(
                 shopping_id=shopping_id, product_id=product_id, quantity=quantity, unt_cost=unt_cost, total_cost=total_cost)
-
+            new_shopping.details.append(new_detail)
             db.session.add(new_detail)
         db.session.commit()  # Commit después de agregar todos los detalles
+        new_shopping.update_inventory()
 
         flash('Compra creada exitosamente')
         return redirect(url_for('shopping.ready_shopping'))

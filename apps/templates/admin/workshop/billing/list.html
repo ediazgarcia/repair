@@ -7,7 +7,8 @@
 <h1 class="h1 mb-0 text-gray-800 d-flex"></h1>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Facturación</h1>
-    <a href="{{url_for('billing.create_billing')}}" class="btn btn-primary btn-circle btn-lg ml-auto" title="Nueva Factura">
+    <a href="{{url_for('billing.create_billing')}}" class="btn btn-primary btn-circle btn-lg ml-auto"
+        title="Nueva Factura">
         <i class="fa fa-plus" aria-hidden="true"></i>
     </a>
 </div>
@@ -46,7 +47,7 @@
                         <td>{{factura.client|default('Venta Rápida',true)}}</td>
                         <td>{{factura.payments}}</td>
                         <td>{{factura.total}}</td>
-                        <td>{{factura.order_services|default('Ninguna',true)}}</td>
+                        <td>{{factura.orders_services|default('Ninguna',true)}}</td>
                         <td>{{factura.created}}</td>
                         <td>
                             <button class="btn  btn-sm btn-primary"

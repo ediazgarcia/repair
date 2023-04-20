@@ -51,4 +51,4 @@ class ServiceOrder(db.Model):
             return False
 
     def __repr__(self) -> str:
-        return f'{self.description}'
+        return f'{self.order_num}'
