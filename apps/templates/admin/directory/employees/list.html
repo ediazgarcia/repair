@@ -111,16 +111,16 @@
                         <td>{{employee.end_time}}</td>
                         <td>{{employee.hire_date}}</td>
                         <td>{{employee.company.trade_name}}</td>
-                        <td>{{employee.user.fullname}} ({{employee.user.username}})</td>
+                        <td>{{employee.user.fullname}} (@{{employee.user.username|default('Ninguno',true)}})</td>
                         <td>{{employee.created}}</td>
                         <td>{{employee.updated}}</td>
                         <td>
                             <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{url_for('employee.update_employee', id=employee.id)}}'">
+                                onclick="location.href='{{url_for('employee.update_employee', id=employee.id)}}'" title="Editar">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('employee.delete_employee', id=employee.id) }}'">
+                                onclick="location.href='{{ url_for('employee.delete_employee', id=employee.id) }}'" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

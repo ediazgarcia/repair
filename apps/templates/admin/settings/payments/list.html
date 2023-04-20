@@ -44,7 +44,7 @@
                         <td>{{payments.created}}</td>
                         <td>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('payments.delete_payments', id=payments.id) }}'">
+                                onclick="location.href='{{ url_for('payments.delete_payments', id=payments.id) }}'" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

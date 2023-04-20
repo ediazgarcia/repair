@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+#from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash
 from config import Config, DevelopmentConfig, ProductionConfig
 
@@ -12,7 +12,7 @@ app.config.from_object(DevelopmentConfig)
 db = SQLAlchemy(app)
 
 # Inicializar la extensión de migraciones
-migrate = Migrate(app, db)
+#migrate = Migrate(app, db)
 
 # Importar routes
 from apps.routes.auth import auth

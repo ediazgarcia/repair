@@ -59,17 +59,21 @@
                         <td>{{product.category}}</td>
                         <td>{{product.cost}}</td>
                         <td>{{product.price}}</td>
-                        <td>{{product.status}}</td>
+                        <td>
+                            {% set state_colors = {'Activo': 'badge-success', 'Inactivo': 'badge-danger'} %}
+                            {% set state_color = state_colors.get(product.status, 'badge-secondary') %}
+                            <span class="badge {{state_color}}">{{product.status}}</span>
+                        </td>
                         <td>{{product.created}}</td>
                         <td>{{product.updated}}</td>
                         <td>{{product.supplier|default('Ninguno',true)}}</td>
                         <td>{{product.company}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('product.update_product', id=product.id) }}'">
+                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('product.update_product', id=product.id) }}'" title="Editar">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('product.delete_product', id=product.id) }}'">
+                                onclick="location.href='{{ url_for('product.delete_product', id=product.id) }}'" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>
