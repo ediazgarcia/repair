@@ -8,12 +8,15 @@ from flask import (
 )
 from werkzeug.security import check_password_hash
 
-from apps import app
-
+from sqlalchemy import func
+from apps import db
 
 from apps.models.user import User
 from apps.models.vehicle_reception import VehicleReception
+from apps.models.vehicle import Vehicle
+from apps.models.inventory import Inventory
 auth = Blueprint('auth', __name__)
+
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -98,10 +101,12 @@ def set_role(f):
 @set_role
 def home(user):
     reception_vehicle = VehicleReception.query.all()
+    vehicle=Vehicle.query.all()
+    inventory=db.session.query(func.sum(Inventory.set_stock)).scalar()
     if g.role == 'Administrador':
-        return render_template('admin/index.html', reception_vehicle=reception_vehicle, user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
+        return render_template('admin/index.html', inventory=inventory,vehicle=vehicle ,reception_vehicle=reception_vehicle, user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
     elif g.role == 'Usuario':
-        return render_template('views/index.html', reception_vehicle=reception_vehicle, user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
+        return render_template('views/index.html', inventory=inventory,vehicle=vehicle ,reception_vehicle=reception_vehicle, user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
     return redirect(url_for('auth.login'))
 
 

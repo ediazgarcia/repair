@@ -70,15 +70,19 @@
                         <td>{{vehicle.color}}</td>
                         <td>{{vehicle.transmission}}</td>
                         <td>{{vehicle.cylinder}}</td>
-                        <td>{{vehicle.status}}</td>
+                        <td>
+                            {% set state_colors = {'Activo': 'badge-success', 'Inactivo': 'badge-danger'} %}
+                            {% set state_color = state_colors.get(vehicle.status, 'badge-secondary') %}
+                            <span class="badge {{state_color}}">{{vehicle.status}}</span>
+                        </td>
                         <td>{{vehicle.created}}</td>
                         <td>{{vehicle.updated}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('vehicle.update_vehicle', id=vehicle.id) }}'">
+                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('vehicle.update_vehicle', id=vehicle.id) }}'" title="Editar">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('vehicle.delete_vehicle', id=vehicle.id) }}'">
+                                onclick="location.href='{{ url_for('vehicle.delete_vehicle', id=vehicle.id) }}'" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

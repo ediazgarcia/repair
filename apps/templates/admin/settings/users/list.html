@@ -52,19 +52,19 @@
                         <td>{{user.email}}</td>
                         <td>{{user.role}}</td>
                         {% if user.active %}
-                        <td>Activo</td>
+                        <td><span class="badge badge-success">Activo</span></td>
                         {% else %}
-                        <td>Inactivo</td>
+                        <td><span class="badge badge-danger">Inactivo</span></td>
                         {% endif %}
                         <td>{{user.created}}</td>
                         <td>{{user.updated}}</td>
                         <td>
                             <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('user.update_user', id=user.id) }}'">
+                                onclick="location.href='{{ url_for('user.update_user', id=user.id) }}'" title="Editar">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('user.delete_user', id=user.id) }}'">
+                                onclick="location.href='{{ url_for('user.delete_user', id=user.id) }}'" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

@@ -37,7 +37,9 @@ def create_vehicle(user=None):
             cylinder = request.form['cylinder']
             status = request.form['status']
 
-            new_vehicle = Vehicle (client_id=client_id,brand=brand,model=model,year=year,fuel_type=fuel_type,plate_number=plate_number,chassis_number=chassis_number,color=color,transmission=transmission,cylinder=cylinder,status=status)
+            client=Customer.query.filter_by(id=client_id).first()
+
+            new_vehicle = Vehicle (client=client,brand=brand,model=model,year=year,fuel_type=fuel_type,plate_number=plate_number,chassis_number=chassis_number,color=color,transmission=transmission,cylinder=cylinder,status=status)
 
             db.session.add(new_vehicle)
             db.session.commit()

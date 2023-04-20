@@ -51,11 +51,11 @@
                         <td>{{factura.created}}</td>
                         <td>
                             <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('billing.print_billing', id=factura.id) }}'">
+                                onclick="location.href='{{ url_for('billing.print_billing', id=factura.id) }}'" title="Imprimir">
                                 <i class="fa fa-print"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('billing.delete_billing', id=factura.id) }}'">
+                                onclick="location.href='{{ url_for('billing.delete_billing', id=factura.id) }}'" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

@@ -68,11 +68,11 @@
                         <td>{{company.updated}}</td>
                         <td>
                             <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('company.update_company', id=company.id) }}'">
+                                onclick="location.href='{{ url_for('company.update_company', id=company.id) }}'" title="Editar">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('company.delete_company', id=company.id) }}'">
+                                onclick="location.href='{{ url_for('company.delete_company', id=company.id) }}'" title="Eliminar"> 
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

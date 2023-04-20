@@ -56,12 +56,12 @@
                         <td>{{inventory.created}}</td>
                         <td>{{inventory.updated}}</td>
                         <td>
-                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('inventory.update_inventory', id=inventory.id) }}'">
+                            <button class="btn  btn-sm btn-primary" onclick="location.href='{{ url_for('inventory.update_inventory', id=inventory.id) }}'" title="Editar">
                                 <i class="fa fa-edit"></i>
                             </button>
 
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('inventory.delete_inventory', id=inventory.id) }}'">
+                                onclick="location.href='{{ url_for('inventory.delete_inventory', id=inventory.id) }}'" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

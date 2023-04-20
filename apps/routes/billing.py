@@ -86,24 +86,6 @@ def create_billing(user=None):
         db.session.add(factura)
         db.session.commit()
 
-        #Añadir orden de serivicio al detalle
-        # if orders_services_id != None:
-        #     orders_services_id=factura.orders_services_id
-        #     product_id=ServiceOrder.product
-        #     factura_id = factura.id
-        #     cantidad=1
-        #     precio_unitario=Product.price
-        #     precio_total=precio_unitario
-        #     detalle_factura = DetalleFactura(
-        #     factura_id=factura_id, producto_id=product_id, cantidad=cantidad, precio_unitario=precio_unitario, precio_total=precio_total)
-        #     db.session.add(detalle_factura)
-
-        #     # Actualizar el total de la factura
-        #     factura=Factura.query.get(id)
-        #     total=total+Product.price
-
-        #     db.session.commit()
-
         # Procesar los detalles de la factura
         for i in range(len(detalles)):
             factura_id = factura.id
@@ -147,8 +129,6 @@ def ready_billing(user=None):
         return render_template('views/workshop/billing/done.html', ultimo_id=ultimo_id)
 
 # Delete
-
-
 @billing.route("/delete/<int:id>", methods=["GET"])
 @set_role
 def delete_billing(id, user=None):
