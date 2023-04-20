@@ -1,5 +1,6 @@
 from datetime import datetime
 from apps import db
+from .inventory import Inventory
 from .company import Company
 from .client import Customer
 from .orders_services import ServiceOrder
@@ -40,6 +41,13 @@ class Factura(db.Model):
         self.client = client
         self.orders_services = orders_services
         self.payments=payments
+        
+    def update_inventory(self):
+        for detail in self.detalles:
+            inventory = Inventory.query.filter_by(product_id=detail.product_id).first()
+            if inventory:
+                inventory.set_stock -= detail.cantidad
+                db.session.commit()
 
     @staticmethod
     def numero_orden_existe_en_bd(order_num):

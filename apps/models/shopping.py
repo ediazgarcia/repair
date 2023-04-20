@@ -1,5 +1,6 @@
 from datetime import datetime
 from apps import db
+from .inventory import Inventory
 from .company import Company
 from .provider import Provider
 from .products import Product
@@ -27,6 +28,14 @@ class Shopping(db.Model):
         self.created = datetime.utcnow()
         self.company = company
         self.provider = provider
+        
+        
+    def update_inventory(self):
+        for detail in self.details:
+            inventory = Inventory.query.filter_by(product_id=detail.product_id).first()
+            if inventory:
+                inventory.set_stock += detail.quantity
+                db.session.commit()
 
     @staticmethod
     def numero_orden_existe_en_bd(order_num):

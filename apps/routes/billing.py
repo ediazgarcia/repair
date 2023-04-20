@@ -82,46 +82,43 @@ def create_billing(user=None):
             order_num = "FT-" + str(next(order_num_counter_service))
 
         factura = Factura(order_num=order_num, client=client, total=total, orders_services=orders_services, company=company, payments=payments)
-
+        factura.details = []
         db.session.add(factura)
         db.session.commit()
 
         #Añadir orden de serivicio al detalle
-        #if orders_services_id != None:
-           #orders_services_id=factura.orders_services_id
-           #product_id=ServiceOrder.product
-           #factura_id = factura.id
-           #cantidad=1
-           #precio_unitario=Product.price
-            #precio_total=precio_unitario
-            #detalle_factura = DetalleFactura(
-           #factura_id=factura_id, producto_id=product_id, cantidad=cantidad, precio_unitario=precio_unitario, precio_total=precio_total)
-            #db.session.add(detalle_factura)
+        # if orders_services_id != None:
+        #     orders_services_id=factura.orders_services_id
+        #     product_id=ServiceOrder.product
+        #     factura_id = factura.id
+        #     cantidad=1
+        #     precio_unitario=Product.price
+        #     precio_total=precio_unitario
+        #     detalle_factura = DetalleFactura(
+        #     factura_id=factura_id, producto_id=product_id, cantidad=cantidad, precio_unitario=precio_unitario, precio_total=precio_total)
+        #     db.session.add(detalle_factura)
 
-        #Actualizar el total de la factura
-        #factura=Factura.query.get(id)
-        #total=total+Product.price
+        #     # Actualizar el total de la factura
+        #     factura=Factura.query.get(id)
+        #     total=total+Product.price
 
-        #db.session.commit()
-
-
-        #detalle_factura=DetalleFactura()
+        #     db.session.commit()
 
         # Procesar los detalles de la factura
         for i in range(len(detalles)):
             factura_id = factura.id
             product_id = detalles[i]
             cantidad = cantidades[i]
-            # cantidad_inv = int(cantidades[i])
             precio_unitario = precios_unitarios[i]
             precio_total = precios_totales[i]
 
             detalle_factura = DetalleFactura(
                 factura_id=factura_id, producto_id=product_id, cantidad=cantidad, precio_unitario=precio_unitario, precio_total=precio_total)
-
+            factura.details.append(detalle_factura)
             db.session.add(detalle_factura)
         db.session.commit()  # Commit después de agregar todos los detalles
-
+        factura.update_inventory()
+        
         flash('Factura creada exitosamente')
         return redirect(url_for('billing.ready_billing'))
 
