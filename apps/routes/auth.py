@@ -12,7 +12,7 @@ from apps import app
 
 
 from apps.models.user import User
-
+from apps.models.vehicle_reception import VehicleReception
 auth = Blueprint('auth', __name__)
 
 
@@ -97,11 +97,11 @@ def set_role(f):
 @auth.route('/', methods=['GET', 'POST'])
 @set_role
 def home(user):
-    print(user)
+    reception_vehicle = VehicleReception.query.all()
     if g.role == 'Administrador':
-        return render_template('admin/index.html', user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
+        return render_template('admin/index.html', reception_vehicle=reception_vehicle, user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
     elif g.role == 'Usuario':
-        return render_template('views/index.html', user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
+        return render_template('views/index.html', reception_vehicle=reception_vehicle, user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
     return redirect(url_for('auth.login'))
 
 
