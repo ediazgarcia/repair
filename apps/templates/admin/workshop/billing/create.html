@@ -9,7 +9,8 @@
 <!-- Page Heading -->
 <div class="d-sm-flex justify-content-end mb-4">
     <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Facturación</h1>
-    <a href="{{url_for('billing.get_billing')}}" class="btn btn-primary btn-circle btn-lg m-1" title="Ver Historial de Facturas">
+    <a href="{{url_for('billing.get_billing')}}" class="btn btn-primary btn-circle btn-lg m-1"
+        title="Ver Historial de Facturas">
         <i class="fas fa-list"></i>
     </a>
 </div>
@@ -33,14 +34,16 @@
                                 <div class="form-group col-md-6">
                                     <label for="">Orden de Servicio</label>
                                     <select id="orders_services_id" name="orders_services_id"
+                                        onchange="cargarPrecioServicio(this)"
                                         class="form-control js-example-basic-single">
                                         <option value="" disabled selected></option>
                                         <option value="0">Ninguna</option>
                                         {% for order_service in order_service%}
-                                        <option value="{{order_service.id}}">Orden {{order_service.order_num}}
-                                            "{{order_service.description}}" por
-                                            {{order_service.employee}}
-                                        </option>
+                                        <option value="{{order_service.id}}" id="{{ order_service.id }}"
+                                            data-price="{{ order_service.price }}">
+                                            Orden {{order_service.order_num}}
+                                            " {{order_service.description}}" - ${{ order_service.price }} por
+                                            {{order_service.employee}} </option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -76,6 +79,7 @@
                                     <th>Producto</th>
                                     <th>Cantidad</th>
                                     <th>Precio Unitario</th>
+                                    <th>Precio Servicios</th>
                                     <th>Precio Total</th>
                                 </tr>
                                 <tr>
@@ -92,6 +96,10 @@
                                             oninput="calcularSubtotal(this)" required min="1"></td>
                                     <td><input type="number" name="precio_unitario" class="form-control"
                                             oninput="calcularSubtotal(this)" readonly></td>
+
+                                    <td><input type="number" name="price" id="price" class="form-control" oninput=""
+                                            readonly></td>
+
                                     <td><input type="number" name="subtotal" oninput="calcularSubtotal(this)"
                                             class="form-control" readonly></td>
                                 </tr>
@@ -133,6 +141,7 @@
             '<option value="0" selected disabled></option>{% for product in product %}<option value="{{ product["id"] }}" data-unit-price="{{ product["price"] }}">{{product["description"] }}</option>{% endfor %}</select></td>' +
             '<td><input type="number" name="cantidad" class="form-control" oninput="calcularSubtotal(this)" required></td>' +
             '<td><input type="number" name="precio_unitario" class="form-control" oninput="calcularSubtotal(this)" readonly></td>' +
+            '<td><input type="number" name="price" class="form-control" oninput="calcularSubtotal(this)" readonly></td>' +
             '<td><input type="number" name="subtotal"  class="form-control" oninput="calcularSubtotal(this)" readonly></td>' +
             '<td><button type="button" class="btn btn-danger" onclick="eliminarFila(this)"><i class="fa fa-trash"></i></button></td>' + // Agrega un botón de eliminación
             '</tr>';
@@ -153,6 +162,14 @@
         var row = selectElement.parentNode.parentNode;
         var precioUnitarioInput = row.querySelector('input[name="precio_unitario"]');
         precioUnitarioInput.value = unitPrice;
+    }
+
+    // Función para cargar el precio de orden de servicios en base a la orden seleccionada
+    function cargarPrecioServicio(selectElement) {
+        var price = selectElement.options[selectElement.selectedIndex].getAttribute('data-price');
+        var row = selectElement.parentNode.parentNode;
+        var precioInput = row.querySelector('input[name="price"]');
+        precioInput.value = price;
     }
 
     // Función para calcular el subtotal en base a la cantidad y precio unitario ingresados

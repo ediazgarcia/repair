@@ -56,6 +56,7 @@ def create_billing(user=None):
         client = Customer.query.filter_by(id=client_id).first()
         orders_services = ServiceOrder.query.filter_by(
             id=orders_services_id).first()
+
         # Obtener una lista de los valores del campo "detalle"
         detalles = request.form.getlist('detalle')
         # Obtener una lista de los valores del campo "cantidad"
@@ -81,7 +82,8 @@ def create_billing(user=None):
         while Factura.numero_orden_existe_en_bd(order_num):
             order_num = "FT-" + str(next(order_num_counter_service))
 
-        factura = Factura(order_num=order_num, client=client, total=total, orders_services=orders_services, company=company, payments=payments)
+        factura = Factura(order_num=order_num, client=client, total=total,
+                          orders_services=orders_services, company=company, payments=payments)
         factura.details = []
         db.session.add(factura)
         db.session.commit()
@@ -100,14 +102,15 @@ def create_billing(user=None):
             db.session.add(detalle_factura)
         db.session.commit()  # Commit después de agregar todos los detalles
         factura.update_inventory()
-        
+
         flash('Factura creada exitosamente')
         return redirect(url_for('billing.ready_billing'))
 
     customers = Customer.query.all()
-    payments= Payments.query.all()
+    payments = Payments.query.all()
     companies = Company.query.all()
-    order_service = ServiceOrder.query.filter(ServiceOrder.status=="Finalizada").all()
+    order_service = ServiceOrder.query.filter(
+        ServiceOrder.status == "Finalizada").all()
     product = db.session.query(Product).join(Inventory).filter(
         Inventory.set_stock > Inventory.min_stock).all()
     if g.role == 'Administrador':
@@ -129,6 +132,8 @@ def ready_billing(user=None):
         return render_template('views/workshop/billing/done.html', ultimo_id=ultimo_id)
 
 # Delete
+
+
 @billing.route("/delete/<int:id>", methods=["GET"])
 @set_role
 def delete_billing(id, user=None):
