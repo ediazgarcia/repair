@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Taller' %}
+context = {'ultimo_id': ultimo_id}
+<h2>{% block title %}Facturación{% endblock %}</h2>
+
+
+
+{% block content %}
+
+<!-- Page Heading -->
+<div class="d-sm-flex justify-content-end mb-4">
+    <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Facturación</h1>
+    <a href="{{url_for('billing.get_billing')}}" class="btn btn-primary btn-circle btn-lg m-1">
+        <i class="fas fa-list"></i>
+    </a>
+</div>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('billing.create_billing')}}">Facturación</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Factura Emitida</li>
+    </ol>
+</nav>
+
+<!-- Content Row -->
+<div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+        <!-- New Row Form cabecera de factura -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="p-5">
+                    <div class="col-12 text-center">
+                        <img src="{{url_for('static', filename='img/check.png')}}" alt="" width="150">
+                        <h1 class="mb-4">Factura Emitida</h1>
+                        <a href="{{ url_for('billing.print_billing', id=ultimo_id) }}" class="btn btn-primary col-2 rounded-button">Imprimir Factura</a>
+                        <a href="{{url_for('billing.create_billing')}}" class="btn btn-secondary col-2 rounded-button">Volver a Facturación</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,17 +1,18 @@
 {% extends 'layout.html' %}
 {% set current_page = 'Directorio' %}
-<h2>{% block title %}Clientes{% endblock %}</h2>
+<h2>{% block title %}Proveedores{% endblock %}</h2>
+
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h1 mb-0 text-gray-800 d-flex">Clientes</h1>
-    <a href="{{url_for('client.create_client')}}" class="btn btn-primary btn-circle btn-lg ml-auto" title="Nuevo Cliente">
+    <h1 class="h1 mb-0 text-gray-800 d-flex">Proveedores</h1>
+    <a href="{{url_for('provider.create_provider')}}" class="btn btn-primary btn-circle btn-lg ml-auto" title="Nuevo Proveedor">
         <i class="fa fa-plus" aria-hidden="true"></i>
     </a>
 </div>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+        <li class="breadcrumb-item active" aria-current="page">Proveedores</li>
     </ol>
 </nav>
 <!-- Content Row -->
@@ -19,16 +20,16 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-5">
     <div class="card-header py-2">
-        <h3 class="text-gray-900 mb-4">Todos los Clientes</h3>
+        <h3 class="text-gray-900 mb-4">Todos los Proveedores</h3>
     </div>
     <div class="card-body table-custom">
         <div class="table-responsive">
             <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th class="th-sm">Nombre
+                        <th class="th-sm">Razón Social
                         </th>
-                        <th class="th-sm">Apellido
+                        <th class="th-sm">Nombre Comercial
                         </th>
                         <th class="th-sm">Tipo de Documento
                         </th>
@@ -53,26 +54,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for customer in customers %}
+                    {% for provider in providers%}
                     <tr>
-                        <td>{{customer.first_name}}</td>
-                        <td>{{customer.last_name}}</td>
-                        <td>{{customer.document_type}}</td>
-                        <td>{{customer.document_number}}</td>
-                        <td>{{customer.email}}</td>
-                        <td>{{customer.phone}}</td>
-                        <td>{{customer.city}}</td>
-                        <td>{{customer.address}}</td>
-                        <td>{{customer.company.trade_name}}</td>
-                        <td>{{customer.created}}</td>
-                        <td>{{customer.updated}}</td>
+                        <td>{{provider.business_name}}</td>
+                        <td>{{provider.trade_name}}</td>
+                        <td>{{provider.document_type}}</td>
+                        <td>{{provider.document_number}}</td>
+                        <td>{{provider.email}}</td>
+                        <td>{{provider.phone}}</td>
+                        <td>{{provider.city}}</td>
+                        <td>{{provider.address}}</td>
+                        <td>{{provider.company.trade_name}}</td>
+                        <td>{{provider.created}}</td>
+                        <td>{{provider.updated}}</td>
                         <td>
                             <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('client.update_client', id=customer.id) }}'" title="Editar">
+                                onclick="location.href='{{ url_for('provider.update_provider', id=provider.id) }}'" title="Editar">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('client.delete_client', id=customer.id) }}'" title="Eliminar">
+                                onclick="location.href='{{ url_for('provider.delete_provider', id=provider.id) }}'" title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

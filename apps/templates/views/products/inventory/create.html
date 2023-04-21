@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Productos' %}
+<h2>{% block title %}Nuevo Producto en Inventario{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex justify-content-end mb-4">
+  <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Inventario</h1>
+  <a href="{{url_for('inventory.get_inventory')}}" class="btn btn-primary btn-circle btn-lg m-1" title="Ver Todos los Productos en Inventario">
+      <i class="fas fa-list"></i>
+  </a>
+</div>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{url_for('inventory.get_inventory')}}">Inventario</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Nuevo Producto en Inventario</li>
+  </ol>
+</nav>
+
+<!-- Content Row -->
+<div class="card o-hidden border-0 shadow-lg my-5">
+  <div class="card-body p-0">
+    <!-- Nested Row within Card Body -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="p-5">
+          <div class="text-left">
+            <h3 class="text-gray-900 mb-4">Nuevo Producto en Inventario</h3>
+          </div>
+          <form action="{{url_for('inventory.create_inventory')}}" method="POST">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="">Producto</label>
+                <select name="product_id" class="form-control js-example-basic-single">
+                  <option value="" disabled selected></option>
+                  {% for product in products%}
+                  <option value="{{product.id}}">{{product.description}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="min_stock">Stock Mínimo</label>
+                <input type="number" name="min_stock" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="set_stock">Stock Actual</label>
+                <input type="number" name="set_stock" class="form-control rounded-imput">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="type">Tipo</label>
+                <select name="type" class="form-control rounded-select">
+                  <option value="" disabled selected></option>
+                  <option value="Venta">Venta</option>
+                  <option value="Almacén">Almacén</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="location">Ubicación</label>
+                <input type="text" name="location" class="form-control rounded-imput">
+              </div>
+            </div>
+            <div class="col-12 text-center">
+              <button class="btn btn-primary col-6 rounded-button" type="submit">Crear</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -22,8 +22,10 @@ client = Blueprint('client', __name__, url_prefix='/client')
 @set_role
 def get_client(user=None):
     customers = Customer.query.all()
-    return render_template('admin/directory/clients/list.html', customers=customers)
-
+    if g.role == 'Administrador':
+        return render_template('admin/directory/clients/list.html', customers=customers)
+    else:
+        return render_template('views/directory/clients/list.html', customers=customers)
 
 # create
 @client.route('/create', methods=['GET', 'POST'])
@@ -99,7 +101,11 @@ def create_client(user=None):
             return redirect(url_for('client.create_client'))
 
     companies = Company.query.all()
-    return render_template('admin/directory/clients/create.html', companies=companies)
+    if g.role=="Administrador":
+        return render_template('admin/directory/clients/create.html', companies=companies)
+    else:
+        return render_template('views/directory/clients/create.html', companies=companies)
+
 
 
 # update
@@ -139,8 +145,10 @@ def update_client(id, user=None):
 
     # pasar el valor actual del tipo de documento al renderizado de la plantilla
     document_type_value = client.document_type
-
-    return render_template('admin/directory/clients/update.html', client=client, companies=companies, document_type_value=document_type_value)
+    if g.role == 'Administrador':
+        return render_template('admin/directory/clients/update.html', client=client, companies=companies, document_type_value=document_type_value)
+    else:
+        return render_template('views/directory/clients/update.html', client=client, companies=companies, document_type_value=document_type_value)
 
 
 # Delete

@@ -98,7 +98,7 @@
 
         var fila = '<tr>' +
             '<td><select class="form-control js-example-basic-single" name="detalle" id="detalle" onchange="cargarPrecioUnitario(this)">' +
-            '<option value="0" selected disabled></option>{% for product in product %}<option value="{{ product["id"] }}" data-unit-price="{{ product["price"] }}">{{product["description"] }}</option>{% endfor %}</select></td>' +
+            '<option value="0" selected disabled></option>{% for product in product %}<option value="{{ product["id"] }}" data-unit-price="{{ product["cost"] }}">{{product["description"] }}</option>{% endfor %}</select></td>' +
             '<td><input type="number" name="cantidad" class="form-control" oninput="calcularSubtotal(this)" required></td>' +
             '<td><input type="number" name="precio_unitario" class="form-control" oninput="calcularSubtotal(this)" readonly></td>' +
             '<td><input type="number" name="subtotal"  class="form-control" oninput="calcularSubtotal(this)" readonly></td>' +

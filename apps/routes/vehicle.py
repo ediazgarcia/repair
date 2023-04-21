@@ -17,7 +17,10 @@ vehicle = Blueprint('vehicle', __name__, url_prefix='/vehicle')
 @set_role
 def get_vehicle(user=None):
     vehicle=Vehicle.query.all()
-    return render_template('admin/vehicles/vehicle/list.html',vehicle=vehicle)
+    if g.role == 'Administrador':
+        return render_template('admin/vehicles/vehicle/list.html',vehicle=vehicle)
+    else:
+        return render_template('views/vehicles/vehicle/list.html',vehicle=vehicle)
 
 
 @vehicle.route("/create", methods=['GET', 'POST'])
@@ -53,7 +56,10 @@ def create_vehicle(user=None):
             flash(f'Error inesperado: {str(err)}', category='error')
             
     customers = Customer.query.all()
-    return render_template('admin/vehicles/vehicle/create.html', customers=customers)
+    if g.role == 'Administrador':
+        return render_template('admin/vehicles/vehicle/create.html', customers=customers)
+    else:
+        return render_template('views/vehicles/vehicle/create.html', customers=customers)
 
 
 @vehicle.route("/update/<int:id>", methods=["GET", "POST"])
@@ -88,8 +94,10 @@ def update_vehicle(id, user=None):
 
             flash('¡Vehículo actualizado con éxito!')
             return redirect(url_for('vehicle.get_vehicle'))
-    
-    return render_template('admin/vehicles/vehicle/update.html', vehicle=vehicle)
+    if g.role == 'Administrador':
+        return render_template('admin/vehicles/vehicle/update.html', vehicle=vehicle)
+    else:
+        return render_template('views/vehicles/vehicle/update.html', vehicle=vehicle)
 
 @vehicle.route("/delete/<id>", methods=["GET"])
 @set_role

@@ -76,8 +76,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Servicios</h6>
                         <a class="collapse-item"
-                            href="{{url_for('vehicle_reception.create_vehicle_reception')}}">Recepción de Vehículos</a>
-                        <a class="collapse-item" href="{{url_for('orders_services.create_orders_services')}}">Ordenes
+                            href="{{url_for('vehicle_reception.get_vehicle_reception')}}">Recepción de Vehículos</a>
+                        <a class="collapse-item" href="{{url_for('orders_services.get_orders_services')}}">Ordenes
                             de Servicio</a>
                         <h6 class="collapse-header">Ventas y Compras</h6>
                         <a class="collapse-item" href="{{url_for('billing.create_billing')}}">Facturación</a>
@@ -141,6 +141,89 @@
 
         <!-- Sidebar Usuarios Básicos -->
 
+        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url_for('auth.home')}}">
+                <div class="sidebar-brand-icon">
+                    <img class="logo" src="{{ url_for('static', filename='img/Logo_White.png') }}" alt="" />
+                </div>
+            </a>
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item {% if current_page == 'Inicio' %} active{% endif %}">
+                <a class="nav-link" href="{{url_for('auth.home')}}">
+                    <i class="fa fa-home"></i>
+                    <span>Inicio</span></a>
+            </li>
+            <!-- Nav Item - DIRECTORIOS Collapse Menu -->
+            <li class="nav-item {% if current_page == 'Directorio' %} active{% endif %}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa fa-sitemap" aria-hidden="true"></i>
+                    <span>Directorio</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{url_for('client.get_client')}}">Clientes</a>
+                        <a class="collapse-item" href="{{url_for('employee.get_employee')}}">Empleados</a>
+                        <a class="collapse-item" href="{{url_for('provider.get_provider')}}">Proveedores</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Taller Collapse Menu -->
+            <li class="nav-item {% if current_page == 'Taller' %} active{% endif %}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                    <span>Taller</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Servicios</h6>
+                        <a class="collapse-item"
+                            href="{{url_for('vehicle_reception.get_vehicle_reception')}}">Recepción de Vehículos</a>
+                        <a class="collapse-item" href="{{url_for('orders_services.get_orders_services')}}">Ordenes
+                            de Servicio</a>
+                        <h6 class="collapse-header">Ventas y Compras</h6>
+                        <a class="collapse-item" href="{{url_for('billing.create_billing')}}">Facturación</a>
+                        <a class="collapse-item" href="{{url_for('shopping.create_shopping')}}">Compras</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - Vehiculos Collapse Menu -->
+            <li class="nav-item {% if current_page == 'Vehículos' %} active{% endif %}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fa fa-car" aria-hidden="true"></i>
+                    <span>Vehículos</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{url_for('vehicle.get_vehicle')}}">Vehículos</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Nav Item - PRODUCTOS Collapse Menu -->
+            <li class="nav-item {% if current_page == 'Productos' %} active{% endif %}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseproducts"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa-solid fa-box" aria-hidden="true"></i>
+                    <span>Productos</span>
+                </a>
+                <div id="collapseproducts" class="collapse" aria-labelledby="headingProduct"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{url_for('product.get_product')}}">Productos</a>
+                        <a class="collapse-item" href="{{url_for('inventory.get_inventory')}}">Inventario</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+
         {% endif %}
         <!-- End of Sidebar -->
 
@@ -158,46 +241,8 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-<!--                     <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
-                                aria-label="Search" aria-describedby="basic-addon2" />
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> -->
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Buscar..." aria-label="Search"
-                                            aria-describedby="basic-addon2" />
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -238,70 +283,33 @@
 
                 {% else %}
 
+                <!-- Topbar Usuarios basicos -->
+
                 <nav class="navbar navbar-expand navbar-light topbar bg-white mb-4 static-top shadow">
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                   <!--  <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
-                                aria-label="Search" aria-describedby="basic-addon2" />
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> -->
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Buscar..." aria-label="Search"
-                                            aria-describedby="basic-addon2" />
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    {% if 'user_id' in session and session['role'] == 'Usuario'
-                                    %}
-                                    <p>{{ g.fullname }} | {{ g.role }}</p>
+                                    {% if 'user_id' in session and session['role'] ==
+                                    'Usuario' %}
+                                    <p class="m-0">{{ g.fullname }}</p>
                                     {% endif %}
                                 </span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ url_for('static', filename='img/profile.png') }}" />
+                                <img class="img-profile rounded-circle" src="{{ g.avatar_url }}" id="navbar-pic" />
                             </a>
 
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{url_for('user.get_user')}}">
+                                <a class="dropdown-item" href="{{url_for('auth.profile')}}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Mi Perfil
                                 </a>
@@ -318,6 +326,7 @@
                         </li>
                     </ul>
                 </nav>
+
                 {% endif %}
                 <!-- End of Sidebar -->
                 <!-- End of Topbar -->
