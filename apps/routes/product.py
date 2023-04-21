@@ -70,32 +70,34 @@ def create_product(user=None):
     else:
         return render_template('views/products/product/create.html', company=company, providers=providers)
 
+
 @product.route("/update/<int:id>", methods=["GET", "POST"])
 @set_role
 def update_product(id, user=None):
     product = Product.query.get_or_404(id)
 
     if request.method == "POST":
-            description = request.form['description']
-            type = request.form['type']
-            category = request.form['category']
-            cost = request.form['cost']
-            price = request.form['price']
-            status = request.form['status']
+        description = request.form['description']
+        type = request.form['type']
+        category = request.form['category']
+        cost = request.form['cost']
+        price = request.form['price']
+        status = request.form['status']
 
-            product.description=description
-            product.type=type
-            product.category=category
-            product.cost=cost
-            product.price=price
-            product.status=status
+        product.description = description
+        product.type = type
+        product.category = category
+        product.cost = cost
+        product.price = price
+        product.status = status
 
-            db.session.commit()
+        db.session.commit()
 
-            flash('¡Producto actualizado con éxito!')
-            return redirect(url_for('product.get_product'))
+        flash('¡Producto actualizado con éxito!')
+        return redirect(url_for('product.get_product'))
 
-    return render_template('admin/products/product/update.html', product=product) 
+    return render_template('admin/products/product/update.html', product=product)
+
 
 @product.route("/delete/<int:id>", methods=["GET"])
 @set_role

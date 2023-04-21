@@ -6,7 +6,8 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h1 mb-0 text-gray-800 d-flex">Ordenes de Servicios</h1>
-    <a href="{{url_for('orders_services.get_orders_services')}}" class="btn btn-primary btn-circle btn-lg ml-auto" title="Ver Historial de Ordenes de Servicio">
+    <a href="{{url_for('orders_services.get_orders_services')}}" class="btn btn-primary btn-circle btn-lg ml-auto"
+        title="Ver Historial de Ordenes de Servicio">
         <i class="fa fa-list" aria-hidden="true"></i>
     </a>
 </div>
@@ -34,7 +35,8 @@
                                 <select name="vehicle_reception_id" class="form-control js-example-basic-single">
                                     <option value="" disabled selected></option>
                                     {% for vehicle_reception in vehicle_reception%}
-                                    <option value="{{vehicle_reception.id}}">Orden {{vehicle_reception.order_num}} {{vehicle_reception.reception_reason}} del
+                                    <option value="{{vehicle_reception.id}}">Orden {{vehicle_reception.order_num}}
+                                        {{vehicle_reception.reception_reason}} del
                                         {{vehicle_reception.vehicle}}
                                     </option>
                                     {% endfor %}
@@ -54,16 +56,28 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-10">
                                 <label for="product_id">Servicio a realizar</label>
-                                <select name="product_id" class="form-control js-example-basic-single">
+                                <select name="product_id" id="product_id" onchange="updatePrice()"
+                                    class="form-control js-example-basic-single">
                                     <option value="" disabled selected></option>
                                     {% for product in product%}
-                                    <option value="{{product.id}}">{{product.description}}</option>
+                                    <option value="{{ product.id }}" id="product-{{ product.id }}"
+                                        data-price="{{ product.price }}">
+                                        {{ product.description }}
+                                    </option>
+
                                     {% endfor %}
                                 </select>
                             </div>
+                            <div class="form-group col-md-2">
+                                <label for="price">Precio</label>
+                                <input type="number" id="price" name="price" value=""
+                                    class="form-control rounded-select" readonly>
+                            </div>
                         </div>
+
+
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="description">Descripción del servicio a realizar</label>
@@ -98,5 +112,21 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        function updatePrice() {
+            const productSelect = document.getElementById("product_id");
+            const priceInput = document.getElementById("price");
+
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            const selectedPrice = selectedOption.getAttribute("data-price");
+            priceInput.value = selectedPrice;
+        }
+
+        const productSelect = document.getElementById("product_id");
+        productSelect.addEventListener("change", updatePrice);
+    </script>
+
 
     {% endblock %}

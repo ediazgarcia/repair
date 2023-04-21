@@ -6,7 +6,8 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Ordenes de Servicios</h1>
-    <a href="{{url_for('orders_services.create_orders_services')}}" class="btn btn-primary btn-circle btn-lg ml-auto" title="Nueva Orden de Servicio">
+    <a href="{{url_for('orders_services.create_orders_services')}}" class="btn btn-primary btn-circle btn-lg ml-auto"
+        title="Nueva Orden de Servicio">
         <i class="fa fa-plus" aria-hidden="true"></i>
     </a>
 </div>
@@ -35,6 +36,7 @@
                         <th>No. de Orden</th>
                         <th>Recepción de Vehículo</th>
                         <th>Descripción del Servicio</th>
+                        <th>Precio</th>
                         <th>Mecánico Asignado</th>
                         <th>Observaciones</th>
                         <th>Fecha/Hora de Recepción</th>
@@ -49,23 +51,27 @@
                         <td>{{orders_services.order_num}}</td>
                         <td>{{orders_services.vehicle_reception}}</td>
                         <td>{{orders_services.description}}</td>
+                        <td>{{orders_services.price}}</td>
                         <td>{{orders_services.employee}}</td>
                         <td>{{orders_services.observations}}</td>
                         <td>{{orders_services.start_date}}</td>
                         <td>{{orders_services.end_date}}</td>
                         <td>
-                            {% set state_colors = {'Finalizada': 'badge-success', 'Pendiente': 'badge-warning', 'Facturada':
+                            {% set state_colors = {'Finalizada': 'badge-success', 'Pendiente': 'badge-warning',
+                            'Facturada':
                             'badge-info', 'Rechazada': 'badge-danger'} %}
                             {% set state_color = state_colors.get(orders_services.status, 'badge-secondary') %}
                             <span class="badge {{state_color}}">{{orders_services.status}}</span>
                         </td>
                         <td>
                             <button class="btn  btn-sm btn-primary"
-                                onclick="location.href='{{ url_for('orders_services.update_orders_services', id=orders_services.id) }}'" title="Editar">
+                                onclick="location.href='{{ url_for('orders_services.update_orders_services', id=orders_services.id) }}'"
+                                title="Editar">
                                 <i class="fa fa-edit"></i>
                             </button>
                             <button class="btn btn-sm btn-danger"
-                                onclick="location.href='{{ url_for('orders_services.delete_orders_services', id=orders_services.id) }}'" title="Eliminar">
+                                onclick="location.href='{{ url_for('orders_services.delete_orders_services', id=orders_services.id) }}'"
+                                title="Eliminar">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </td>

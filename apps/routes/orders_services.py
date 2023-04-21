@@ -34,6 +34,7 @@ def create_orders_services(user=None):
     try:
         if request.method == 'POST':
             description = request.form['description']
+            price = request.form['price']
             observations = request.form['observations']
             start_date = str(request.form['start_date'])
             end_date = str(request.form['end_date'])
@@ -57,7 +58,7 @@ def create_orders_services(user=None):
             product = Product.query.filter_by(id=product_id).first()
 
             new_order = ServiceOrder(order_num=order_num, description=description, observations=observations, start_date=start_date,
-                                     end_date=end_date, status=status, vehicle_reception=vehicle_reception, employee=employee, product=product)
+                                     end_date=end_date, status=status, vehicle_reception=vehicle_reception, employee=employee, product=product, price=price)
 
             db.session.add(new_order)
             db.session.commit()
@@ -67,8 +68,10 @@ def create_orders_services(user=None):
         flash(f'Error inesperado: {str(err)}', category='error')
 
     vehicle_reception = VehicleReception.query.all()
-    product = Product.query.filter(Product.type=="Servicio").filter(Product.status=="Activo").all()
-    employee = Employee.query.filter(Employee.position=="Mecánico").filter(Employee.state=="Activo").all()
+    product = Product.query.filter(Product.type == "Servicio").filter(
+        Product.status == "Activo").all()
+    employee = Employee.query.filter(Employee.position == "Mecánico").filter(
+        Employee.state == "Activo").all()
     if g.role == 'Administrador':
         return render_template('admin/workshop/ordersservices/create.html', orders_services=orders_services, employee=employee, product=product, vehicle_reception=vehicle_reception)
     else:
