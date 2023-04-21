@@ -28,21 +28,8 @@
                 <div class="p-5">
                     <div class="text-left">
                         <h3 class="text-gray-900 mb-4">Nueva Factura</h3>
-                        <form method="post" action="{{url_for('billing.create_billing')}}">
+                        <form method="post" action="{{url_for('quick_billing.create_billing')}}">
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="">Orden de Servicio</label>
-                                    <select id="orders_services_id" name="orders_services_id"
-                                        class="form-control js-example-basic-single">
-                                        <option value="" disabled selected></option>
-                                        {% for order_service in order_service%}
-                                        <option value="{{order_service.id}}">Orden {{order_service.order_num}}
-                                            "{{order_service.description}}" por
-                                            {{order_service.employee}}
-                                        </option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
                                 <div class="form-group col-md-6">
                                     <label for="company_id">Datos de la Empresa</label>
                                     <select id="company_id" name="company_id"
@@ -60,6 +47,7 @@
                                     <select id="client_id" name="client_id"
                                         class="form-control js-example-basic-single">
                                         <option value="" selected disabled></option>
+                                        <option value="0">Venta Rápida</option>
                                         {% for customer in customers %}
                                         <option value="{{customer.id}}">{{customer.first_name}} {{customer.last_name}}
                                         </option>
