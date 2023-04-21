@@ -100,8 +100,10 @@ def update_orders_services(id, user=None):
 
         flash('¡Orden actualizada con éxito!')
         return redirect(url_for('orders_services.get_orders_services'))
-
-    return render_template('admin/workshop/ordersservices/update.html', orders_services=orders_services)
+    if g.role == 'Administrador':
+        return render_template('admin/workshop/ordersservices/update.html', orders_services=orders_services)
+    else:
+        return render_template('views/workshop/ordersservices/update.html', orders_services=orders_services)
 
 
 @orders_services.route("/delete/<id>", methods=["GET"])

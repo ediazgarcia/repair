@@ -88,7 +88,10 @@ def create_vehicle_reception(user=None):
     vehicle = Vehicle.query.all()
     employee = Employee.query.filter(Employee.position!="Mecánico").all()
     vehicle_reception = VehicleReception.query.all()
-    return render_template('admin/workshop/vehiclereception/create.html', vehicle=vehicle, employee=employee, vehicle_reception=vehicle_reception)
+    if g.role == 'Administrador':
+        return render_template('admin/workshop/vehiclereception/create.html', vehicle=vehicle, employee=employee, vehicle_reception=vehicle_reception)
+    else:
+        return render_template('views/workshop/vehiclereception/create.html', vehicle=vehicle, employee=employee, vehicle_reception=vehicle_reception)
 
 
 @vehicle_reception.route("/update/<int:id>", methods=["GET", "POST"])

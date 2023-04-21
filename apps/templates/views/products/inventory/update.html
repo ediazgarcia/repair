@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Productos' %}
+<h2>{% block title %}Editar Producto en Inventario{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex justify-content-end mb-4">
+  <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Inventario</h1>
+  <a href="{{url_for('inventory.get_inventory')}}" class="btn btn-primary btn-circle btn-lg m-1" title="Ver Todos los Productos en Inventario">
+      <i class="fas fa-list"></i>
+  </a>
+</div>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{url_for('inventory.get_inventory')}}">Inventario</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar Producto en Inventario</li>
+  </ol>
+</nav>
+
+<!-- Content Row -->
+<div class="card o-hidden border-0 shadow-lg my-5">
+  <div class="card-body p-0">
+    <!-- Nested Row within Card Body -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="p-5">
+          <div class="text-left">
+            <h3 class="text-gray-900 mb-4">Editar Producto en Inventario</h3>
+          </div>
+          <form action="{{url_for('inventory.update_inventory', id=inventory.id)}}" method="POST">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="">Producto</label>
+                <select name="product_id" class="form-control js-example-basic-single" disabled>
+                  <option value="{{inventory.product_id}}" selected>{{inventory.product}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="min_stock">Stock Mínimo</label>
+                <input type="number" name="min_stock" class="form-control rounded-imput" value="{{inventory.min_stock}}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="set_stock">Stock Actual</label>
+                <input type="number" name="set_stock" class="form-control rounded-imput"  value="{{inventory.set_stock}}">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="type">Tipo</label>
+                <select name="type" class="form-control rounded-select">
+                  <option value="" {% if not inventory.type %}selected{% endif %} disabled></option>
+                  <option value="Venta" {% if inventory.type=="Venta" %}selected{% endif %}>Venta</option>
+                  <option value="Almacen" {% if inventory.type=="Almacen" %}selected{% endif %}>Almacen</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="location">Ubicación</label>
+                <input type="text" name="location" class="form-control rounded-imput" value="{{inventory.location}}">
+              </div>
+            </div>
+            <div class="col-12 text-center">
+              <button class="btn btn-primary col-6 rounded-button" type="submit">Actualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

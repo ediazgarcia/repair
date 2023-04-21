@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Taller' %}
+<h2>{% block title %}Historial de Facturas{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<h1 class="h1 mb-0 text-gray-800 d-flex"></h1>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Facturación</h1>
+    <a href="{{url_for('billing.create_billing')}}" class="btn btn-primary btn-circle btn-lg ml-auto"
+        title="Nueva Factura">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+</div>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url_for('billing.create_billing')}}">Facturación</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Historial de Facturas</li>
+    </ol>
+</nav>
+<!-- Content Row -->
+
+<!-- DataTales Example -->
+<div class="card shadow mb-5">
+    <div class="card-header py-2">
+        <h3 class="text-gray-900 mb-4">Historial de Facturas</h3>
+    </div>
+    <div class="card-body table-custom">
+        <div class="table-responsive">
+            <blockquote>Pulsa en "Imprimir" en la factura deseada para ver más información.</blockquote>
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No. de factura</th>
+                        <th>Cliente</th>
+                        <th>Método de Pago</th>
+                        <th>Total</th>
+                        <th>No. de Orden</th>
+                        <th>Creada</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for factura in factura%}
+                    <tr>
+                        <td>{{factura.order_num}}</td>
+                        <td>{{factura.client|default('Venta Rápida',true)}}</td>
+                        <td>{{factura.payments}}</td>
+                        <td>{{factura.total}}</td>
+                        <td>{{factura.orders_services|default('Ninguna',true)}}</td>
+                        <td>{{factura.created}}</td>
+                        <td>
+                            <button class="btn  btn-sm btn-primary"
+                                onclick="location.href='{{ url_for('billing.print_billing', id=factura.id) }}'" title="Imprimir">
+                                <i class="fa fa-print"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="location.href='{{ url_for('billing.delete_billing', id=factura.id) }}'" title="Eliminar">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- </div> -->
+
+{% endblock %}

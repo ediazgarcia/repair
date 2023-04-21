@@ -1,20 +1,19 @@
 {% extends 'layout.html' %}
 {% set current_page = 'Directorio' %}
-<h2>{% block title %}Editar Cliente{% endblock %}</h2>
+<h2>{% block title %}Editar Proveedor{% endblock %}</h2>
 
 {% block content %}
 <!-- Page Heading -->
-
 <div class="d-sm-flex justify-content-end mb-4">
-  <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Clientes</h1>
-  <a href="{{url_for('client.get_client')}}" class="btn btn-primary btn-circle btn-lg m-1" title="Ver Todos los Clientes">
+  <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Proveedores</h1>
+  <a href="{{url_for('provider.get_provider')}}" class="btn btn-primary btn-circle btn-lg m-1" title="Ver Todos los Proveedores">
       <i class="fas fa-list"></i>
   </a>
 </div>
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{url_for('client.get_client')}}">Clientes</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Editar Cliente</li>
+    <li class="breadcrumb-item"><a href="{{url_for('provider.get_provider')}}">Proveedores</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar Proveedor</li>
   </ol>
 </nav>
 
@@ -26,70 +25,75 @@
       <div class="col-lg-12">
         <div class="p-5">
           <div class="text-left">
-            <h3 class="text-gray-900 mb-4">Editar Cliente</h3>
+            <h3 class="text-gray-900 mb-4">Editar Proveedor</h3>
           </div>
-          <form action="{{url_for('client.update_client', id=client.id)}}" method="POST">
+          <form action="{{url_for('provider.update_provider', id=provider.id)}}" method="POST">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="first_name">Nombre</label>
-                <input type="text" id="first_name" name="first_name" value="{{client.first_name}}"
+                <label for="business_name">Razón Social</label>
+                <input type="text" id="business_name" name="business_name" value="{{provider.business_name}}"
                   class="form-control rounded-imput">
               </div>
               <div class="form-group col-md-6">
-                <label for="last_name">Apellido</label>
-                <input type="text" id="last_name" name="last_name" value="{{client.last_name}}"
+                <label for="trade_name">Nombre Comercial</label>
+                <input type="text" id="trade_name" name="trade_name" value="{{provider.trade_name}}"
                   class="form-control rounded-imput">
               </div>
+
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="document_type">Tipo de Documento</label>
                 <select id="document_type" name="document_type" class="form-control rounded-select">
-                  <option value="" {% if not client.document_type %}selected{% endif %} disabled>Seleccione el tipo de
+                  <option value="" {% if not provider.document_type %}selected{% endif %} disabled>Seleccione el tipo de
                     documento</option>
-                  <option value="Cédula" {% if client.document_type=="Cédula" %}selected{% endif %}>Cédula</option>
-                  <option value="Pasaporte" {% if client.document_type=="Pasaporte" %}selected{% endif %}>Pasaporte
+                  <option value="Cédula" {% if provider.document_type=="Cédula" %}selected{% endif %}>Cédula</option>
+                  <option value="RNC" {% if provider.document_type=="RNC" %}selected{% endif %}>RNC
                   </option>
                 </select>
               </div>
               <div class="form-group col-md-6">
                 <label for="document_number">No. de Documento</label>
-                <input type="text" id="document_number" name="document_number" value="{{client.document_number}}"
+                <input type="text" id="document_number" name="document_number" placeholder="Números sin guiones" value="{{provider.document_number}}"
                   class="form-control rounded-imput">
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-8">
                 <label for="email">Correo Electrónico</label>
-                <input type="email" id="email" name="email" value=" {{client.email}}"
+                <input type="email" id="email" name="email" value="{{provider.email}}"
                   class="form-control rounded-imput">
               </div>
               <div class="form-group col-md-4">
                 <label for="phone">Teléfono</label>
-                <input type="text" id="phone" name="phone" value="{{client.phone}}" class="form-control rounded-imput">
-              </div>
-              <div class="form-group col-md-4">
-                <label for="city">Provincia</label>
-                <input type="text" id="city" name="city" value="{{client.city}}" class="form-control rounded-imput">
+                <input type="tel" id="phone" name="phone" value="{{provider.phone}}" class="form-control rounded-imput"
+                  placeholder="Números sin guiones" maxlength="10">
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
+                <label for="city">Provincia</label>
+                <input type="text" id="city" name="city" value="{{provider.city}}" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-8">
                 <label for="address">Dirección</label>
-                <input type="text" id="address" name="address" value="{{client.address}}"
+                <input type="text" id="address" name="address" value="{{provider.address}}"
                   class="form-control rounded-imput">
               </div>
-              <div class="form-group col-md-6">
+
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
                 <label for="company_id">Empresa</label>
                 <select id="company_id" name="company_id" class="form-control rounded-select">
-                  <option value="" disabled {% if not client.company %}selected{% endif %}></option>
+                  <option value="" disabled {% if not provider.company %}selected{% endif %}>
+                  </option>
                   {% for company in companies %}
-                  <option value="{{ company.id }}" {% if client.company and client.company.id==company.id %}selected{%
-                    endif %}>{{ company.trade_name }}</option>
+                  <option value="{{ company.id }}" {% if provider.company and provider.company.id==company.id
+                    %}selected{% endif %}>{{ company.trade_name }}</option>
                   {% endfor %}
                 </select>
               </div>
-
             </div>
             <div class="col-12 text-center">
               <button class="btn btn-primary col-6 rounded-button" type="submit">Actualizar</button>

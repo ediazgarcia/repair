@@ -71,7 +71,12 @@ def update_inventory(id, user=None):
             flash('¡Producto en inventario actualizado con éxito!')
             return redirect(url_for('inventory.get_inventory'))
       
-     return render_template('admin/products/inventory/update.html', inventory=inventory) 
+     if g.role == 'Administrador':
+        return render_template('admin/products/inventory/update.html', inventory=inventory)
+     else:
+          return render_template('views/products/inventory/update.html', inventory=inventory)
+
+
 
 @inventory.route("/delete/<int:id>", methods=["GET"])
 @set_role

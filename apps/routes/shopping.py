@@ -93,7 +93,10 @@ def create_shopping(user=None):
     provider = Provider.query.all()
     product = db.session.query(Product).join(Inventory).filter(
         Inventory.set_stock > 0).all()
-    return render_template('admin/workshop/shopping/create.html', companies=companies, product=product, provider=provider)
+    if g.role == 'Administrador':
+        return render_template('admin/workshop/shopping/create.html', companies=companies, product=product, provider=provider)
+    else:
+        return render_template('views/workshop/shopping/create.html', companies=companies, product=product, provider=provider)
 
 
 @shopping.route("/done")

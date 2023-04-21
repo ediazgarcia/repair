@@ -1,0 +1,117 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Vehículos' %}
+<h2>{% block title %}Nuevo Vehículo{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex justify-content-end mb-4">
+  <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Vehículos</h1>
+  <a href="{{url_for('vehicle.get_vehicle')}}" class="btn btn-primary btn-circle btn-lg m-1" title="Ver Todos los Vehículos">
+      <i class="fas fa-list"></i>
+  </a>
+</div>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{url_for('vehicle.get_vehicle')}}">Vehículos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Nuevo Vehículo</li>
+  </ol>
+</nav>
+
+<!-- Content Row -->
+<div class="card o-hidden border-0 shadow-lg my-5">
+  <div class="card-body p-0">
+    <!-- Nested Row within Card Body -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="p-5">
+          <div class="text-left">
+            <h3 class="text-gray-900 mb-4">Nuevo Vehículo</h3>
+          </div>
+          <form action="{{url_for('vehicle.create_vehicle')}}" method="POST">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="client_id">Cliente</label>
+                <select name="client_id" class="form-control js-example-basic-single">
+                  <option value="" selected disabled></option>
+                  {% for customer in customers %}
+                  <option value="{{customer.id}}">{{customer.first_name}} {{customer.last_name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="brand">Marca</label>
+                <input type="text" name="brand" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="model">Modelo</label>
+                <input type="text" name="model" class="form-control rounded-imput">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="year">Año</label>
+                <input type="number" name="year" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="fuel_type">Tipo de Combustible</label>
+                <select name="fuel_type" class="form-control rounded-imput">
+                  <option value="" selected disabled></option>
+                  <option value="Gasolina">Gasolina</option>
+                  <option value="GLP">GLP</option>
+                  <option value="Gasoil/Diesel">Gasoil/Diesel</option>
+                  <option value="Gasolina y GLP">Gasolina y GLP</option>
+                  <option value="Eléctrico">Eléctrico</option>
+                  <option value="Híbrido">Híbrido</option>
+                  <option value="Otros">Otros</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="plate_number">Placa</label>
+                <input type="text" name="plate_number" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="chassis_number">Chasis</label>
+                <input type="text" name="chassis_number" class="form-control rounded-imput">
+              </div>
+              <div class="form-group col-md-2">
+                <label for="color" class="form-label">Color</label>
+                <input type="color" class="form-control form-control-color rounded-imput" name="color" id="exampleColorInput" value="#ffffff"
+                  title="Color del Vehículo">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="transmission">Transmisión</label>
+                <select class="form-control rounded-imput" name="transmission">
+                  <option value="" disabled selected></option>
+                  <option value="Automática">Automática</option>
+                  <option value="Mecánica">Mecánica</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="cylinder">Cilindraje</label>
+                <input type="number" name="cylinder" class="form-control rounded-imput" min="1" max="16">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="status">Estado</label>
+                <select class="form-control rounded-imput" name="status">
+                  <option value="" disabled selected></option>
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12 text-center">
+              <button class="btn btn-primary col-6 rounded-button" type="submit">Crear</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

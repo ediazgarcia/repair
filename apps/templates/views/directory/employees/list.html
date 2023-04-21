@@ -1,0 +1,135 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Directorio' %}
+<h2>{% block title %}Empleados{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h1 mb-0 text-gray-800 d-flex">Empleados</h1>
+    <a href="{{url_for('employee.create_employee')}}" class="btn btn-primary btn-circle btn-lg ml-auto" title="Nuevo Empleado">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+</div>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Empleados</li>
+    </ol>
+</nav>
+<!-- Content Row -->
+
+<!-- DataTales Example -->
+<div class="card shadow mb-5">
+    <div class="card-header py-2">
+        <h3 class="text-gray-900 mb-4">Todos los Empleados</h3>
+    </div>
+    <div class="card-body table-custom">
+        <div class="table-responsive">
+            <table class="table" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="th-sm">Nombre
+                        </th>
+                        <th class="th-sm">Apellido
+                        </th>
+                        <th class="th-sm">Correo Electrónico
+                        </th>
+                        <th class="th-sm">Teléfono
+                        </th>
+                        <th class="th-sm">Tipo de Documento
+                        </th>
+                        <th class="th-sm">No. de Documento
+                        </th>
+                        <th class="th-sm">Fecha de Nac.</th>
+                        <th class="th-sm">Género</th>
+                        <th class="th-sm">Sueldo</th>
+                        <th class="th-sm">Dirección
+                        </th>
+                        <th class="th-sm">Provincia
+                        </th>
+                        <th class="th-sm">Estado</th>
+                        <th class="th-sm">Cargo Laboral
+                        </th>
+                        <th class="th-sm">Dias Laborales
+                        </th>
+                        <th class="th-sm">Hora de Entrada
+                        </th>
+                        <th class="th-sm">Hora de Salida
+                        </th>
+                        <th class="th-sm">Contratado
+                        </th>
+                        <th class="th-sm">Empresa
+                        </th>
+                        <th class="th-sm">Nombre de Usuario
+                        </th>
+                        <th class="th-sm">Registrado
+                        </th>
+                        <th class="th-sm">Actualizado
+                        </th>
+                        <th class="th-sm">Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                    <tr>
+                        <td>{{employee.first_name}}</td>
+                        <td>{{employee.last_name}}</td>
+                        <td>{{employee.email}}</td>
+                        <td>{{employee.phone}}</td>
+                        <td>{{employee.document_type}}</td>
+                        <td>{{employee.document_number}}</td>
+                        <td>{{employee.birth_date}}</td>
+                        <td>
+                            {% if employee.gender == 'M' %}
+                            Masculino
+                            {% elif employee.gender == 'F' %}
+                            Femenino
+                            {% else %}
+                            {{ employee.gender }}
+                            {% endif %}
+                        </td>
+                        <td>{{employee.salary}}</td>
+                        <td>{{employee.address}}</td>
+                        <td>{{employee.city}}</td>
+                        <td>
+                            {% set state_colors = {'Activo': 'badge-success', 'Vacaciones': 'badge-warning', 'Licencia':
+                            'badge-info', 'Inactivo': 'badge-danger'} %}
+                            {% set state_color = state_colors.get(employee.state, 'badge-secondary') %}
+                            <span class="badge {{state_color}}">{{employee.state}}</span>
+                        </td>
+                        <td>{{employee.position}}</td>
+                        <td>
+                            {% set colors = ['badge-primary', 'badge-secondary', 'badge-success', 'badge-danger',
+                            'badge-warning', 'badge-info'] %}
+                            {% set work_day = employee.work_day.split(', ') %}
+                            {% for work_day in work_day %}
+                            {% set color_index = loop.index0 % colors|length %}
+                            <span class="badge {{colors[color_index]}}">{{work_day}}</span>
+                            {% endfor %}
+                        </td>
+                        <td>{{employee.start_time}}</td>
+                        <td>{{employee.end_time}}</td>
+                        <td>{{employee.hire_date}}</td>
+                        <td>{{employee.company.trade_name}}</td>
+                        <td>{{employee.user.fullname}} (@{{employee.user.username|default('Ninguno',true)}})</td>
+                        <td>{{employee.created}}</td>
+                        <td>{{employee.updated}}</td>
+                        <td>
+                            <button class="btn  btn-sm btn-primary"
+                                onclick="location.href='{{url_for('employee.update_employee', id=employee.id)}}'" title="Editar">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="location.href='{{ url_for('employee.delete_employee', id=employee.id) }}'" title="Eliminar">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

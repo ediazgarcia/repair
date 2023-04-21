@@ -1,0 +1,123 @@
+{% extends 'layout.html' %}
+{% set current_page = 'Productos' %}
+<h2>{% block title %}Nuevo Producto{% endblock %}</h2>
+
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex justify-content-end mb-4">
+  <h1 class="h1 mb-0 text-gray-800 flex-grow-1">Productos</h1>
+  <a href="{{url_for('product.get_product')}}" class="btn btn-primary btn-circle btn-lg m-1"
+    title="Ver Todos los Productos">
+    <i class="fas fa-list"></i>
+  </a>
+</div>
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{url_for('product.get_product')}}">Productos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Nuevo Producto</li>
+  </ol>
+</nav>
+
+<!-- Content Row -->
+<div class="card o-hidden border-0 shadow-lg my-5">
+  <div class="card-body p-0">
+    <!-- Nested Row within Card Body -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="p-5">
+          <div class="text-left">
+            <h3 class="text-gray-900 mb-4">Nuevo Producto</h3>
+          </div>
+          <form action="{{url_for('product.create_product')}}" method="POST">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="description">Descripción</label>
+                <input type="text" name="description" class="form-control rounded-imput">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="type">Tipo</label>
+                <select name="type" class="form-control rounded-imput">
+                  <option value="" disabled selected></option>
+                  <option value="Producto">Producto</option>
+                  <option value="Servicio">Servicio</option>
+                </select>
+              </div>
+              <div class="form-group col-md-8">
+                <label for="category">Categoría</label>
+                <select name="category" class="form-control js-example-basic-single">
+                  <option value="" disabled selected></option>
+                  <option value="Aceites y Lubricantes">Aceites y Lubricantes</option>
+                  <option value="Adornos y Accesorios">Adornos y Accesorios</option>
+                  <option value="Aire Acondicionado y Calefacción">Aire Acondicionado y Calefacción</option>
+                  <option value="Carga y Remolque">Carga y Remolque</option>
+                  <option value="Carrocería">Carrocería</option>
+                  <option value="Combustible">Combustible</option>
+                  <option value="Diagnóstico">Diagnóstico</option>
+                  <option value="Frenos">Frenos</option>
+                  <option value="Herramientas">Herramientas</option>
+                  <option value="Iluminación">Iluminación</option>
+                  <option value="Limpieza">Limpieza</option>
+                  <option value="Motor y Escape">Motor y Escape</option>
+                  <option value="Neumáticos">Neumáticos</option>
+                  <option value="Pintura">Pintura</option>
+                  <option value="Seguridad">Seguridad</option>
+                  <option value="Sistema de Electricidad y Encendido">Sistema de Electricidad y Encendido</option>
+                  <option value="Sonido y Multimedia">Sonido y Multimedia</option>
+                  <option value="Suspensión">Suspensión</option>
+                  <option value="Transmisión">Transmisión</option>
+                  <option value="Otros">Otros</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="cost">Costo</label>
+                <input type="number" name="cost" class="form-control rounded-select">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="price">Precio</label>
+                <input type="number" name="price" class="form-control rounded-select">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="status">Estado</label>
+                <select name="status" class="form-control rounded-select">
+                  <option value="" disabled selected></option>
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="supplier_id">Proveedor</label>
+                <select name="supplier_id" class="form-control js-example-basic-single">
+                  <option value="" selected disabled></option>
+                  <option value="0">Ninguno</option>
+                  {% for provider in providers%}
+                  <option value="{{provider.id}}">{{provider.trade_name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="company_id">Empresa</label>
+                <select name="company_id" class="form-control js-example-basic-single">
+                  <option value="" selected disabled></option>
+                  {% for company in company%}
+                  <option value="{{company.id}}">{{company.trade_name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="col-12 text-center">
+              <button class="btn btn-primary col-6 rounded-button" type="submit">Crear</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

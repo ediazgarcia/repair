@@ -15,6 +15,7 @@ from apps.models.user import User
 from apps.models.vehicle_reception import VehicleReception
 from apps.models.vehicle import Vehicle
 from apps.models.inventory import Inventory
+from apps.models.billing import Factura
 auth = Blueprint('auth', __name__)
 
 
@@ -100,13 +101,19 @@ def set_role(f):
 @auth.route('/', methods=['GET', 'POST'])
 @set_role
 def home(user):
+    fecha_actual = datetime.now()
+    fecha_24_horas_atras = fecha_actual - timedelta(hours=24)
+    fecha_7_dias_atras = fecha_actual - timedelta(days=7)
     reception_vehicle = VehicleReception.query.all()
     vehicle=Vehicle.query.all()
     inventory=db.session.query(func.sum(Inventory.set_stock)).scalar()
+    ventas=db.session.query(func.sum(Factura.total)).scalar()
+    ventas_semana=db.session.query(func.sum(Factura.total)).filter(Factura.created >= fecha_7_dias_atras).scalar()
+    ventas_dia=db.session.query(func.sum(Factura.total)).filter(Factura.created >= fecha_24_horas_atras).scalar()
     if g.role == 'Administrador':
-        return render_template('admin/index.html', inventory=inventory,vehicle=vehicle ,reception_vehicle=reception_vehicle, user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
+        return render_template('admin/index.html',ventas_semana=ventas_semana,ventas_dia=ventas_dia,ventas=ventas,inventory=inventory,vehicle=vehicle ,reception_vehicle=reception_vehicle, user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
     elif g.role == 'Usuario':
-        return render_template('views/index.html', inventory=inventory,vehicle=vehicle ,reception_vehicle=reception_vehicle, user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
+        return render_template('views/index.html',ventas_semana=ventas_semana,ventas_dia=ventas_dia,ventas=ventas,inventory=inventory,vehicle=vehicle ,reception_vehicle=reception_vehicle, user=user, role=g.role, username=g.username, fullname=g.fullname, email=g.email, avatar_url=g.avatar_url)
     return redirect(url_for('auth.login'))
 
 

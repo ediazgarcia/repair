@@ -88,6 +88,27 @@ def create_billing(user=None):
         db.session.add(factura)
         db.session.commit()
 
+        #Añadir orden de servicio a la factura
+        if orders_services_id is not None:
+            orden = ServiceOrder.query.filter_by(id=orders_services_id).first()
+            factura_id=factura.id 
+            product_id=orden.product_id
+            cantidad=1
+            precio_unitario=orden.price
+            precio_total=orden.price
+
+            add_orden=DetalleFactura(
+                factura_id=factura_id, producto_id=product_id, cantidad=cantidad, precio_unitario=precio_unitario, precio_total=precio_total)
+            factura.details.append(add_orden)
+            db.session.add(add_orden)
+            #Sumar el total a la orden y cambiar el estado
+            factura=Factura.query.get(factura.id)
+            orden = ServiceOrder.query.get(factura.orders_services_id)
+            precio=float(orden.price)
+            factura.total=total+precio
+            orden.status="Facturada"
+        db.session.commit()
+
         # Procesar los detalles de la factura
         for i in range(len(detalles)):
             factura_id = factura.id

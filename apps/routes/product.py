@@ -96,7 +96,10 @@ def update_product(id, user=None):
         flash('¡Producto actualizado con éxito!')
         return redirect(url_for('product.get_product'))
 
-    return render_template('admin/products/product/update.html', product=product)
+    if g.role == 'Administrador':
+        return render_template('admin/products/product/update.html', product=product)
+    else:
+        return render_template('views/products/product/update.html', product=product)
 
 
 @product.route("/delete/<int:id>", methods=["GET"])
